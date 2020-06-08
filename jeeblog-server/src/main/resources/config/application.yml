@@ -1,0 +1,10 @@
+#服务端口号
+server:
+  port: 8092
+
+spring:
+  application:
+    name: jeeblog-user
+  profiles:
+    active: ${cfg.env}
+
