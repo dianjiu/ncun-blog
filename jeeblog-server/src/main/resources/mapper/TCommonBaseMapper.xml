@@ -1,0 +1,673 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.dianjiu.server.dao.TCommonBaseDao">
+
+    <resultMap type="cn.org.dianjiu.server.entity.TCommonBase" id="TCommonBaseResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="paramName" column="param_name" jdbcType="VARCHAR"/>
+        <result property="paramKey" column="param_key" jdbcType="VARCHAR"/>
+        <result property="paramValue" column="param_value" jdbcType="VARCHAR"/>
+        <result property="paramDesc" column="param_desc" jdbcType="VARCHAR"/>
+        <result property="extent1" column="extent1" jdbcType="VARCHAR"/>
+        <result property="extent2" column="extent2" jdbcType="VARCHAR"/>
+        <result property="extent3" column="extent3" jdbcType="VARCHAR"/>
+        <result property="extent4" column="extent4" jdbcType="VARCHAR"/>
+        <result property="extent5" column="extent5" jdbcType="VARCHAR"/>
+        <result property="extent6" column="extent6" jdbcType="VARCHAR"/>
+        <result property="extent7" column="extent7" jdbcType="VARCHAR"/>
+        <result property="extent8" column="extent8" jdbcType="VARCHAR"/>
+        <result property="extent9" column="extent9" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, param_name, param_key, param_value, param_desc, extent1, extent2, extent3, extent4, extent5, extent6, extent7, extent8, extent9, status, create_time, update_time      
+    </sql>
+       
+    <!--通过Id查询单个对象-->
+    <select id="getById" resultMap="TCommonBaseResultMap" parameterType="java.lang.Integer">
+        select
+          <include refid="table_field" />
+        from t_common_base
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询对象列表-->
+    <select id="listByEntity" resultMap="TCommonBaseResultMap" parameterType="cn.org.dianjiu.server.entity.TCommonBase">
+        select
+          <include refid="table_field" />
+        from t_common_base
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="paramName != null">
+                and param_name = #{paramName,jdbcType=VARCHAR}
+            </if>
+            <if test="paramKey != null">
+                and param_key = #{paramKey,jdbcType=VARCHAR}
+            </if>
+            <if test="paramValue != null">
+                and param_value = #{paramValue,jdbcType=VARCHAR}
+            </if>
+            <if test="paramDesc != null">
+                and param_desc = #{paramDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="extent1 != null">
+                and extent1 = #{extent1,jdbcType=VARCHAR}
+            </if>
+            <if test="extent2 != null">
+                and extent2 = #{extent2,jdbcType=VARCHAR}
+            </if>
+            <if test="extent3 != null">
+                and extent3 = #{extent3,jdbcType=VARCHAR}
+            </if>
+            <if test="extent4 != null">
+                and extent4 = #{extent4,jdbcType=VARCHAR}
+            </if>
+            <if test="extent5 != null">
+                and extent5 = #{extent5,jdbcType=VARCHAR}
+            </if>
+            <if test="extent6 != null">
+                and extent6 = #{extent6,jdbcType=VARCHAR}
+            </if>
+            <if test="extent7 != null">
+                and extent7 = #{extent7,jdbcType=VARCHAR}
+            </if>
+            <if test="extent8 != null">
+                and extent8 = #{extent8,jdbcType=VARCHAR}
+            </if>
+            <if test="extent9 != null">
+                and extent9 = #{extent9,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个对象-->
+    <select id="getByEntity" resultMap="TCommonBaseResultMap" parameterType="cn.org.dianjiu.server.entity.TCommonBase">
+        select
+          <include refid="table_field" />
+        from t_common_base
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="paramName != null">
+                and param_name = #{paramName,jdbcType=VARCHAR}
+            </if>
+            <if test="paramKey != null">
+                and param_key = #{paramKey,jdbcType=VARCHAR}
+            </if>
+            <if test="paramValue != null">
+                and param_value = #{paramValue,jdbcType=VARCHAR}
+            </if>
+            <if test="paramDesc != null">
+                and param_desc = #{paramDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="extent1 != null">
+                and extent1 = #{extent1,jdbcType=VARCHAR}
+            </if>
+            <if test="extent2 != null">
+                and extent2 = #{extent2,jdbcType=VARCHAR}
+            </if>
+            <if test="extent3 != null">
+                and extent3 = #{extent3,jdbcType=VARCHAR}
+            </if>
+            <if test="extent4 != null">
+                and extent4 = #{extent4,jdbcType=VARCHAR}
+            </if>
+            <if test="extent5 != null">
+                and extent5 = #{extent5,jdbcType=VARCHAR}
+            </if>
+            <if test="extent6 != null">
+                and extent6 = #{extent6,jdbcType=VARCHAR}
+            </if>
+            <if test="extent7 != null">
+                and extent7 = #{extent7,jdbcType=VARCHAR}
+            </if>
+            <if test="extent8 != null">
+                and extent8 = #{extent8,jdbcType=VARCHAR}
+            </if>
+            <if test="extent9 != null">
+                and extent9 = #{extent9,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询对象列表，列表长度不为0-->
+    <select id="listByIds" resultMap="TCommonBaseResultMap" parameterType="list">
+        select
+          <include refid="table_field" />
+        from t_common_base
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="cn.org.dianjiu.server.entity.TCommonBase">
+        insert into t_common_base
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="paramName != null">
+             param_name,
+          </if>
+          <if test="paramKey != null">
+             param_key,
+          </if>
+          <if test="paramValue != null">
+             param_value,
+          </if>
+          <if test="paramDesc != null">
+             param_desc,
+          </if>
+          <if test="extent1 != null">
+             extent1,
+          </if>
+          <if test="extent2 != null">
+             extent2,
+          </if>
+          <if test="extent3 != null">
+             extent3,
+          </if>
+          <if test="extent4 != null">
+             extent4,
+          </if>
+          <if test="extent5 != null">
+             extent5,
+          </if>
+          <if test="extent6 != null">
+             extent6,
+          </if>
+          <if test="extent7 != null">
+             extent7,
+          </if>
+          <if test="extent8 != null">
+             extent8,
+          </if>
+          <if test="extent9 != null">
+             extent9,
+          </if>
+          <if test="status != null">
+             status,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="updateTime != null">
+             update_time,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="paramName != null">
+             #{paramName,jdbcType=VARCHAR},
+          </if>
+          <if test="paramKey != null">
+             #{paramKey,jdbcType=VARCHAR},
+          </if>
+          <if test="paramValue != null">
+             #{paramValue,jdbcType=VARCHAR},
+          </if>
+          <if test="paramDesc != null">
+             #{paramDesc,jdbcType=VARCHAR},
+          </if>
+          <if test="extent1 != null">
+             #{extent1,jdbcType=VARCHAR},
+          </if>
+          <if test="extent2 != null">
+             #{extent2,jdbcType=VARCHAR},
+          </if>
+          <if test="extent3 != null">
+             #{extent3,jdbcType=VARCHAR},
+          </if>
+          <if test="extent4 != null">
+             #{extent4,jdbcType=VARCHAR},
+          </if>
+          <if test="extent5 != null">
+             #{extent5,jdbcType=VARCHAR},
+          </if>
+          <if test="extent6 != null">
+             #{extent6,jdbcType=VARCHAR},
+          </if>
+          <if test="extent7 != null">
+             #{extent7,jdbcType=VARCHAR},
+          </if>
+          <if test="extent8 != null">
+             #{extent8,jdbcType=VARCHAR},
+          </if>
+          <if test="extent9 != null">
+             #{extent9,jdbcType=VARCHAR},
+          </if>
+          <if test="status != null">
+             #{status,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+             #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into t_common_base
+         (<if test="id != null">id,</if>param_name, param_key, param_value, param_desc, extent1, extent2, extent3, extent4, extent5, extent6, extent7, extent8, extent9, status, create_time, update_time)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (<if test="id != null">#{id,jdbcType=INTEGER},</if>#{paramName,jdbcType=VARCHAR}, #{paramKey,jdbcType=VARCHAR}, #{paramValue,jdbcType=VARCHAR}, #{paramDesc,jdbcType=VARCHAR}, #{extent1,jdbcType=VARCHAR}, #{extent2,jdbcType=VARCHAR}, #{extent3,jdbcType=VARCHAR}, #{extent4,jdbcType=VARCHAR}, #{extent5,jdbcType=VARCHAR}, #{extent6,jdbcType=VARCHAR}, #{extent7,jdbcType=VARCHAR}, #{extent8,jdbcType=VARCHAR}, #{extent9,jdbcType=VARCHAR}, #{status,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="cn.org.dianjiu.server.entity.TCommonBase">
+        update t_common_base
+        <set>
+            <if test="paramName != null and paramName != ''">
+                param_name = #{paramName,jdbcType=VARCHAR},
+            </if>
+            <if test="paramKey != null and paramKey != ''">
+                param_key = #{paramKey,jdbcType=VARCHAR},
+            </if>
+            <if test="paramValue != null and paramValue != ''">
+                param_value = #{paramValue,jdbcType=VARCHAR},
+            </if>
+            <if test="paramDesc != null and paramDesc != ''">
+                param_desc = #{paramDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="extent1 != null and extent1 != ''">
+                extent1 = #{extent1,jdbcType=VARCHAR},
+            </if>
+            <if test="extent2 != null and extent2 != ''">
+                extent2 = #{extent2,jdbcType=VARCHAR},
+            </if>
+            <if test="extent3 != null and extent3 != ''">
+                extent3 = #{extent3,jdbcType=VARCHAR},
+            </if>
+            <if test="extent4 != null and extent4 != ''">
+                extent4 = #{extent4,jdbcType=VARCHAR},
+            </if>
+            <if test="extent5 != null and extent5 != ''">
+                extent5 = #{extent5,jdbcType=VARCHAR},
+            </if>
+            <if test="extent6 != null and extent6 != ''">
+                extent6 = #{extent6,jdbcType=VARCHAR},
+            </if>
+            <if test="extent7 != null and extent7 != ''">
+                extent7 = #{extent7,jdbcType=VARCHAR},
+            </if>
+            <if test="extent8 != null and extent8 != ''">
+                extent8 = #{extent8,jdbcType=VARCHAR},
+            </if>
+            <if test="extent9 != null and extent9 != ''">
+                extent9 = #{extent9,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update t_common_base
+        <set>
+            <if test="where.paramName == null and set.paramName != null and set.paramName != ''">
+                param_name = #{set.paramName,jdbcType=VARCHAR},
+            </if>
+            <if test="where.paramKey == null and set.paramKey != null and set.paramKey != ''">
+                param_key = #{set.paramKey,jdbcType=VARCHAR},
+            </if>
+            <if test="where.paramValue == null and set.paramValue != null and set.paramValue != ''">
+                param_value = #{set.paramValue,jdbcType=VARCHAR},
+            </if>
+            <if test="where.paramDesc == null and set.paramDesc != null and set.paramDesc != ''">
+                param_desc = #{set.paramDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent1 == null and set.extent1 != null and set.extent1 != ''">
+                extent1 = #{set.extent1,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent2 == null and set.extent2 != null and set.extent2 != ''">
+                extent2 = #{set.extent2,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent3 == null and set.extent3 != null and set.extent3 != ''">
+                extent3 = #{set.extent3,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent4 == null and set.extent4 != null and set.extent4 != ''">
+                extent4 = #{set.extent4,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent5 == null and set.extent5 != null and set.extent5 != ''">
+                extent5 = #{set.extent5,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent6 == null and set.extent6 != null and set.extent6 != ''">
+                extent6 = #{set.extent6,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent7 == null and set.extent7 != null and set.extent7 != ''">
+                extent7 = #{set.extent7,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent8 == null and set.extent8 != null and set.extent8 != ''">
+                extent8 = #{set.extent8,jdbcType=VARCHAR},
+            </if>
+            <if test="where.extent9 == null and set.extent9 != null and set.extent9 != ''">
+                extent9 = #{set.extent9,jdbcType=VARCHAR},
+            </if>
+            <if test="where.status == null and set.status != null and set.status != ''">
+                status = #{set.status,jdbcType=VARCHAR},
+            </if>
+            <if test="where.createTime == null and set.createTime != null">
+                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateTime == null and set.updateTime != null">
+                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.paramName != null">
+                and param_name = #{where.paramName,jdbcType=VARCHAR}
+            </if>
+            <if test="where.paramKey != null">
+                and param_key = #{where.paramKey,jdbcType=VARCHAR}
+            </if>
+            <if test="where.paramValue != null">
+                and param_value = #{where.paramValue,jdbcType=VARCHAR}
+            </if>
+            <if test="where.paramDesc != null">
+                and param_desc = #{where.paramDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent1 != null">
+                and extent1 = #{where.extent1,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent2 != null">
+                and extent2 = #{where.extent2,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent3 != null">
+                and extent3 = #{where.extent3,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent4 != null">
+                and extent4 = #{where.extent4,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent5 != null">
+                and extent5 = #{where.extent5,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent6 != null">
+                and extent6 = #{where.extent6,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent7 != null">
+                and extent7 = #{where.extent7,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent8 != null">
+                and extent8 = #{where.extent8,jdbcType=VARCHAR}
+            </if>
+            <if test="where.extent9 != null">
+                and extent9 = #{where.extent9,jdbcType=VARCHAR}
+            </if>
+            <if test="where.status != null">
+                and status = #{where.status,jdbcType=VARCHAR}
+            </if>
+            <if test="where.createTime != null">
+                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateTime != null">
+                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update t_common_base
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="param_name = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.paramName}
+                 </foreach>
+            </trim>
+            <trim prefix="param_key = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.paramKey}
+                 </foreach>
+            </trim>
+            <trim prefix="param_value = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.paramValue}
+                 </foreach>
+            </trim>
+            <trim prefix="param_desc = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.paramDesc}
+                 </foreach>
+            </trim>
+            <trim prefix="extent1 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent1}
+                 </foreach>
+            </trim>
+            <trim prefix="extent2 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent2}
+                 </foreach>
+            </trim>
+            <trim prefix="extent3 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent3}
+                 </foreach>
+            </trim>
+            <trim prefix="extent4 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent4}
+                 </foreach>
+            </trim>
+            <trim prefix="extent5 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent5}
+                 </foreach>
+            </trim>
+            <trim prefix="extent6 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent6}
+                 </foreach>
+            </trim>
+            <trim prefix="extent7 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent7}
+                 </foreach>
+            </trim>
+            <trim prefix="extent8 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent8}
+                 </foreach>
+            </trim>
+            <trim prefix="extent9 = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.extent9}
+                 </foreach>
+            </trim>
+            <trim prefix="status = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.status}
+                 </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.createTime}
+                 </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.updateTime}
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_common_base where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TCommonBase">
+        delete from t_common_base
+        <where>
+            <if test="paramName != null">
+                and param_name = #{paramName,jdbcType=VARCHAR}
+            </if>
+            <if test="paramKey != null">
+                and param_key = #{paramKey,jdbcType=VARCHAR}
+            </if>
+            <if test="paramValue != null">
+                and param_value = #{paramValue,jdbcType=VARCHAR}
+            </if>
+            <if test="paramDesc != null">
+                and param_desc = #{paramDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="extent1 != null">
+                and extent1 = #{extent1,jdbcType=VARCHAR}
+            </if>
+            <if test="extent2 != null">
+                and extent2 = #{extent2,jdbcType=VARCHAR}
+            </if>
+            <if test="extent3 != null">
+                and extent3 = #{extent3,jdbcType=VARCHAR}
+            </if>
+            <if test="extent4 != null">
+                and extent4 = #{extent4,jdbcType=VARCHAR}
+            </if>
+            <if test="extent5 != null">
+                and extent5 = #{extent5,jdbcType=VARCHAR}
+            </if>
+            <if test="extent6 != null">
+                and extent6 = #{extent6,jdbcType=VARCHAR}
+            </if>
+            <if test="extent7 != null">
+                and extent7 = #{extent7,jdbcType=VARCHAR}
+            </if>
+            <if test="extent8 != null">
+                and extent8 = #{extent8,jdbcType=VARCHAR}
+            </if>
+            <if test="extent9 != null">
+                and extent9 = #{extent9,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+    
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_common_base where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+    
+    <select id="countAll" resultType="int">
+        select count(id) from t_common_base
+    </select>
+    
+    <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TCommonBase" resultType="int">
+        select count(id) from t_common_base
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="paramName != null">
+                and param_name = #{paramName,jdbcType=VARCHAR}
+            </if>
+            <if test="paramKey != null">
+                and param_key = #{paramKey,jdbcType=VARCHAR}
+            </if>
+            <if test="paramValue != null">
+                and param_value = #{paramValue,jdbcType=VARCHAR}
+            </if>
+            <if test="paramDesc != null">
+                and param_desc = #{paramDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="extent1 != null">
+                and extent1 = #{extent1,jdbcType=VARCHAR}
+            </if>
+            <if test="extent2 != null">
+                and extent2 = #{extent2,jdbcType=VARCHAR}
+            </if>
+            <if test="extent3 != null">
+                and extent3 = #{extent3,jdbcType=VARCHAR}
+            </if>
+            <if test="extent4 != null">
+                and extent4 = #{extent4,jdbcType=VARCHAR}
+            </if>
+            <if test="extent5 != null">
+                and extent5 = #{extent5,jdbcType=VARCHAR}
+            </if>
+            <if test="extent6 != null">
+                and extent6 = #{extent6,jdbcType=VARCHAR}
+            </if>
+            <if test="extent7 != null">
+                and extent7 = #{extent7,jdbcType=VARCHAR}
+            </if>
+            <if test="extent8 != null">
+                and extent8 = #{extent8,jdbcType=VARCHAR}
+            </if>
+            <if test="extent9 != null">
+                and extent9 = #{extent9,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>
