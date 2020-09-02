@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>cn.org.dianjiu</groupId>
+	<artifactId>jeeblog</artifactId>
+	<version>1.0-SNAPSHOT</version>
+	<name>jeeblog</name>
+	<description>jeeblog</description>
+	<packaging>pom</packaging>
+
+	<parent>
+		<groupId>org.springframework.boot</groupId>
+		<artifactId>spring-boot-starter-parent</artifactId>
+		<version>2.3.3.RELEASE</version>
+		<relativePath/> <!-- lookup parent from repository -->
+	</parent>
+
+	<modules>
+		<module>jeeblog-common</module>
+		<module>jeeblog-server</module>
+	</modules>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+		<java.version>11</java.version>
+		<base.version>1.0-SNAPSHOT</base.version>
+		<java-validation.version>2.0.1.Final</java-validation.version>
+		<httpclient.version>4.5.11</httpclient.version>
+		<commons-lang3.version>3.9</commons-lang3.version>
+		<commons-io.version>2.7</commons-io.version>
+		<commons-net.version>3.6</commons-net.version>
+		<joda-time.version>2.10.5</joda-time.version>
+		<pagehelper.version>5.1.11</pagehelper.version>
+		<pagehelper-sb.version>1.2.13</pagehelper-sb.version>
+		<mybatis.version>2.1.3</mybatis.version>
+		<druid.version>1.1.0</druid.version>
+		<lombok.version>1.18.10</lombok.version>
+		<hutool.version>5.0.6</hutool.version>
+		<useragent.version>1.21</useragent.version>
+		<ip2region.version>1.7.2</ip2region.version>
+		<thumbnailator.version>0.4.11</thumbnailator.version>
+		<ehcache.version>3.8.1</ehcache.version>
+		<MDTool.version>1.2.4</MDTool.version>
+		<rome.version>1.0</rome.version>
+		<rome-tools.version>1.13.1</rome-tools.version>
+		<fastjson.version>1.2.31</fastjson.version>
+		<swagger2.version>2.9.2</swagger2.version>
+		<knife4j.version>2.0.3</knife4j.version>
+	</properties>
+
+	<!--只是声明依赖，并不会自动引入依赖-->
+	<dependencyManagement>
+		<dependencies>
+			<!--子项目依赖-->
+			<dependency>
+				<groupId>cn.org.dianjiu</groupId>
+				<artifactId>jeeblog-common</artifactId>
+				<version>${base.version}</version>
+			</dependency>
+			<!-- httpclient -->
+			<dependency>
+				<groupId>org.apache.httpcomponents</groupId>
+				<artifactId>httpclient</artifactId>
+				<version>${httpclient.version}</version>
+			</dependency>
+
+			<!-- 时间操作组件 -->
+			<dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>${joda-time.version}</version>
+			</dependency>
+
+			<!--MyBatis依赖-->
+			<dependency>
+				<groupId>org.mybatis.spring.boot</groupId>
+				<artifactId>mybatis-spring-boot-starter</artifactId>
+				<version>${mybatis.version}</version>
+			</dependency>
+
+			<!-- druid数据库连接池 -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>druid-spring-boot-starter</artifactId>
+				<version>${druid.version}</version>
+			</dependency>
+
+			<!-- 分页插件 -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper</artifactId>
+				<version>${pagehelper.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-autoconfigure -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-autoconfigure</artifactId>
+				<version>${pagehelper-sb.version}</version>
+			</dependency>
+			<!-- https://mvnrepository.com/artifact/com.github.pagehelper/pagehelper-spring-boot-starter -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>${pagehelper-sb.version}</version>
+			</dependency>
+
+			<!--swagger-->
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger2</artifactId>
+				<version>${swagger2.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>io.springfox</groupId>
+				<artifactId>springfox-swagger-ui</artifactId>
+				<version>${swagger2.version}</version>
+			</dependency>
+
+			<!-- 1. swagger-bootstrap-ui 目前改名为 knife4j -->
+			<!-- 2. 实现 swagger-bootstrap-ui 的自动化配置  -->
+			<!-- 3. 因为 knife4j-spring 已经引入 Swagger 依赖，所以无需重复引入 -->
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>knife4j-spring</artifactId>
+				<version>${knife4j.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.github.xiaoymin</groupId>
+				<artifactId>knife4j-spring-ui</artifactId>
+				<version>${knife4j.version}</version>
+			</dependency>
+			<!--lombok-->
+			<dependency>
+				<groupId>org.projectlombok</groupId>
+				<artifactId>lombok</artifactId>
+				<version>${lombok.version}</version>
+				<scope>provided</scope>
+			</dependency>
+
+			<!--validation-->
+			<dependency>
+				<groupId>javax.validation</groupId>
+				<artifactId>validation-api</artifactId>
+				<version>${java-validation.version}</version>
+				<scope>compile</scope>
+			</dependency>
+
+			<!--工具类-->
+			<dependency>
+				<groupId>cn.hutool</groupId>
+				<artifactId>hutool-all</artifactId>
+				<version>${hutool.version}</version>
+			</dependency>
+
+			<!--获取请求信息依赖 浏览器、IP-->
+			<dependency>
+				<groupId>eu.bitwalker</groupId>
+				<artifactId>UserAgentUtils</artifactId>
+				<version>${useragent.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.lionsoul</groupId>
+				<artifactId>ip2region</artifactId>
+				<version>${ip2region.version}</version>
+			</dependency>
+
+			<!--fastjson-->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson.version}</version>
+			</dependency>
+
+			<!-- Apache工具组件 -->
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-io</artifactId>
+				<version>${commons-io.version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>commons-net</groupId>
+				<artifactId>commons-net</artifactId>
+				<version>${commons-net.version}</version>
+			</dependency>
+
+			<!--缩略图生成库 -->
+			<dependency>
+				<groupId>net.coobird</groupId>
+				<artifactId>thumbnailator</artifactId>
+				<version>${thumbnailator.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.ehcache</groupId>
+				<artifactId>ehcache</artifactId>
+				<version>${ehcache.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.youbenzi</groupId>
+				<artifactId>MDTool</artifactId>
+				<version>${MDTool.version}</version>
+			</dependency>
+			<!-- rss -->
+			<dependency>
+				<groupId>rome</groupId>
+				<artifactId>rome</artifactId>
+				<version>${rome.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.rometools</groupId>
+				<artifactId>rome</artifactId>
+				<version>${rome-tools.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project>

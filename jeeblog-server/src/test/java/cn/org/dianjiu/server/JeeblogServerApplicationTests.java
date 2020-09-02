@@ -1,0 +1,13 @@
+package cn.org.dianjiu.server;
+
+import org.junit.jupiter.api.Test;
+import org.springframework.boot.test.context.SpringBootTest;
+
+@SpringBootTest
+class JeeblogServerApplicationTests {
+
+	@Test
+	void contextLoads() {
+	}
+
+}
