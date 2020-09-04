@@ -1,0 +1,475 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.dianjiu.server.dao.TSystemLogDao">
+
+    <resultMap type="cn.org.dianjiu.server.entity.TSystemLog" id="TSystemLogResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="businessNo" column="business_no" jdbcType="VARCHAR"/>
+        <result property="reqUrl" column="req_url" jdbcType="VARCHAR"/>
+        <result property="reqDesc" column="req_desc" jdbcType="VARCHAR"/>
+        <result property="reqBody" column="req_body" jdbcType="OTHER"/>
+        <result property="respBody" column="resp_body" jdbcType="OTHER"/>
+        <result property="timeCost" column="time_cost" jdbcType="VARCHAR"/>
+        <result property="reqIp" column="req_ip" jdbcType="VARCHAR"/>
+        <result property="ipAddr" column="ip_addr" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, business_no, req_url, req_desc, req_body, resp_body, time_cost, req_ip, ip_addr, create_time, update_time      
+    </sql>
+       
+    <!--通过Id查询单个对象-->
+    <select id="getById" resultMap="TSystemLogResultMap" parameterType="java.lang.Integer">
+        select
+          <include refid="table_field" />
+        from t_system_log
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询对象列表-->
+    <select id="listByEntity" resultMap="TSystemLogResultMap" parameterType="cn.org.dianjiu.server.entity.TSystemLog">
+        select
+          <include refid="table_field" />
+        from t_system_log
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="businessNo != null">
+                and business_no = #{businessNo,jdbcType=VARCHAR}
+            </if>
+            <if test="reqUrl != null">
+                and req_url = #{reqUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="reqDesc != null">
+                and req_desc = #{reqDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="reqBody != null">
+                and req_body = #{reqBody,jdbcType=OTHER}
+            </if>
+            <if test="respBody != null">
+                and resp_body = #{respBody,jdbcType=OTHER}
+            </if>
+            <if test="timeCost != null">
+                and time_cost = #{timeCost,jdbcType=VARCHAR}
+            </if>
+            <if test="reqIp != null">
+                and req_ip = #{reqIp,jdbcType=VARCHAR}
+            </if>
+            <if test="ipAddr != null">
+                and ip_addr = #{ipAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个对象-->
+    <select id="getByEntity" resultMap="TSystemLogResultMap" parameterType="cn.org.dianjiu.server.entity.TSystemLog">
+        select
+          <include refid="table_field" />
+        from t_system_log
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="businessNo != null">
+                and business_no = #{businessNo,jdbcType=VARCHAR}
+            </if>
+            <if test="reqUrl != null">
+                and req_url = #{reqUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="reqDesc != null">
+                and req_desc = #{reqDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="reqBody != null">
+                and req_body = #{reqBody,jdbcType=OTHER}
+            </if>
+            <if test="respBody != null">
+                and resp_body = #{respBody,jdbcType=OTHER}
+            </if>
+            <if test="timeCost != null">
+                and time_cost = #{timeCost,jdbcType=VARCHAR}
+            </if>
+            <if test="reqIp != null">
+                and req_ip = #{reqIp,jdbcType=VARCHAR}
+            </if>
+            <if test="ipAddr != null">
+                and ip_addr = #{ipAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询对象列表，列表长度不为0-->
+    <select id="listByIds" resultMap="TSystemLogResultMap" parameterType="list">
+        select
+          <include refid="table_field" />
+        from t_system_log
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="cn.org.dianjiu.server.entity.TSystemLog">
+        insert into t_system_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="businessNo != null">
+             business_no,
+          </if>
+          <if test="reqUrl != null">
+             req_url,
+          </if>
+          <if test="reqDesc != null">
+             req_desc,
+          </if>
+          <if test="reqBody != null">
+             req_body,
+          </if>
+          <if test="respBody != null">
+             resp_body,
+          </if>
+          <if test="timeCost != null">
+             time_cost,
+          </if>
+          <if test="reqIp != null">
+             req_ip,
+          </if>
+          <if test="ipAddr != null">
+             ip_addr,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="updateTime != null">
+             update_time,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="businessNo != null">
+             #{businessNo,jdbcType=VARCHAR},
+          </if>
+          <if test="reqUrl != null">
+             #{reqUrl,jdbcType=VARCHAR},
+          </if>
+          <if test="reqDesc != null">
+             #{reqDesc,jdbcType=VARCHAR},
+          </if>
+          <if test="reqBody != null">
+             #{reqBody,jdbcType=OTHER},
+          </if>
+          <if test="respBody != null">
+             #{respBody,jdbcType=OTHER},
+          </if>
+          <if test="timeCost != null">
+             #{timeCost,jdbcType=VARCHAR},
+          </if>
+          <if test="reqIp != null">
+             #{reqIp,jdbcType=VARCHAR},
+          </if>
+          <if test="ipAddr != null">
+             #{ipAddr,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+             #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into t_system_log
+         (<if test="id != null">id,</if>business_no, req_url, req_desc, req_body, resp_body, time_cost, req_ip, ip_addr, create_time, update_time)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.businessNo,jdbcType=VARCHAR}, #{item.reqUrl,jdbcType=VARCHAR}, #{item.reqDesc,jdbcType=VARCHAR}, #{item.reqBody,jdbcType=OTHER}, #{item.respBody,jdbcType=OTHER}, #{item.timeCost,jdbcType=VARCHAR}, #{item.reqIp,jdbcType=VARCHAR}, #{item.ipAddr,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="cn.org.dianjiu.server.entity.TSystemLog">
+        update t_system_log
+        <set>
+            <if test="businessNo != null and businessNo != ''">
+                business_no = #{businessNo,jdbcType=VARCHAR},
+            </if>
+            <if test="reqUrl != null and reqUrl != ''">
+                req_url = #{reqUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="reqDesc != null and reqDesc != ''">
+                req_desc = #{reqDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="reqBody != null">
+                req_body = #{reqBody,jdbcType=OTHER},
+            </if>
+            <if test="respBody != null">
+                resp_body = #{respBody,jdbcType=OTHER},
+            </if>
+            <if test="timeCost != null and timeCost != ''">
+                time_cost = #{timeCost,jdbcType=VARCHAR},
+            </if>
+            <if test="reqIp != null and reqIp != ''">
+                req_ip = #{reqIp,jdbcType=VARCHAR},
+            </if>
+            <if test="ipAddr != null and ipAddr != ''">
+                ip_addr = #{ipAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update t_system_log
+        <set>
+            <if test="where.businessNo == null and set.businessNo != null and set.businessNo != ''">
+                business_no = #{set.businessNo,jdbcType=VARCHAR},
+            </if>
+            <if test="where.reqUrl == null and set.reqUrl != null and set.reqUrl != ''">
+                req_url = #{set.reqUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="where.reqDesc == null and set.reqDesc != null and set.reqDesc != ''">
+                req_desc = #{set.reqDesc,jdbcType=VARCHAR},
+            </if>
+            <if test="where.reqBody == null and set.reqBody != null">
+                req_body = #{set.reqBody,jdbcType=OTHER},
+            </if>
+            <if test="where.respBody == null and set.respBody != null">
+                resp_body = #{set.respBody,jdbcType=OTHER},
+            </if>
+            <if test="where.timeCost == null and set.timeCost != null and set.timeCost != ''">
+                time_cost = #{set.timeCost,jdbcType=VARCHAR},
+            </if>
+            <if test="where.reqIp == null and set.reqIp != null and set.reqIp != ''">
+                req_ip = #{set.reqIp,jdbcType=VARCHAR},
+            </if>
+            <if test="where.ipAddr == null and set.ipAddr != null and set.ipAddr != ''">
+                ip_addr = #{set.ipAddr,jdbcType=VARCHAR},
+            </if>
+            <if test="where.createTime == null and set.createTime != null">
+                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateTime == null and set.updateTime != null">
+                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.businessNo != null">
+                and business_no = #{where.businessNo,jdbcType=VARCHAR}
+            </if>
+            <if test="where.reqUrl != null">
+                and req_url = #{where.reqUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="where.reqDesc != null">
+                and req_desc = #{where.reqDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="where.reqBody != null">
+                and req_body = #{where.reqBody,jdbcType=OTHER}
+            </if>
+            <if test="where.respBody != null">
+                and resp_body = #{where.respBody,jdbcType=OTHER}
+            </if>
+            <if test="where.timeCost != null">
+                and time_cost = #{where.timeCost,jdbcType=VARCHAR}
+            </if>
+            <if test="where.reqIp != null">
+                and req_ip = #{where.reqIp,jdbcType=VARCHAR}
+            </if>
+            <if test="where.ipAddr != null">
+                and ip_addr = #{where.ipAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="where.createTime != null">
+                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateTime != null">
+                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update t_system_log
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="business_no = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.businessNo}
+                 </foreach>
+            </trim>
+            <trim prefix="req_url = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.reqUrl}
+                 </foreach>
+            </trim>
+            <trim prefix="req_desc = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.reqDesc}
+                 </foreach>
+            </trim>
+            <trim prefix="req_body = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.reqBody}
+                 </foreach>
+            </trim>
+            <trim prefix="resp_body = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.respBody}
+                 </foreach>
+            </trim>
+            <trim prefix="time_cost = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.timeCost}
+                 </foreach>
+            </trim>
+            <trim prefix="req_ip = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.reqIp}
+                 </foreach>
+            </trim>
+            <trim prefix="ip_addr = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.ipAddr}
+                 </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.createTime}
+                 </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.updateTime}
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_system_log where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TSystemLog">
+        delete from t_system_log
+        <where>
+            <if test="businessNo != null">
+                and business_no = #{businessNo,jdbcType=VARCHAR}
+            </if>
+            <if test="reqUrl != null">
+                and req_url = #{reqUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="reqDesc != null">
+                and req_desc = #{reqDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="reqBody != null">
+                and req_body = #{reqBody,jdbcType=OTHER}
+            </if>
+            <if test="respBody != null">
+                and resp_body = #{respBody,jdbcType=OTHER}
+            </if>
+            <if test="timeCost != null">
+                and time_cost = #{timeCost,jdbcType=VARCHAR}
+            </if>
+            <if test="reqIp != null">
+                and req_ip = #{reqIp,jdbcType=VARCHAR}
+            </if>
+            <if test="ipAddr != null">
+                and ip_addr = #{ipAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+    
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_system_log where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+    
+    <select id="countAll" resultType="int">
+        select count(id) from t_system_log
+    </select>
+    
+    <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TSystemLog" resultType="int">
+        select count(id) from t_system_log
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="businessNo != null">
+                and business_no = #{businessNo,jdbcType=VARCHAR}
+            </if>
+            <if test="reqUrl != null">
+                and req_url = #{reqUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="reqDesc != null">
+                and req_desc = #{reqDesc,jdbcType=VARCHAR}
+            </if>
+            <if test="reqBody != null">
+                and req_body = #{reqBody,jdbcType=OTHER}
+            </if>
+            <if test="respBody != null">
+                and resp_body = #{respBody,jdbcType=OTHER}
+            </if>
+            <if test="timeCost != null">
+                and time_cost = #{timeCost,jdbcType=VARCHAR}
+            </if>
+            <if test="reqIp != null">
+                and req_ip = #{reqIp,jdbcType=VARCHAR}
+            </if>
+            <if test="ipAddr != null">
+                and ip_addr = #{ipAddr,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,343 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.dianjiu.server.dao.TJeeblogPluginDao">
+
+    <resultMap type="cn.org.dianjiu.server.entity.TJeeblogPlugin" id="TJeeblogPluginResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="pluginName" column="plugin_name" jdbcType="VARCHAR"/>
+        <result property="pluginDescribe" column="plugin_describe" jdbcType="VARCHAR"/>
+        <result property="pluginImg" column="plugin_img" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, plugin_name, plugin_describe, plugin_img, status, create_time, update_time      
+    </sql>
+       
+    <!--通过Id查询单个对象-->
+    <select id="getById" resultMap="TJeeblogPluginResultMap" parameterType="java.lang.Integer">
+        select
+          <include refid="table_field" />
+        from t_jeeblog_plugin
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询对象列表-->
+    <select id="listByEntity" resultMap="TJeeblogPluginResultMap" parameterType="cn.org.dianjiu.server.entity.TJeeblogPlugin">
+        select
+          <include refid="table_field" />
+        from t_jeeblog_plugin
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="pluginName != null">
+                and plugin_name = #{pluginName,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginDescribe != null">
+                and plugin_describe = #{pluginDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginImg != null">
+                and plugin_img = #{pluginImg,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个对象-->
+    <select id="getByEntity" resultMap="TJeeblogPluginResultMap" parameterType="cn.org.dianjiu.server.entity.TJeeblogPlugin">
+        select
+          <include refid="table_field" />
+        from t_jeeblog_plugin
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="pluginName != null">
+                and plugin_name = #{pluginName,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginDescribe != null">
+                and plugin_describe = #{pluginDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginImg != null">
+                and plugin_img = #{pluginImg,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询对象列表，列表长度不为0-->
+    <select id="listByIds" resultMap="TJeeblogPluginResultMap" parameterType="list">
+        select
+          <include refid="table_field" />
+        from t_jeeblog_plugin
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="cn.org.dianjiu.server.entity.TJeeblogPlugin">
+        insert into t_jeeblog_plugin
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="pluginName != null">
+             plugin_name,
+          </if>
+          <if test="pluginDescribe != null">
+             plugin_describe,
+          </if>
+          <if test="pluginImg != null">
+             plugin_img,
+          </if>
+          <if test="status != null">
+             status,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="updateTime != null">
+             update_time,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="pluginName != null">
+             #{pluginName,jdbcType=VARCHAR},
+          </if>
+          <if test="pluginDescribe != null">
+             #{pluginDescribe,jdbcType=VARCHAR},
+          </if>
+          <if test="pluginImg != null">
+             #{pluginImg,jdbcType=VARCHAR},
+          </if>
+          <if test="status != null">
+             #{status,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+             #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into t_jeeblog_plugin
+         (<if test="id != null">id,</if>plugin_name, plugin_describe, plugin_img, status, create_time, update_time)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.pluginName,jdbcType=VARCHAR}, #{item.pluginDescribe,jdbcType=VARCHAR}, #{item.pluginImg,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="cn.org.dianjiu.server.entity.TJeeblogPlugin">
+        update t_jeeblog_plugin
+        <set>
+            <if test="pluginName != null and pluginName != ''">
+                plugin_name = #{pluginName,jdbcType=VARCHAR},
+            </if>
+            <if test="pluginDescribe != null and pluginDescribe != ''">
+                plugin_describe = #{pluginDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="pluginImg != null and pluginImg != ''">
+                plugin_img = #{pluginImg,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update t_jeeblog_plugin
+        <set>
+            <if test="where.pluginName == null and set.pluginName != null and set.pluginName != ''">
+                plugin_name = #{set.pluginName,jdbcType=VARCHAR},
+            </if>
+            <if test="where.pluginDescribe == null and set.pluginDescribe != null and set.pluginDescribe != ''">
+                plugin_describe = #{set.pluginDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="where.pluginImg == null and set.pluginImg != null and set.pluginImg != ''">
+                plugin_img = #{set.pluginImg,jdbcType=VARCHAR},
+            </if>
+            <if test="where.status == null and set.status != null and set.status != ''">
+                status = #{set.status,jdbcType=VARCHAR},
+            </if>
+            <if test="where.createTime == null and set.createTime != null">
+                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateTime == null and set.updateTime != null">
+                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.pluginName != null">
+                and plugin_name = #{where.pluginName,jdbcType=VARCHAR}
+            </if>
+            <if test="where.pluginDescribe != null">
+                and plugin_describe = #{where.pluginDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="where.pluginImg != null">
+                and plugin_img = #{where.pluginImg,jdbcType=VARCHAR}
+            </if>
+            <if test="where.status != null">
+                and status = #{where.status,jdbcType=VARCHAR}
+            </if>
+            <if test="where.createTime != null">
+                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateTime != null">
+                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update t_jeeblog_plugin
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="plugin_name = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.pluginName}
+                 </foreach>
+            </trim>
+            <trim prefix="plugin_describe = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.pluginDescribe}
+                 </foreach>
+            </trim>
+            <trim prefix="plugin_img = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.pluginImg}
+                 </foreach>
+            </trim>
+            <trim prefix="status = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.status}
+                 </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.createTime}
+                 </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.updateTime}
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_jeeblog_plugin where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TJeeblogPlugin">
+        delete from t_jeeblog_plugin
+        <where>
+            <if test="pluginName != null">
+                and plugin_name = #{pluginName,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginDescribe != null">
+                and plugin_describe = #{pluginDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginImg != null">
+                and plugin_img = #{pluginImg,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+    
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_jeeblog_plugin where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+    
+    <select id="countAll" resultType="int">
+        select count(id) from t_jeeblog_plugin
+    </select>
+    
+    <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TJeeblogPlugin" resultType="int">
+        select count(id) from t_jeeblog_plugin
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="pluginName != null">
+                and plugin_name = #{pluginName,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginDescribe != null">
+                and plugin_describe = #{pluginDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="pluginImg != null">
+                and plugin_img = #{pluginImg,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

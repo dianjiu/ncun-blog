@@ -1,0 +1,706 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.dianjiu.server.dao.TBlogDao">
+
+    <resultMap type="cn.org.dianjiu.server.entity.TBlog" id="TBlogResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="articleTitle" column="article_title" jdbcType="VARCHAR"/>
+        <result property="articleText" column="article_text" jdbcType="OTHER"/>
+        <result property="articleSummary" column="article_summary" jdbcType="VARCHAR"/>
+        <result property="articleType" column="article_type" jdbcType="VARCHAR"/>
+        <result property="articleCategories" column="article_categories" jdbcType="VARCHAR"/>
+        <result property="articleLabel" column="article_label" jdbcType="VARCHAR"/>
+        <result property="articleSpecial" column="article_special" jdbcType="VARCHAR"/>
+        <result property="articleGrade" column="article_grade" jdbcType="INTEGER"/>
+        <result property="articleAuthor" column="article_author" jdbcType="VARCHAR"/>
+        <result property="articleImgs" column="article_imgs" jdbcType="VARCHAR"/>
+        <result property="articleUrl" column="article_url" jdbcType="VARCHAR"/>
+        <result property="articleLikes" column="article_likes" jdbcType="INTEGER"/>
+        <result property="articleViews" column="article_views" jdbcType="INTEGER"/>
+        <result property="commentStatus" column="comment_status" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, article_title, article_text, article_summary, article_type, article_categories, article_label, article_special, article_grade, article_author, article_imgs, article_url, article_likes, article_views, comment_status, status, create_time, update_time      
+    </sql>
+       
+    <!--通过Id查询单个对象-->
+    <select id="getById" resultMap="TBlogResultMap" parameterType="java.lang.Integer">
+        select
+          <include refid="table_field" />
+        from t_blog
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询对象列表-->
+    <select id="listByEntity" resultMap="TBlogResultMap" parameterType="cn.org.dianjiu.server.entity.TBlog">
+        select
+          <include refid="table_field" />
+        from t_blog
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="articleTitle != null">
+                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="articleText != null">
+                and article_text = #{articleText,jdbcType=OTHER}
+            </if>
+            <if test="articleSummary != null">
+                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            </if>
+            <if test="articleType != null">
+                and article_type = #{articleType,jdbcType=VARCHAR}
+            </if>
+            <if test="articleCategories != null">
+                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLabel != null">
+                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            </if>
+            <if test="articleSpecial != null">
+                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            </if>
+            <if test="articleGrade != null">
+                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            </if>
+            <if test="articleAuthor != null">
+                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            </if>
+            <if test="articleImgs != null">
+                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            </if>
+            <if test="articleUrl != null">
+                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLikes != null">
+                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            </if>
+            <if test="articleViews != null">
+                and article_views = #{articleViews,jdbcType=INTEGER}
+            </if>
+            <if test="commentStatus != null">
+                and comment_status = #{commentStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个对象-->
+    <select id="getByEntity" resultMap="TBlogResultMap" parameterType="cn.org.dianjiu.server.entity.TBlog">
+        select
+          <include refid="table_field" />
+        from t_blog
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="articleTitle != null">
+                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="articleText != null">
+                and article_text = #{articleText,jdbcType=OTHER}
+            </if>
+            <if test="articleSummary != null">
+                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            </if>
+            <if test="articleType != null">
+                and article_type = #{articleType,jdbcType=VARCHAR}
+            </if>
+            <if test="articleCategories != null">
+                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLabel != null">
+                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            </if>
+            <if test="articleSpecial != null">
+                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            </if>
+            <if test="articleGrade != null">
+                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            </if>
+            <if test="articleAuthor != null">
+                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            </if>
+            <if test="articleImgs != null">
+                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            </if>
+            <if test="articleUrl != null">
+                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLikes != null">
+                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            </if>
+            <if test="articleViews != null">
+                and article_views = #{articleViews,jdbcType=INTEGER}
+            </if>
+            <if test="commentStatus != null">
+                and comment_status = #{commentStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询对象列表，列表长度不为0-->
+    <select id="listByIds" resultMap="TBlogResultMap" parameterType="list">
+        select
+          <include refid="table_field" />
+        from t_blog
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="cn.org.dianjiu.server.entity.TBlog">
+        insert into t_blog
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="articleTitle != null">
+             article_title,
+          </if>
+          <if test="articleText != null">
+             article_text,
+          </if>
+          <if test="articleSummary != null">
+             article_summary,
+          </if>
+          <if test="articleType != null">
+             article_type,
+          </if>
+          <if test="articleCategories != null">
+             article_categories,
+          </if>
+          <if test="articleLabel != null">
+             article_label,
+          </if>
+          <if test="articleSpecial != null">
+             article_special,
+          </if>
+          <if test="articleGrade != null">
+             article_grade,
+          </if>
+          <if test="articleAuthor != null">
+             article_author,
+          </if>
+          <if test="articleImgs != null">
+             article_imgs,
+          </if>
+          <if test="articleUrl != null">
+             article_url,
+          </if>
+          <if test="articleLikes != null">
+             article_likes,
+          </if>
+          <if test="articleViews != null">
+             article_views,
+          </if>
+          <if test="commentStatus != null">
+             comment_status,
+          </if>
+          <if test="status != null">
+             status,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="updateTime != null">
+             update_time,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="articleTitle != null">
+             #{articleTitle,jdbcType=VARCHAR},
+          </if>
+          <if test="articleText != null">
+             #{articleText,jdbcType=OTHER},
+          </if>
+          <if test="articleSummary != null">
+             #{articleSummary,jdbcType=VARCHAR},
+          </if>
+          <if test="articleType != null">
+             #{articleType,jdbcType=VARCHAR},
+          </if>
+          <if test="articleCategories != null">
+             #{articleCategories,jdbcType=VARCHAR},
+          </if>
+          <if test="articleLabel != null">
+             #{articleLabel,jdbcType=VARCHAR},
+          </if>
+          <if test="articleSpecial != null">
+             #{articleSpecial,jdbcType=VARCHAR},
+          </if>
+          <if test="articleGrade != null">
+             #{articleGrade,jdbcType=INTEGER},
+          </if>
+          <if test="articleAuthor != null">
+             #{articleAuthor,jdbcType=VARCHAR},
+          </if>
+          <if test="articleImgs != null">
+             #{articleImgs,jdbcType=VARCHAR},
+          </if>
+          <if test="articleUrl != null">
+             #{articleUrl,jdbcType=VARCHAR},
+          </if>
+          <if test="articleLikes != null">
+             #{articleLikes,jdbcType=INTEGER},
+          </if>
+          <if test="articleViews != null">
+             #{articleViews,jdbcType=INTEGER},
+          </if>
+          <if test="commentStatus != null">
+             #{commentStatus,jdbcType=VARCHAR},
+          </if>
+          <if test="status != null">
+             #{status,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+             #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into t_blog
+         (<if test="id != null">id,</if>article_title, article_text, article_summary, article_type, article_categories, article_label, article_special, article_grade, article_author, article_imgs, article_url, article_likes, article_views, comment_status, status, create_time, update_time)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.articleTitle,jdbcType=VARCHAR}, #{item.articleText,jdbcType=OTHER}, #{item.articleSummary,jdbcType=VARCHAR}, #{item.articleType,jdbcType=VARCHAR}, #{item.articleCategories,jdbcType=VARCHAR}, #{item.articleLabel,jdbcType=VARCHAR}, #{item.articleSpecial,jdbcType=VARCHAR}, #{item.articleGrade,jdbcType=INTEGER}, #{item.articleAuthor,jdbcType=VARCHAR}, #{item.articleImgs,jdbcType=VARCHAR}, #{item.articleUrl,jdbcType=VARCHAR}, #{item.articleLikes,jdbcType=INTEGER}, #{item.articleViews,jdbcType=INTEGER}, #{item.commentStatus,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="cn.org.dianjiu.server.entity.TBlog">
+        update t_blog
+        <set>
+            <if test="articleTitle != null and articleTitle != ''">
+                article_title = #{articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="articleText != null">
+                article_text = #{articleText,jdbcType=OTHER},
+            </if>
+            <if test="articleSummary != null and articleSummary != ''">
+                article_summary = #{articleSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="articleType != null and articleType != ''">
+                article_type = #{articleType,jdbcType=VARCHAR},
+            </if>
+            <if test="articleCategories != null and articleCategories != ''">
+                article_categories = #{articleCategories,jdbcType=VARCHAR},
+            </if>
+            <if test="articleLabel != null and articleLabel != ''">
+                article_label = #{articleLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="articleSpecial != null and articleSpecial != ''">
+                article_special = #{articleSpecial,jdbcType=VARCHAR},
+            </if>
+            <if test="articleGrade != null">
+                article_grade = #{articleGrade,jdbcType=INTEGER},
+            </if>
+            <if test="articleAuthor != null and articleAuthor != ''">
+                article_author = #{articleAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="articleImgs != null and articleImgs != ''">
+                article_imgs = #{articleImgs,jdbcType=VARCHAR},
+            </if>
+            <if test="articleUrl != null and articleUrl != ''">
+                article_url = #{articleUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="articleLikes != null">
+                article_likes = #{articleLikes,jdbcType=INTEGER},
+            </if>
+            <if test="articleViews != null">
+                article_views = #{articleViews,jdbcType=INTEGER},
+            </if>
+            <if test="commentStatus != null and commentStatus != ''">
+                comment_status = #{commentStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update t_blog
+        <set>
+            <if test="where.articleTitle == null and set.articleTitle != null and set.articleTitle != ''">
+                article_title = #{set.articleTitle,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleText == null and set.articleText != null">
+                article_text = #{set.articleText,jdbcType=OTHER},
+            </if>
+            <if test="where.articleSummary == null and set.articleSummary != null and set.articleSummary != ''">
+                article_summary = #{set.articleSummary,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleType == null and set.articleType != null and set.articleType != ''">
+                article_type = #{set.articleType,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleCategories == null and set.articleCategories != null and set.articleCategories != ''">
+                article_categories = #{set.articleCategories,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleLabel == null and set.articleLabel != null and set.articleLabel != ''">
+                article_label = #{set.articleLabel,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleSpecial == null and set.articleSpecial != null and set.articleSpecial != ''">
+                article_special = #{set.articleSpecial,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleGrade == null and set.articleGrade != null">
+                article_grade = #{set.articleGrade,jdbcType=INTEGER},
+            </if>
+            <if test="where.articleAuthor == null and set.articleAuthor != null and set.articleAuthor != ''">
+                article_author = #{set.articleAuthor,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleImgs == null and set.articleImgs != null and set.articleImgs != ''">
+                article_imgs = #{set.articleImgs,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleUrl == null and set.articleUrl != null and set.articleUrl != ''">
+                article_url = #{set.articleUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="where.articleLikes == null and set.articleLikes != null">
+                article_likes = #{set.articleLikes,jdbcType=INTEGER},
+            </if>
+            <if test="where.articleViews == null and set.articleViews != null">
+                article_views = #{set.articleViews,jdbcType=INTEGER},
+            </if>
+            <if test="where.commentStatus == null and set.commentStatus != null and set.commentStatus != ''">
+                comment_status = #{set.commentStatus,jdbcType=VARCHAR},
+            </if>
+            <if test="where.status == null and set.status != null and set.status != ''">
+                status = #{set.status,jdbcType=VARCHAR},
+            </if>
+            <if test="where.createTime == null and set.createTime != null">
+                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateTime == null and set.updateTime != null">
+                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.articleTitle != null">
+                and article_title = #{where.articleTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleText != null">
+                and article_text = #{where.articleText,jdbcType=OTHER}
+            </if>
+            <if test="where.articleSummary != null">
+                and article_summary = #{where.articleSummary,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleType != null">
+                and article_type = #{where.articleType,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleCategories != null">
+                and article_categories = #{where.articleCategories,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleLabel != null">
+                and article_label = #{where.articleLabel,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleSpecial != null">
+                and article_special = #{where.articleSpecial,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleGrade != null">
+                and article_grade = #{where.articleGrade,jdbcType=INTEGER}
+            </if>
+            <if test="where.articleAuthor != null">
+                and article_author = #{where.articleAuthor,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleImgs != null">
+                and article_imgs = #{where.articleImgs,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleUrl != null">
+                and article_url = #{where.articleUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="where.articleLikes != null">
+                and article_likes = #{where.articleLikes,jdbcType=INTEGER}
+            </if>
+            <if test="where.articleViews != null">
+                and article_views = #{where.articleViews,jdbcType=INTEGER}
+            </if>
+            <if test="where.commentStatus != null">
+                and comment_status = #{where.commentStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="where.status != null">
+                and status = #{where.status,jdbcType=VARCHAR}
+            </if>
+            <if test="where.createTime != null">
+                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateTime != null">
+                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update t_blog
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="article_title = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleTitle}
+                 </foreach>
+            </trim>
+            <trim prefix="article_text = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleText}
+                 </foreach>
+            </trim>
+            <trim prefix="article_summary = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleSummary}
+                 </foreach>
+            </trim>
+            <trim prefix="article_type = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleType}
+                 </foreach>
+            </trim>
+            <trim prefix="article_categories = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleCategories}
+                 </foreach>
+            </trim>
+            <trim prefix="article_label = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleLabel}
+                 </foreach>
+            </trim>
+            <trim prefix="article_special = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleSpecial}
+                 </foreach>
+            </trim>
+            <trim prefix="article_grade = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleGrade}
+                 </foreach>
+            </trim>
+            <trim prefix="article_author = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleAuthor}
+                 </foreach>
+            </trim>
+            <trim prefix="article_imgs = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleImgs}
+                 </foreach>
+            </trim>
+            <trim prefix="article_url = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleUrl}
+                 </foreach>
+            </trim>
+            <trim prefix="article_likes = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleLikes}
+                 </foreach>
+            </trim>
+            <trim prefix="article_views = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.articleViews}
+                 </foreach>
+            </trim>
+            <trim prefix="comment_status = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.commentStatus}
+                 </foreach>
+            </trim>
+            <trim prefix="status = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.status}
+                 </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.createTime}
+                 </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.updateTime}
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_blog where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TBlog">
+        delete from t_blog
+        <where>
+            <if test="articleTitle != null">
+                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="articleText != null">
+                and article_text = #{articleText,jdbcType=OTHER}
+            </if>
+            <if test="articleSummary != null">
+                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            </if>
+            <if test="articleType != null">
+                and article_type = #{articleType,jdbcType=VARCHAR}
+            </if>
+            <if test="articleCategories != null">
+                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLabel != null">
+                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            </if>
+            <if test="articleSpecial != null">
+                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            </if>
+            <if test="articleGrade != null">
+                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            </if>
+            <if test="articleAuthor != null">
+                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            </if>
+            <if test="articleImgs != null">
+                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            </if>
+            <if test="articleUrl != null">
+                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLikes != null">
+                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            </if>
+            <if test="articleViews != null">
+                and article_views = #{articleViews,jdbcType=INTEGER}
+            </if>
+            <if test="commentStatus != null">
+                and comment_status = #{commentStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+    
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_blog where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+    
+    <select id="countAll" resultType="int">
+        select count(id) from t_blog
+    </select>
+    
+    <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TBlog" resultType="int">
+        select count(id) from t_blog
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="articleTitle != null">
+                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            </if>
+            <if test="articleText != null">
+                and article_text = #{articleText,jdbcType=OTHER}
+            </if>
+            <if test="articleSummary != null">
+                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            </if>
+            <if test="articleType != null">
+                and article_type = #{articleType,jdbcType=VARCHAR}
+            </if>
+            <if test="articleCategories != null">
+                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLabel != null">
+                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            </if>
+            <if test="articleSpecial != null">
+                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            </if>
+            <if test="articleGrade != null">
+                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            </if>
+            <if test="articleAuthor != null">
+                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            </if>
+            <if test="articleImgs != null">
+                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            </if>
+            <if test="articleUrl != null">
+                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="articleLikes != null">
+                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            </if>
+            <if test="articleViews != null">
+                and article_views = #{articleViews,jdbcType=INTEGER}
+            </if>
+            <if test="commentStatus != null">
+                and comment_status = #{commentStatus,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

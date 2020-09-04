@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.dianjiu.server.dao.TFriendUrlDao">
+
+    <resultMap type="cn.org.dianjiu.server.entity.TFriendUrl" id="TFriendUrlResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="linkName" column="link_name" jdbcType="VARCHAR"/>
+        <result property="linkImg" column="link_img" jdbcType="VARCHAR"/>
+        <result property="linkInfo" column="link_info" jdbcType="VARCHAR"/>
+        <result property="linkUrl" column="link_url" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, link_name, link_img, link_info, link_url, status, create_time, update_time      
+    </sql>
+       
+    <!--通过Id查询单个对象-->
+    <select id="getById" resultMap="TFriendUrlResultMap" parameterType="java.lang.Integer">
+        select
+          <include refid="table_field" />
+        from t_friend_url
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询对象列表-->
+    <select id="listByEntity" resultMap="TFriendUrlResultMap" parameterType="cn.org.dianjiu.server.entity.TFriendUrl">
+        select
+          <include refid="table_field" />
+        from t_friend_url
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="linkName != null">
+                and link_name = #{linkName,jdbcType=VARCHAR}
+            </if>
+            <if test="linkImg != null">
+                and link_img = #{linkImg,jdbcType=VARCHAR}
+            </if>
+            <if test="linkInfo != null">
+                and link_info = #{linkInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="linkUrl != null">
+                and link_url = #{linkUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个对象-->
+    <select id="getByEntity" resultMap="TFriendUrlResultMap" parameterType="cn.org.dianjiu.server.entity.TFriendUrl">
+        select
+          <include refid="table_field" />
+        from t_friend_url
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="linkName != null">
+                and link_name = #{linkName,jdbcType=VARCHAR}
+            </if>
+            <if test="linkImg != null">
+                and link_img = #{linkImg,jdbcType=VARCHAR}
+            </if>
+            <if test="linkInfo != null">
+                and link_info = #{linkInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="linkUrl != null">
+                and link_url = #{linkUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询对象列表，列表长度不为0-->
+    <select id="listByIds" resultMap="TFriendUrlResultMap" parameterType="list">
+        select
+          <include refid="table_field" />
+        from t_friend_url
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="cn.org.dianjiu.server.entity.TFriendUrl">
+        insert into t_friend_url
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="linkName != null">
+             link_name,
+          </if>
+          <if test="linkImg != null">
+             link_img,
+          </if>
+          <if test="linkInfo != null">
+             link_info,
+          </if>
+          <if test="linkUrl != null">
+             link_url,
+          </if>
+          <if test="status != null">
+             status,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="updateTime != null">
+             update_time,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="linkName != null">
+             #{linkName,jdbcType=VARCHAR},
+          </if>
+          <if test="linkImg != null">
+             #{linkImg,jdbcType=VARCHAR},
+          </if>
+          <if test="linkInfo != null">
+             #{linkInfo,jdbcType=VARCHAR},
+          </if>
+          <if test="linkUrl != null">
+             #{linkUrl,jdbcType=VARCHAR},
+          </if>
+          <if test="status != null">
+             #{status,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+             #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into t_friend_url
+         (<if test="id != null">id,</if>link_name, link_img, link_info, link_url, status, create_time, update_time)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.linkName,jdbcType=VARCHAR}, #{item.linkImg,jdbcType=VARCHAR}, #{item.linkInfo,jdbcType=VARCHAR}, #{item.linkUrl,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="cn.org.dianjiu.server.entity.TFriendUrl">
+        update t_friend_url
+        <set>
+            <if test="linkName != null and linkName != ''">
+                link_name = #{linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="linkImg != null and linkImg != ''">
+                link_img = #{linkImg,jdbcType=VARCHAR},
+            </if>
+            <if test="linkInfo != null and linkInfo != ''">
+                link_info = #{linkInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="linkUrl != null and linkUrl != ''">
+                link_url = #{linkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update t_friend_url
+        <set>
+            <if test="where.linkName == null and set.linkName != null and set.linkName != ''">
+                link_name = #{set.linkName,jdbcType=VARCHAR},
+            </if>
+            <if test="where.linkImg == null and set.linkImg != null and set.linkImg != ''">
+                link_img = #{set.linkImg,jdbcType=VARCHAR},
+            </if>
+            <if test="where.linkInfo == null and set.linkInfo != null and set.linkInfo != ''">
+                link_info = #{set.linkInfo,jdbcType=VARCHAR},
+            </if>
+            <if test="where.linkUrl == null and set.linkUrl != null and set.linkUrl != ''">
+                link_url = #{set.linkUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="where.status == null and set.status != null and set.status != ''">
+                status = #{set.status,jdbcType=VARCHAR},
+            </if>
+            <if test="where.createTime == null and set.createTime != null">
+                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateTime == null and set.updateTime != null">
+                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.linkName != null">
+                and link_name = #{where.linkName,jdbcType=VARCHAR}
+            </if>
+            <if test="where.linkImg != null">
+                and link_img = #{where.linkImg,jdbcType=VARCHAR}
+            </if>
+            <if test="where.linkInfo != null">
+                and link_info = #{where.linkInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="where.linkUrl != null">
+                and link_url = #{where.linkUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="where.status != null">
+                and status = #{where.status,jdbcType=VARCHAR}
+            </if>
+            <if test="where.createTime != null">
+                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateTime != null">
+                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update t_friend_url
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="link_name = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.linkName}
+                 </foreach>
+            </trim>
+            <trim prefix="link_img = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.linkImg}
+                 </foreach>
+            </trim>
+            <trim prefix="link_info = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.linkInfo}
+                 </foreach>
+            </trim>
+            <trim prefix="link_url = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.linkUrl}
+                 </foreach>
+            </trim>
+            <trim prefix="status = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.status}
+                 </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.createTime}
+                 </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.updateTime}
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_friend_url where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TFriendUrl">
+        delete from t_friend_url
+        <where>
+            <if test="linkName != null">
+                and link_name = #{linkName,jdbcType=VARCHAR}
+            </if>
+            <if test="linkImg != null">
+                and link_img = #{linkImg,jdbcType=VARCHAR}
+            </if>
+            <if test="linkInfo != null">
+                and link_info = #{linkInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="linkUrl != null">
+                and link_url = #{linkUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+    
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_friend_url where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+    
+    <select id="countAll" resultType="int">
+        select count(id) from t_friend_url
+    </select>
+    
+    <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TFriendUrl" resultType="int">
+        select count(id) from t_friend_url
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="linkName != null">
+                and link_name = #{linkName,jdbcType=VARCHAR}
+            </if>
+            <if test="linkImg != null">
+                and link_img = #{linkImg,jdbcType=VARCHAR}
+            </if>
+            <if test="linkInfo != null">
+                and link_info = #{linkInfo,jdbcType=VARCHAR}
+            </if>
+            <if test="linkUrl != null">
+                and link_url = #{linkUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>

@@ -1,0 +1,442 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.dianjiu.server.dao.TCommentDao">
+
+    <resultMap type="cn.org.dianjiu.server.entity.TComment" id="TCommentResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="blogId" column="blog_id" jdbcType="INTEGER"/>
+        <result property="name" column="name" jdbcType="VARCHAR"/>
+        <result property="mail" column="mail" jdbcType="VARCHAR"/>
+        <result property="site" column="site" jdbcType="VARCHAR"/>
+        <result property="content" column="content" jdbcType="VARCHAR"/>
+        <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, blog_id, name, mail, site, content, parent_id, create_time, update_time, status      
+    </sql>
+       
+    <!--通过Id查询单个对象-->
+    <select id="getById" resultMap="TCommentResultMap" parameterType="java.lang.Integer">
+        select
+          <include refid="table_field" />
+        from t_comment
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询对象列表-->
+    <select id="listByEntity" resultMap="TCommentResultMap" parameterType="cn.org.dianjiu.server.entity.TComment">
+        select
+          <include refid="table_field" />
+        from t_comment
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="blogId != null">
+                and blog_id = #{blogId,jdbcType=INTEGER}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="mail != null">
+                and mail = #{mail,jdbcType=VARCHAR}
+            </if>
+            <if test="site != null">
+                and site = #{site,jdbcType=VARCHAR}
+            </if>
+            <if test="content != null">
+                and content = #{content,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个对象-->
+    <select id="getByEntity" resultMap="TCommentResultMap" parameterType="cn.org.dianjiu.server.entity.TComment">
+        select
+          <include refid="table_field" />
+        from t_comment
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="blogId != null">
+                and blog_id = #{blogId,jdbcType=INTEGER}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="mail != null">
+                and mail = #{mail,jdbcType=VARCHAR}
+            </if>
+            <if test="site != null">
+                and site = #{site,jdbcType=VARCHAR}
+            </if>
+            <if test="content != null">
+                and content = #{content,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询对象列表，列表长度不为0-->
+    <select id="listByIds" resultMap="TCommentResultMap" parameterType="list">
+        select
+          <include refid="table_field" />
+        from t_comment
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="cn.org.dianjiu.server.entity.TComment">
+        insert into t_comment
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="blogId != null">
+             blog_id,
+          </if>
+          <if test="name != null">
+             name,
+          </if>
+          <if test="mail != null">
+             mail,
+          </if>
+          <if test="site != null">
+             site,
+          </if>
+          <if test="content != null">
+             content,
+          </if>
+          <if test="parentId != null">
+             parent_id,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="updateTime != null">
+             update_time,
+          </if>
+          <if test="status != null">
+             status,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="blogId != null">
+             #{blogId,jdbcType=INTEGER},
+          </if>
+          <if test="name != null">
+             #{name,jdbcType=VARCHAR},
+          </if>
+          <if test="mail != null">
+             #{mail,jdbcType=VARCHAR},
+          </if>
+          <if test="site != null">
+             #{site,jdbcType=VARCHAR},
+          </if>
+          <if test="content != null">
+             #{content,jdbcType=VARCHAR},
+          </if>
+          <if test="parentId != null">
+             #{parentId,jdbcType=INTEGER},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+             #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="status != null">
+             #{status,jdbcType=VARCHAR},
+          </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into t_comment
+         (<if test="id != null">id,</if>blog_id, name, mail, site, content, parent_id, create_time, update_time, status)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.blogId,jdbcType=INTEGER}, #{item.name,jdbcType=VARCHAR}, #{item.mail,jdbcType=VARCHAR}, #{item.site,jdbcType=VARCHAR}, #{item.content,jdbcType=VARCHAR}, #{item.parentId,jdbcType=INTEGER}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP}, #{item.status,jdbcType=VARCHAR})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="cn.org.dianjiu.server.entity.TComment">
+        update t_comment
+        <set>
+            <if test="blogId != null">
+                blog_id = #{blogId,jdbcType=INTEGER},
+            </if>
+            <if test="name != null and name != ''">
+                name = #{name,jdbcType=VARCHAR},
+            </if>
+            <if test="mail != null and mail != ''">
+                mail = #{mail,jdbcType=VARCHAR},
+            </if>
+            <if test="site != null and site != ''">
+                site = #{site,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null and content != ''">
+                content = #{content,jdbcType=VARCHAR},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update t_comment
+        <set>
+            <if test="where.blogId == null and set.blogId != null">
+                blog_id = #{set.blogId,jdbcType=INTEGER},
+            </if>
+            <if test="where.name == null and set.name != null and set.name != ''">
+                name = #{set.name,jdbcType=VARCHAR},
+            </if>
+            <if test="where.mail == null and set.mail != null and set.mail != ''">
+                mail = #{set.mail,jdbcType=VARCHAR},
+            </if>
+            <if test="where.site == null and set.site != null and set.site != ''">
+                site = #{set.site,jdbcType=VARCHAR},
+            </if>
+            <if test="where.content == null and set.content != null and set.content != ''">
+                content = #{set.content,jdbcType=VARCHAR},
+            </if>
+            <if test="where.parentId == null and set.parentId != null">
+                parent_id = #{set.parentId,jdbcType=INTEGER},
+            </if>
+            <if test="where.createTime == null and set.createTime != null">
+                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateTime == null and set.updateTime != null">
+                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.status == null and set.status != null and set.status != ''">
+                status = #{set.status,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.blogId != null">
+                and blog_id = #{where.blogId,jdbcType=INTEGER}
+            </if>
+            <if test="where.name != null">
+                and name = #{where.name,jdbcType=VARCHAR}
+            </if>
+            <if test="where.mail != null">
+                and mail = #{where.mail,jdbcType=VARCHAR}
+            </if>
+            <if test="where.site != null">
+                and site = #{where.site,jdbcType=VARCHAR}
+            </if>
+            <if test="where.content != null">
+                and content = #{where.content,jdbcType=VARCHAR}
+            </if>
+            <if test="where.parentId != null">
+                and parent_id = #{where.parentId,jdbcType=INTEGER}
+            </if>
+            <if test="where.createTime != null">
+                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateTime != null">
+                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.status != null">
+                and status = #{where.status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update t_comment
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="blog_id = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.blogId}
+                 </foreach>
+            </trim>
+            <trim prefix="name = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.name}
+                 </foreach>
+            </trim>
+            <trim prefix="mail = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.mail}
+                 </foreach>
+            </trim>
+            <trim prefix="site = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.site}
+                 </foreach>
+            </trim>
+            <trim prefix="content = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.content}
+                 </foreach>
+            </trim>
+            <trim prefix="parent_id = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.parentId}
+                 </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.createTime}
+                 </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.updateTime}
+                 </foreach>
+            </trim>
+            <trim prefix="status = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.status}
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_comment where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TComment">
+        delete from t_comment
+        <where>
+            <if test="blogId != null">
+                and blog_id = #{blogId,jdbcType=INTEGER}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="mail != null">
+                and mail = #{mail,jdbcType=VARCHAR}
+            </if>
+            <if test="site != null">
+                and site = #{site,jdbcType=VARCHAR}
+            </if>
+            <if test="content != null">
+                and content = #{content,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </delete>
+    
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_comment where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+    
+    <select id="countAll" resultType="int">
+        select count(id) from t_comment
+    </select>
+    
+    <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TComment" resultType="int">
+        select count(id) from t_comment
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="blogId != null">
+                and blog_id = #{blogId,jdbcType=INTEGER}
+            </if>
+            <if test="name != null">
+                and name = #{name,jdbcType=VARCHAR}
+            </if>
+            <if test="mail != null">
+                and mail = #{mail,jdbcType=VARCHAR}
+            </if>
+            <if test="site != null">
+                and site = #{site,jdbcType=VARCHAR}
+            </if>
+            <if test="content != null">
+                and content = #{content,jdbcType=VARCHAR}
+            </if>
+            <if test="parentId != null">
+                and parent_id = #{parentId,jdbcType=INTEGER}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+        </where>
+    </select>
+</mapper>

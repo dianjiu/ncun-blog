@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.org.dianjiu.server.dao.TBlogTypeDao">
+
+    <resultMap type="cn.org.dianjiu.server.entity.TBlogType" id="TBlogTypeResultMap">
+        <result property="id" column="id" jdbcType="INTEGER"/>
+        <result property="labelName" column="label_name" jdbcType="VARCHAR"/>
+        <result property="typeUrl" column="type_url" jdbcType="VARCHAR"/>
+        <result property="typeDescribe" column="type_describe" jdbcType="VARCHAR"/>
+        <result property="type" column="type" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="table_field">
+      id, label_name, type_url, type_describe, type, status, create_time, update_time      
+    </sql>
+       
+    <!--通过Id查询单个对象-->
+    <select id="getById" resultMap="TBlogTypeResultMap" parameterType="java.lang.Integer">
+        select
+          <include refid="table_field" />
+        from t_blog_type
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+
+    <!--通过实体不为空的属性作为筛选条件查询对象列表-->
+    <select id="listByEntity" resultMap="TBlogTypeResultMap" parameterType="cn.org.dianjiu.server.entity.TBlogType">
+        select
+          <include refid="table_field" />
+        from t_blog_type
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="labelName != null">
+                and label_name = #{labelName,jdbcType=VARCHAR}
+            </if>
+            <if test="typeUrl != null">
+                and type_url = #{typeUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="typeDescribe != null">
+                and type_describe = #{typeDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                and type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过实体不为空的属性作为筛选条件查询单个对象-->
+    <select id="getByEntity" resultMap="TBlogTypeResultMap" parameterType="cn.org.dianjiu.server.entity.TBlogType">
+        select
+          <include refid="table_field" />
+        from t_blog_type
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="labelName != null">
+                and label_name = #{labelName,jdbcType=VARCHAR}
+            </if>
+            <if test="typeUrl != null">
+                and type_url = #{typeUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="typeDescribe != null">
+                and type_describe = #{typeDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                and type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+
+    <!--通过Id列表作为筛选条件查询对象列表，列表长度不为0-->
+    <select id="listByIds" resultMap="TBlogTypeResultMap" parameterType="list">
+        select
+          <include refid="table_field" />
+        from t_blog_type
+        where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </select>
+
+    <!--新增实体属性不为null的记录-->
+    <insert id="insert" keyProperty="id" useGeneratedKeys="true" parameterType="cn.org.dianjiu.server.entity.TBlogType">
+        insert into t_blog_type
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             id,
+          </if>
+          <if test="labelName != null">
+             label_name,
+          </if>
+          <if test="typeUrl != null">
+             type_url,
+          </if>
+          <if test="typeDescribe != null">
+             type_describe,
+          </if>
+          <if test="type != null">
+             type,
+          </if>
+          <if test="status != null">
+             status,
+          </if>
+          <if test="createTime != null">
+             create_time,
+          </if>
+          <if test="updateTime != null">
+             update_time,
+          </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+          <if test="id != null">
+             #{id,jdbcType=INTEGER},
+          </if>
+          <if test="labelName != null">
+             #{labelName,jdbcType=VARCHAR},
+          </if>
+          <if test="typeUrl != null">
+             #{typeUrl,jdbcType=VARCHAR},
+          </if>
+          <if test="typeDescribe != null">
+             #{typeDescribe,jdbcType=VARCHAR},
+          </if>
+          <if test="type != null">
+             #{type,jdbcType=VARCHAR},
+          </if>
+          <if test="status != null">
+             #{status,jdbcType=VARCHAR},
+          </if>
+          <if test="createTime != null">
+             #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updateTime != null">
+             #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+        </trim>
+    </insert>
+
+    <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
+    <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
+        insert into t_blog_type
+         (<if test="id != null">id,</if>label_name, type_url, type_describe, type, status, create_time, update_time)
+        values
+        <foreach item="item" collection="list" separator="," open="" close="" index="index">
+         (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.labelName,jdbcType=VARCHAR}, #{item.typeUrl,jdbcType=VARCHAR}, #{item.typeDescribe,jdbcType=VARCHAR}, #{item.type,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+        </foreach>
+    </insert>
+
+    <!--通过主键修改实体属性不为null的列-->
+    <update id="update" parameterType="cn.org.dianjiu.server.entity.TBlogType">
+        update t_blog_type
+        <set>
+            <if test="labelName != null and labelName != ''">
+                label_name = #{labelName,jdbcType=VARCHAR},
+            </if>
+            <if test="typeUrl != null and typeUrl != ''">
+                type_url = #{typeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="typeDescribe != null and typeDescribe != ''">
+                type_describe = #{typeDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null and type != ''">
+                type = #{type,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null and status != ''">
+                status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+
+    <!--通过表字段修改实体属性不为null的列-->
+    <update id="updateByField">
+        update t_blog_type
+        <set>
+            <if test="where.labelName == null and set.labelName != null and set.labelName != ''">
+                label_name = #{set.labelName,jdbcType=VARCHAR},
+            </if>
+            <if test="where.typeUrl == null and set.typeUrl != null and set.typeUrl != ''">
+                type_url = #{set.typeUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="where.typeDescribe == null and set.typeDescribe != null and set.typeDescribe != ''">
+                type_describe = #{set.typeDescribe,jdbcType=VARCHAR},
+            </if>
+            <if test="where.type == null and set.type != null and set.type != ''">
+                type = #{set.type,jdbcType=VARCHAR},
+            </if>
+            <if test="where.status == null and set.status != null and set.status != ''">
+                status = #{set.status,jdbcType=VARCHAR},
+            </if>
+            <if test="where.createTime == null and set.createTime != null">
+                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updateTime == null and set.updateTime != null">
+                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        <where>
+            <if test="where.id != null">
+                and id = #{where.id,jdbcType=INTEGER}
+            </if>
+            <if test="where.labelName != null">
+                and label_name = #{where.labelName,jdbcType=VARCHAR}
+            </if>
+            <if test="where.typeUrl != null">
+                and type_url = #{where.typeUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="where.typeDescribe != null">
+                and type_describe = #{where.typeDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="where.type != null">
+                and type = #{where.type,jdbcType=VARCHAR}
+            </if>
+            <if test="where.status != null">
+                and status = #{where.status,jdbcType=VARCHAR}
+            </if>
+            <if test="where.createTime != null">
+                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updateTime != null">
+                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </update>
+
+    <!--通过主键修改实体列表，列表长度不能为0，注意：当实体属性为null时，对应的列也会别更新为null-->
+    <update id="updateBatch" parameterType="list">
+        update t_blog_type
+        <trim prefix="set" suffixOverrides=",">
+            <trim prefix="label_name = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.labelName}
+                 </foreach>
+            </trim>
+            <trim prefix="type_url = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.typeUrl}
+                 </foreach>
+            </trim>
+            <trim prefix="type_describe = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.typeDescribe}
+                 </foreach>
+            </trim>
+            <trim prefix="type = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.type}
+                 </foreach>
+            </trim>
+            <trim prefix="status = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.status}
+                 </foreach>
+            </trim>
+            <trim prefix="create_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.createTime}
+                 </foreach>
+            </trim>
+            <trim prefix="update_time = case" suffix="end,">
+                 <foreach collection="list" item="item" index="index">
+                  when id = #{item.id} then #{item.updateTime}
+                 </foreach>
+            </trim>
+        </trim>
+        where id in
+        <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
+            #{item.id,jdbcType=INTEGER}
+        </foreach>
+    </update>
+    
+    <!--通过主键删除-->
+    <delete id="deleteById" parameterType="java.lang.Integer">
+        delete from t_blog_type where id = #{id,jdbcType=INTEGER}
+    </delete>
+
+    <!--通过实体非空属性删除-->
+    <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TBlogType">
+        delete from t_blog_type
+        <where>
+            <if test="labelName != null">
+                and label_name = #{labelName,jdbcType=VARCHAR}
+            </if>
+            <if test="typeUrl != null">
+                and type_url = #{typeUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="typeDescribe != null">
+                and type_describe = #{typeDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                and type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </delete>
+    
+    <!--通过主键列表删除，列表长度不能为0-->
+    <delete id="deleteByIds" parameterType="list">
+        delete from t_blog_type where id in
+        <foreach item="item" collection="list" separator="," open="(" close=")" index="index">
+            #{item}
+        </foreach>
+    </delete>
+    
+    <select id="countAll" resultType="int">
+        select count(id) from t_blog_type
+    </select>
+    
+    <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TBlogType" resultType="int">
+        select count(id) from t_blog_type
+        <where>
+            <if test="id != null">
+                and id = #{id,jdbcType=INTEGER}
+            </if>
+            <if test="labelName != null">
+                and label_name = #{labelName,jdbcType=VARCHAR}
+            </if>
+            <if test="typeUrl != null">
+                and type_url = #{typeUrl,jdbcType=VARCHAR}
+            </if>
+            <if test="typeDescribe != null">
+                and type_describe = #{typeDescribe,jdbcType=VARCHAR}
+            </if>
+            <if test="type != null">
+                and type = #{type,jdbcType=VARCHAR}
+            </if>
+            <if test="status != null">
+                and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createTime != null">
+                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updateTime != null">
+                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            </if>
+        </where>
+    </select>
+</mapper>
