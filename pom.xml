@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.org.dianjiu</groupId>
-	<artifactId>jeeblog</artifactId>
+	<artifactId>jee-blog</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>jeeblog</name>
-	<description>jeeblog</description>
+	<name>jee-blog</name>
+	<description>jee-blog</description>
 	<packaging>pom</packaging>
 
 	<parent>
