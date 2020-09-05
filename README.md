@@ -1,6 +1,6 @@
 <h1><a href="https://ncun.fun">NCun</a></h1>
 
->  **ncun-blog项目更名为诺春博客系统，基于SpringBoot+Vue前后端分离思想架构设计** 
+>  **NCun项目为诺春博客系统，基于SpringBoot+Vue前后端分离思想架构设计** 
 
 >  **诺春博客系统为轻量级博客系统，免费开源项目，为个人提供免费服务，支持docker一键部署** 
 

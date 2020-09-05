@@ -3,10 +3,10 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>cn.org.dianjiu</groupId>
-	<artifactId>jee-blog</artifactId>
+	<artifactId>ncun-blog</artifactId>
 	<version>1.0-SNAPSHOT</version>
-	<name>jee-blog</name>
-	<description>jee-blog</description>
+	<name>ncun-blog</name>
+	<description>ncun-blog</description>
 	<packaging>pom</packaging>
 
 	<parent>
@@ -17,8 +17,8 @@
 	</parent>
 
 	<modules>
-		<module>jeeblog-common</module>
-		<module>jeeblog-server</module>
+		<module>ncun-base</module>
+		<module>ncun-server</module>
 	</modules>
 
 	<properties>
@@ -56,7 +56,7 @@
 			<!--子项目依赖-->
 			<dependency>
 				<groupId>cn.org.dianjiu</groupId>
-				<artifactId>jeeblog-common</artifactId>
+				<artifactId>ncun-base</artifactId>
 				<version>${base.version}</version>
 			</dependency>
 			<!-- httpclient -->
