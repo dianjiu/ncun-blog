@@ -1,5 +1,5 @@
 spring:
-  profiles: dev #开发环境
+  profiles: local #开发环境
   datasource:
     #账号配置
     url: jdbc:mysql://192.168.31.162:3306/ncun?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
