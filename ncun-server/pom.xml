@@ -13,6 +13,7 @@
 		<groupId>cn.org.dianjiu</groupId>
 		<artifactId>ncun-blog</artifactId>
 		<version>1.0-SNAPSHOT</version>
+		<relativePath/>
 	</parent>
 
 	<properties>
