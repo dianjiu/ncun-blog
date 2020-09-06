@@ -33,7 +33,7 @@ public class TBlogServiceImpl implements TBlogServiceI {
         TBlogResp tBlogResp = new TBlogResp();
         TBlog tBlog = tBlogDao.getById(id);
         if (ObjectUtils.checkObjAllFieldsIsNull(tBlog)) {
-            log.error("根据id【" + id + "】没有查到相关记录！");
+            //log.error("根据id【" + id + "】没有查到相关记录！");
             throw new BusinessException("400", "根据id【" + id + "】没有查到相关记录！");
         }
         ObjectUtils.copyProperties(tBlog, tBlogResp);

@@ -14,7 +14,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 public class GlobalExceptionHandler {
 
     @ResponseBody
-    @ResponseStatus(HttpStatus.OK)
     @ExceptionHandler(value = BusinessException.class)
     public ResultBean BusinessExceptionHandler(BusinessException e) {
         ResultBean res = ResultBean.builder().build();
