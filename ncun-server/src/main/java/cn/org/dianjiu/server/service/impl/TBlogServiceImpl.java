@@ -1,11 +1,11 @@
 package cn.org.dianjiu.server.service.impl;
 
-import cn.org.dianjiu.common.exception.BusinessException;
 import cn.org.dianjiu.common.pojo.req.TBlogReq;
 import cn.org.dianjiu.common.pojo.resp.TBlogResp;
 import cn.org.dianjiu.common.util.ObjectUtils;
 import cn.org.dianjiu.server.dao.TBlogDao;
 import cn.org.dianjiu.server.entity.TBlog;
+import cn.org.dianjiu.server.exception.BusinessException;
 import cn.org.dianjiu.server.service.TBlogServiceI;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class TBlogServiceImpl implements TBlogServiceI {
         TBlogResp tBlogResp = new TBlogResp();
         TBlog tBlog = tBlogDao.getById(id);
         if (ObjectUtils.checkObjAllFieldsIsNull(tBlog)) {
-            //log.error("根据id【" + id + "】没有查到相关记录！");
+            log.error("根据id【" + id + "】没有查到相关记录！");
             throw new BusinessException("400", "根据id【" + id + "】没有查到相关记录！");
         }
         ObjectUtils.copyProperties(tBlog, tBlogResp);

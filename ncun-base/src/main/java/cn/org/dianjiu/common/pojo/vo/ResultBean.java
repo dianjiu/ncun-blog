@@ -23,8 +23,4 @@ public class ResultBean<T> implements Serializable {
     @Builder.Default
     private T data = (T) "";
 
-    public ResultBean(String code, String msg) {
-        this.code = code;
-        this.msg = msg;
-    }
 }
