@@ -4,6 +4,8 @@ import cn.org.dianjiu.common.pojo.req.TBlogThemeReq;
 import cn.org.dianjiu.common.pojo.resp.TBlogThemeResp;
 import cn.org.dianjiu.common.pojo.vo.RespVO;
 import cn.org.dianjiu.server.service.TBlogThemeServiceI;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -12,12 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * (TBlogTheme)表控制层
+ * 主题操作(TBlogTheme)表控制层
  *
  * @author makejava
- * @since 2020-09-05 21:30:22
+ * @since 2020-09-08 14:49:55
  */
 @RestController
+@Api(value = "TBlogTheme", tags = {"主题操作"})
 @RequestMapping("/tBlogTheme")
 public class TBlogThemeController {
 
@@ -33,6 +36,7 @@ public class TBlogThemeController {
      * @param id 主键
      * @return 实例对象
      */
+    @ApiOperation("通过Id查询单个对象")
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> getById(@PathVariable Integer id) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
@@ -54,6 +58,7 @@ public class TBlogThemeController {
      * @param tBlogThemeReq
      * @return 实例对象
      */
+    @ApiOperation("通过属性查询单个对象")
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> getByEntity(TBlogThemeReq tBlogThemeReq) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
@@ -75,6 +80,7 @@ public class TBlogThemeController {
      * @param tBlogThemeReq 实例对象
      * @return 对象列表
      */
+    @ApiOperation("通过属性查询对象列表")
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<List> list(TBlogThemeReq tBlogThemeReq) {
         RespVO<List> result = new RespVO<>();
@@ -96,6 +102,7 @@ public class TBlogThemeController {
      * @param tBlogThemeReq 实例对象
      * @return 实例对象
      */
+    @ApiOperation("新增对象记录")
     @PostMapping(value = "/insert", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> insert(@RequestBody @Validated TBlogThemeReq tBlogThemeReq) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
@@ -111,11 +118,33 @@ public class TBlogThemeController {
     }
 
     /**
+     * 新增实体属性不为null的多条记录
+     *
+     * @param list 对象集合
+     * @return 实例对象
+     */
+    @ApiOperation("批量新增对象记录")
+    @PostMapping(value = "/insertBatch", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RespVO<TBlogThemeResp> insertBatch(@RequestBody List<TBlogThemeReq> list) {
+        RespVO<TBlogThemeResp> result = new RespVO<>();
+        int insert = tBlogThemeService.insertBatch(list);
+        if (insert < 1) {
+            result.setCode("400");
+            result.setMsg("新增数据失败！");
+            return result;
+        }
+        result.setCode("200");
+        result.setMsg("新增数据成功！");
+        return result;
+    }
+
+    /**
      * 通过表字段修改实体属性不为null的列
      *
      * @param tBlogThemeReq 实例对象
      * @return 实例对象
      */
+    @ApiOperation("更新对象记录")
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> update(@RequestBody @Validated TBlogThemeReq tBlogThemeReq) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
@@ -131,11 +160,12 @@ public class TBlogThemeController {
     }
 
     /**
-     * 通过主键删除数据
+     * 通过ID主键删除数据
      *
      * @param id 主键
      * @return 实例对象
      */
+    @ApiOperation("删除一条对象记录")
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> deleteOne(@PathVariable Integer id) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
@@ -156,6 +186,7 @@ public class TBlogThemeController {
      * @param ids 实例对象
      * @return 实例对象
      */
+    @ApiOperation("批量删除对象记录")
     @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> deleteBatch(@RequestBody List<Integer> ids) {
         RespVO<TBlogThemeResp> result = new RespVO<>();

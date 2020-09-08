@@ -4,6 +4,8 @@ import cn.org.dianjiu.common.pojo.req.TUserRolesReq;
 import cn.org.dianjiu.common.pojo.resp.TUserRolesResp;
 import cn.org.dianjiu.common.pojo.vo.RespVO;
 import cn.org.dianjiu.server.service.TUserRolesServiceI;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -12,12 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * (TUserRoles)表控制层
+ * 用户角色操作(TUserRoles)表控制层
  *
  * @author makejava
- * @since 2020-09-05 21:33:32
+ * @since 2020-09-08 14:50:13
  */
 @RestController
+@Api(value = "TUserRoles", tags = {"用户角色操作"})
 @RequestMapping("/tUserRoles")
 public class TUserRolesController {
 
@@ -33,6 +36,7 @@ public class TUserRolesController {
      * @param id 主键
      * @return 实例对象
      */
+    @ApiOperation("通过Id查询单个对象")
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TUserRolesResp> getById(@PathVariable Integer id) {
         RespVO<TUserRolesResp> result = new RespVO<>();
@@ -54,6 +58,7 @@ public class TUserRolesController {
      * @param tUserRolesReq
      * @return 实例对象
      */
+    @ApiOperation("通过属性查询单个对象")
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TUserRolesResp> getByEntity(TUserRolesReq tUserRolesReq) {
         RespVO<TUserRolesResp> result = new RespVO<>();
@@ -75,6 +80,7 @@ public class TUserRolesController {
      * @param tUserRolesReq 实例对象
      * @return 对象列表
      */
+    @ApiOperation("通过属性查询对象列表")
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<List> list(TUserRolesReq tUserRolesReq) {
         RespVO<List> result = new RespVO<>();
@@ -96,6 +102,7 @@ public class TUserRolesController {
      * @param tUserRolesReq 实例对象
      * @return 实例对象
      */
+    @ApiOperation("新增对象记录")
     @PostMapping(value = "/insert", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TUserRolesResp> insert(@RequestBody @Validated TUserRolesReq tUserRolesReq) {
         RespVO<TUserRolesResp> result = new RespVO<>();
@@ -111,11 +118,33 @@ public class TUserRolesController {
     }
 
     /**
+     * 新增实体属性不为null的多条记录
+     *
+     * @param list 对象集合
+     * @return 实例对象
+     */
+    @ApiOperation("批量新增对象记录")
+    @PostMapping(value = "/insertBatch", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RespVO<TUserRolesResp> insertBatch(@RequestBody List<TUserRolesReq> list) {
+        RespVO<TUserRolesResp> result = new RespVO<>();
+        int insert = tUserRolesService.insertBatch(list);
+        if (insert < 1) {
+            result.setCode("400");
+            result.setMsg("新增数据失败！");
+            return result;
+        }
+        result.setCode("200");
+        result.setMsg("新增数据成功！");
+        return result;
+    }
+
+    /**
      * 通过表字段修改实体属性不为null的列
      *
      * @param tUserRolesReq 实例对象
      * @return 实例对象
      */
+    @ApiOperation("更新对象记录")
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TUserRolesResp> update(@RequestBody @Validated TUserRolesReq tUserRolesReq) {
         RespVO<TUserRolesResp> result = new RespVO<>();
@@ -131,11 +160,12 @@ public class TUserRolesController {
     }
 
     /**
-     * 通过主键删除数据
+     * 通过ID主键删除数据
      *
      * @param id 主键
      * @return 实例对象
      */
+    @ApiOperation("删除一条对象记录")
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TUserRolesResp> deleteOne(@PathVariable Integer id) {
         RespVO<TUserRolesResp> result = new RespVO<>();
@@ -156,6 +186,7 @@ public class TUserRolesController {
      * @param ids 实例对象
      * @return 实例对象
      */
+    @ApiOperation("批量删除对象记录")
     @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TUserRolesResp> deleteBatch(@RequestBody List<Integer> ids) {
         RespVO<TUserRolesResp> result = new RespVO<>();

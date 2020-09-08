@@ -4,6 +4,8 @@ import cn.org.dianjiu.common.pojo.req.TBlogReq;
 import cn.org.dianjiu.common.pojo.resp.TBlogResp;
 import cn.org.dianjiu.common.pojo.vo.RespVO;
 import cn.org.dianjiu.server.service.TBlogServiceI;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.validation.annotation.Validated;
@@ -12,12 +14,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * (TBlog)表控制层
+ * 博客操作(TBlog)表控制层
  *
  * @author makejava
- * @since 2020-09-05 21:30:04
+ * @since 2020-09-08 14:49:51
  */
 @RestController
+@Api(value = "TBlog", tags = {"博客操作"})
 @RequestMapping("/tBlog")
 public class TBlogController {
 
@@ -33,6 +36,7 @@ public class TBlogController {
      * @param id 主键
      * @return 实例对象
      */
+    @ApiOperation("通过Id查询单个对象")
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> getById(@PathVariable Integer id) {
         RespVO<TBlogResp> result = new RespVO<>();
@@ -54,6 +58,7 @@ public class TBlogController {
      * @param tBlogReq
      * @return 实例对象
      */
+    @ApiOperation("通过属性查询单个对象")
     @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> getByEntity(TBlogReq tBlogReq) {
         RespVO<TBlogResp> result = new RespVO<>();
@@ -75,6 +80,7 @@ public class TBlogController {
      * @param tBlogReq 实例对象
      * @return 对象列表
      */
+    @ApiOperation("通过属性查询对象列表")
     @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<List> list(TBlogReq tBlogReq) {
         RespVO<List> result = new RespVO<>();
@@ -96,6 +102,7 @@ public class TBlogController {
      * @param tBlogReq 实例对象
      * @return 实例对象
      */
+    @ApiOperation("新增对象记录")
     @PostMapping(value = "/insert", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> insert(@RequestBody @Validated TBlogReq tBlogReq) {
         RespVO<TBlogResp> result = new RespVO<>();
@@ -111,11 +118,33 @@ public class TBlogController {
     }
 
     /**
+     * 新增实体属性不为null的多条记录
+     *
+     * @param list 对象集合
+     * @return 实例对象
+     */
+    @ApiOperation("批量新增对象记录")
+    @PostMapping(value = "/insertBatch", produces = MediaType.APPLICATION_JSON_VALUE)
+    public RespVO<TBlogResp> insertBatch(@RequestBody List<TBlogReq> list) {
+        RespVO<TBlogResp> result = new RespVO<>();
+        int insert = tBlogService.insertBatch(list);
+        if (insert < 1) {
+            result.setCode("400");
+            result.setMsg("新增数据失败！");
+            return result;
+        }
+        result.setCode("200");
+        result.setMsg("新增数据成功！");
+        return result;
+    }
+
+    /**
      * 通过表字段修改实体属性不为null的列
      *
      * @param tBlogReq 实例对象
      * @return 实例对象
      */
+    @ApiOperation("更新对象记录")
     @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> update(@RequestBody @Validated TBlogReq tBlogReq) {
         RespVO<TBlogResp> result = new RespVO<>();
@@ -131,11 +160,12 @@ public class TBlogController {
     }
 
     /**
-     * 通过主键删除数据
+     * 通过ID主键删除数据
      *
      * @param id 主键
      * @return 实例对象
      */
+    @ApiOperation("删除一条对象记录")
     @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> deleteOne(@PathVariable Integer id) {
         RespVO<TBlogResp> result = new RespVO<>();
@@ -156,6 +186,7 @@ public class TBlogController {
      * @param ids 实例对象
      * @return 实例对象
      */
+    @ApiOperation("批量删除对象记录")
     @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> deleteBatch(@RequestBody List<Integer> ids) {
         RespVO<TBlogResp> result = new RespVO<>();
