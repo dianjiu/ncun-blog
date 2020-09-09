@@ -24,7 +24,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-		<java.version>11</java.version>
+		<java.version>13</java.version>
 		<base.version>1.0-SNAPSHOT</base.version>
 		<java-validation.version>2.0.1.Final</java-validation.version>
 		<httpclient.version>4.5.11</httpclient.version>
