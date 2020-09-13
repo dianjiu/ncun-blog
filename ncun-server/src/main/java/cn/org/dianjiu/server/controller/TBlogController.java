@@ -59,7 +59,7 @@ public class TBlogController {
      * @return 实例对象
      */
     @ApiOperation("通过属性查询单个对象")
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> getByEntity(TBlogReq tBlogReq) {
         RespVO<TBlogResp> result = new RespVO<>();
         TBlogResp tBlogResp = tBlogService.getByEntity(tBlogReq);
@@ -81,7 +81,7 @@ public class TBlogController {
      * @return 对象列表
      */
     @ApiOperation("通过属性查询对象列表")
-    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<List> list(TBlogReq tBlogReq) {
         RespVO<List> result = new RespVO<>();
         List<TBlogResp> tBlogRespList = tBlogService.listByEntity(tBlogReq);
@@ -145,7 +145,7 @@ public class TBlogController {
      * @return 实例对象
      */
     @ApiOperation("更新对象记录")
-    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> update(@RequestBody @Validated TBlogReq tBlogReq) {
         RespVO<TBlogResp> result = new RespVO<>();
         int update = tBlogService.update(tBlogReq);
@@ -166,7 +166,7 @@ public class TBlogController {
      * @return 实例对象
      */
     @ApiOperation("删除一条对象记录")
-    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> deleteOne(@PathVariable Integer id) {
         RespVO<TBlogResp> result = new RespVO<>();
         int delete = tBlogService.deleteById(id);
@@ -187,7 +187,7 @@ public class TBlogController {
      * @return 实例对象
      */
     @ApiOperation("批量删除对象记录")
-    @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogResp> deleteBatch(@RequestBody List<Integer> ids) {
         RespVO<TBlogResp> result = new RespVO<>();
         int dels = 0;
