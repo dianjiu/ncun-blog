@@ -22,7 +22,7 @@ import java.util.List;
  * 插件操作(TBlogPlugin)表服务实现类
  *
  * @author makejava
- * @since 2020-10-06 18:38:28
+ * @since 2020-10-06 20:22:20
  */
 @Slf4j
 @Service
@@ -117,10 +117,13 @@ public class TBlogPluginServiceImpl implements TBlogPluginServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TBlogPluginResp> list = listByEntity(pageReq.getData());
-        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TBlogPluginResp> pages = new PageInfo<>(list);
-        //分页时，实际返回的结果list类型是Page<E>，如果想取出分页信息，需要强制转换为Page<E>
-        //Page<TTaskDetailsResp> pages = (Page<TTaskDetailsResp>) list;
+        int count = countByEntity(pageReq.getData());
+        int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
+        pages.setPageNum(pageReq.getPageNum());
+        pages.setPageSize(pageReq.getPageSize());
+        pages.setTotal(count);
+        pages.setPages(num);
         return pages;
     }
 

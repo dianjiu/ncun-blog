@@ -11,7 +11,7 @@ import java.util.List;
  * 日志操作(TSystemLog)表服务接口
  *
  * @author makejava
- * @since 2020-10-06 18:38:49
+ * @since 2020-10-06 20:22:35
  */
 public interface TSystemLogServiceI {
 

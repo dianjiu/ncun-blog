@@ -22,7 +22,7 @@ import java.util.List;
  * 文件操作(TFile)表服务实现类
  *
  * @author makejava
- * @since 2020-10-06 18:38:39
+ * @since 2020-10-06 20:22:28
  */
 @Slf4j
 @Service
@@ -117,10 +117,13 @@ public class TFileServiceImpl implements TFileServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TFileResp> list = listByEntity(pageReq.getData());
-        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TFileResp> pages = new PageInfo<>(list);
-        //分页时，实际返回的结果list类型是Page<E>，如果想取出分页信息，需要强制转换为Page<E>
-        //Page<TTaskDetailsResp> pages = (Page<TTaskDetailsResp>) list;
+        int count = countByEntity(pageReq.getData());
+        int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
+        pages.setPageNum(pageReq.getPageNum());
+        pages.setPageSize(pageReq.getPageSize());
+        pages.setTotal(count);
+        pages.setPages(num);
         return pages;
     }
 

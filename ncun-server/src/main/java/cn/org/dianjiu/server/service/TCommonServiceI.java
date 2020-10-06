@@ -11,7 +11,7 @@ import java.util.List;
  * 字典操作(TCommon)表服务接口
  *
  * @author makejava
- * @since 2020-10-06 18:38:35
+ * @since 2020-10-06 20:22:26
  */
 public interface TCommonServiceI {
 

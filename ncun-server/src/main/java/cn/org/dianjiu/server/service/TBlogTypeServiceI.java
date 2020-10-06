@@ -11,7 +11,7 @@ import java.util.List;
  * 分类操作(TBlogType)表服务接口
  *
  * @author makejava
- * @since 2020-10-06 18:38:31
+ * @since 2020-10-06 20:22:22
  */
 public interface TBlogTypeServiceI {
 
