@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TRoleMenusReq;
 import cn.org.dianjiu.common.pojo.resp.TRoleMenusResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TRoleMenus)表服务接口
+ * 角色菜单操作(TRoleMenus)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:31:11
+ * @since 2020-10-06 18:38:47
  */
 public interface TRoleMenusServiceI {
 
@@ -20,6 +22,8 @@ public interface TRoleMenusServiceI {
     List<TRoleMenusResp> listByEntity(TRoleMenusReq tRoleMenusReq);
 
     List<TRoleMenusResp> listByIds(List<Integer> ids);
+
+    PageInfo<TRoleMenusResp> listByPage(PageReq<TRoleMenusReq> pageReq);
 
     int insert(TRoleMenusReq tRoleMenusReq);
 

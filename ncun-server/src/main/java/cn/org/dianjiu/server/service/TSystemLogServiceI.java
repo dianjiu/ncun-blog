@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TSystemLogReq;
 import cn.org.dianjiu.common.pojo.resp.TSystemLogResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TSystemLog)表服务接口
+ * 日志操作(TSystemLog)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:33:17
+ * @since 2020-10-06 18:38:49
  */
 public interface TSystemLogServiceI {
 
@@ -20,6 +22,8 @@ public interface TSystemLogServiceI {
     List<TSystemLogResp> listByEntity(TSystemLogReq tSystemLogReq);
 
     List<TSystemLogResp> listByIds(List<Integer> ids);
+
+    PageInfo<TSystemLogResp> listByPage(PageReq<TSystemLogReq> pageReq);
 
     int insert(TSystemLogReq tSystemLogReq);
 

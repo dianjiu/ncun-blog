@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TBlogReq;
 import cn.org.dianjiu.common.pojo.resp.TBlogResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TBlog)表服务接口
+ * 博客操作(TBlog)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:29:56
+ * @since 2020-10-06 18:38:24
  */
 public interface TBlogServiceI {
 
@@ -20,6 +22,8 @@ public interface TBlogServiceI {
     List<TBlogResp> listByEntity(TBlogReq tBlogReq);
 
     List<TBlogResp> listByIds(List<Integer> ids);
+
+    PageInfo<TBlogResp> listByPage(PageReq<TBlogReq> pageReq);
 
     int insert(TBlogReq tBlogReq);
 

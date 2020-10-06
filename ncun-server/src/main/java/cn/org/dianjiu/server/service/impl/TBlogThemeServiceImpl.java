@@ -1,5 +1,6 @@
 package cn.org.dianjiu.server.service.impl;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TBlogThemeReq;
 import cn.org.dianjiu.common.pojo.resp.TBlogThemeResp;
 import cn.org.dianjiu.common.util.ObjectUtils;
@@ -7,6 +8,8 @@ import cn.org.dianjiu.server.dao.TBlogThemeDao;
 import cn.org.dianjiu.server.entity.TBlogTheme;
 import cn.org.dianjiu.server.exception.BusinessException;
 import cn.org.dianjiu.server.service.TBlogThemeServiceI;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,10 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * (TBlogTheme)表服务实现类
+ * 主题操作(TBlogTheme)表服务实现类
  *
  * @author makejava
- * @since 2020-09-05 21:30:20
+ * @since 2020-10-06 18:38:30
  */
 @Slf4j
 @Service
@@ -104,6 +107,21 @@ public class TBlogThemeServiceImpl implements TBlogThemeServiceI {
             }
         }
         return list;
+    }
+
+    @Override
+    public PageInfo<TBlogThemeResp> listByPage(PageReq<TBlogThemeReq> pageReq) {
+        //获取第1页，10条内容，默认查询总数count
+        //PageHelper.startPage(1, 10);
+        //紧跟着的第一个select方法会被分页
+        //将参数传给这个方法就可以实现物理分页了，非常简单。
+        PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
+        List<TBlogThemeResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
+        PageInfo<TBlogThemeResp> pages = new PageInfo<>(list);
+        //分页时，实际返回的结果list类型是Page<E>，如果想取出分页信息，需要强制转换为Page<E>
+        //Page<TTaskDetailsResp> pages = (Page<TTaskDetailsResp>) list;
+        return pages;
     }
 
     @Override

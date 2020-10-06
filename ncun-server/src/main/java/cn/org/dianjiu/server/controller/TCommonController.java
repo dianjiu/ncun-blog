@@ -1,9 +1,13 @@
 package cn.org.dianjiu.server.controller;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TCommonReq;
+import cn.org.dianjiu.common.pojo.resp.PageResp;
 import cn.org.dianjiu.common.pojo.resp.TCommonResp;
 import cn.org.dianjiu.common.pojo.vo.RespVO;
+import cn.org.dianjiu.common.util.ObjectUtils;
 import cn.org.dianjiu.server.service.TCommonServiceI;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,7 @@ import java.util.List;
  * 字典操作(TCommon)表控制层
  *
  * @author makejava
- * @since 2020-09-08 14:49:59
+ * @since 2020-10-06 18:51:56
  */
 @RestController
 @Api(value = "TCommon", tags = {"字典操作"})
@@ -59,7 +63,7 @@ public class TCommonController {
      * @return 实例对象
      */
     @ApiOperation("通过属性查询单个对象")
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TCommonResp> getByEntity(TCommonReq tCommonReq) {
         RespVO<TCommonResp> result = new RespVO<>();
         TCommonResp tCommonResp = tCommonService.getByEntity(tCommonReq);
@@ -81,7 +85,7 @@ public class TCommonController {
      * @return 对象列表
      */
     @ApiOperation("通过属性查询对象列表")
-    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<List> list(TCommonReq tCommonReq) {
         RespVO<List> result = new RespVO<>();
         List<TCommonResp> tCommonRespList = tCommonService.listByEntity(tCommonReq);
@@ -93,6 +97,34 @@ public class TCommonController {
         result.setCode("200");
         result.setMsg("请求成功！");
         result.setData(tCommonRespList);
+        return result;
+    }
+
+    /**
+     * 通过实体不为空的属性作为筛选条件查询对象列表
+     *
+     * @param pageReq 实例对象
+     * @return 对象列表
+     */
+    @ApiOperation(value = "分页获取对象列表", notes = "当前页和页大小必传")
+    @RequestMapping(value = "/listByPage", method = RequestMethod.POST)
+    public RespVO<PageResp> listByPage(@RequestBody PageReq<TCommonReq> pageReq) {
+        PageResp<List<TCommonResp>> pageVO = new PageResp<>();
+        RespVO<PageResp> result = new RespVO<>();
+        PageInfo<TCommonResp> pages = tCommonService.listByPage(pageReq);
+        if (ObjectUtils.checkObjAllFieldsIsNull(pages)) {
+            result.setCode("400");
+            result.setMsg("没有查到数据！");
+            return result;
+        }
+        pageVO.setTotal(pages.getTotal());
+        pageVO.setPages(pages.getPages());
+        pageVO.setPageNum(pages.getPageNum());
+        pageVO.setPageSize(pages.getPageSize());
+        pageVO.setData(pages.getList());
+        result.setCode("200");
+        result.setMsg("请求成功！");
+        result.setData(pageVO);
         return result;
     }
 
@@ -145,7 +177,7 @@ public class TCommonController {
      * @return 实例对象
      */
     @ApiOperation("更新对象记录")
-    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TCommonResp> update(@RequestBody @Validated TCommonReq tCommonReq) {
         RespVO<TCommonResp> result = new RespVO<>();
         int update = tCommonService.update(tCommonReq);
@@ -166,7 +198,7 @@ public class TCommonController {
      * @return 实例对象
      */
     @ApiOperation("删除一条对象记录")
-    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TCommonResp> deleteOne(@PathVariable Integer id) {
         RespVO<TCommonResp> result = new RespVO<>();
         int delete = tCommonService.deleteById(id);
@@ -187,7 +219,7 @@ public class TCommonController {
      * @return 实例对象
      */
     @ApiOperation("批量删除对象记录")
-    @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TCommonResp> deleteBatch(@RequestBody List<Integer> ids) {
         RespVO<TCommonResp> result = new RespVO<>();
         int dels = 0;

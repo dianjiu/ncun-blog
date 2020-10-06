@@ -1,9 +1,13 @@
 package cn.org.dianjiu.server.controller;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TBlogThemeReq;
+import cn.org.dianjiu.common.pojo.resp.PageResp;
 import cn.org.dianjiu.common.pojo.resp.TBlogThemeResp;
 import cn.org.dianjiu.common.pojo.vo.RespVO;
+import cn.org.dianjiu.common.util.ObjectUtils;
 import cn.org.dianjiu.server.service.TBlogThemeServiceI;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,7 @@ import java.util.List;
  * 主题操作(TBlogTheme)表控制层
  *
  * @author makejava
- * @since 2020-09-08 14:49:55
+ * @since 2020-10-06 18:51:53
  */
 @RestController
 @Api(value = "TBlogTheme", tags = {"主题操作"})
@@ -59,7 +63,7 @@ public class TBlogThemeController {
      * @return 实例对象
      */
     @ApiOperation("通过属性查询单个对象")
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> getByEntity(TBlogThemeReq tBlogThemeReq) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
         TBlogThemeResp tBlogThemeResp = tBlogThemeService.getByEntity(tBlogThemeReq);
@@ -81,7 +85,7 @@ public class TBlogThemeController {
      * @return 对象列表
      */
     @ApiOperation("通过属性查询对象列表")
-    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<List> list(TBlogThemeReq tBlogThemeReq) {
         RespVO<List> result = new RespVO<>();
         List<TBlogThemeResp> tBlogThemeRespList = tBlogThemeService.listByEntity(tBlogThemeReq);
@@ -93,6 +97,34 @@ public class TBlogThemeController {
         result.setCode("200");
         result.setMsg("请求成功！");
         result.setData(tBlogThemeRespList);
+        return result;
+    }
+
+    /**
+     * 通过实体不为空的属性作为筛选条件查询对象列表
+     *
+     * @param pageReq 实例对象
+     * @return 对象列表
+     */
+    @ApiOperation(value = "分页获取对象列表", notes = "当前页和页大小必传")
+    @RequestMapping(value = "/listByPage", method = RequestMethod.POST)
+    public RespVO<PageResp> listByPage(@RequestBody PageReq<TBlogThemeReq> pageReq) {
+        PageResp<List<TBlogThemeResp>> pageVO = new PageResp<>();
+        RespVO<PageResp> result = new RespVO<>();
+        PageInfo<TBlogThemeResp> pages = tBlogThemeService.listByPage(pageReq);
+        if (ObjectUtils.checkObjAllFieldsIsNull(pages)) {
+            result.setCode("400");
+            result.setMsg("没有查到数据！");
+            return result;
+        }
+        pageVO.setTotal(pages.getTotal());
+        pageVO.setPages(pages.getPages());
+        pageVO.setPageNum(pages.getPageNum());
+        pageVO.setPageSize(pages.getPageSize());
+        pageVO.setData(pages.getList());
+        result.setCode("200");
+        result.setMsg("请求成功！");
+        result.setData(pageVO);
         return result;
     }
 
@@ -145,7 +177,7 @@ public class TBlogThemeController {
      * @return 实例对象
      */
     @ApiOperation("更新对象记录")
-    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> update(@RequestBody @Validated TBlogThemeReq tBlogThemeReq) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
         int update = tBlogThemeService.update(tBlogThemeReq);
@@ -166,7 +198,7 @@ public class TBlogThemeController {
      * @return 实例对象
      */
     @ApiOperation("删除一条对象记录")
-    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> deleteOne(@PathVariable Integer id) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
         int delete = tBlogThemeService.deleteById(id);
@@ -187,7 +219,7 @@ public class TBlogThemeController {
      * @return 实例对象
      */
     @ApiOperation("批量删除对象记录")
-    @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TBlogThemeResp> deleteBatch(@RequestBody List<Integer> ids) {
         RespVO<TBlogThemeResp> result = new RespVO<>();
         int dels = 0;

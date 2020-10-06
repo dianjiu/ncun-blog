@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TMenuReq;
 import cn.org.dianjiu.common.pojo.resp.TMenuResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TMenu)表服务接口
+ * 菜单操作(TMenu)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:30:58
+ * @since 2020-10-06 18:38:42
  */
 public interface TMenuServiceI {
 
@@ -20,6 +22,8 @@ public interface TMenuServiceI {
     List<TMenuResp> listByEntity(TMenuReq tMenuReq);
 
     List<TMenuResp> listByIds(List<Integer> ids);
+
+    PageInfo<TMenuResp> listByPage(PageReq<TMenuReq> pageReq);
 
     int insert(TMenuReq tMenuReq);
 

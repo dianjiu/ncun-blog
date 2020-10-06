@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TCommentReq;
 import cn.org.dianjiu.common.pojo.resp.TCommentResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TComment)表服务接口
+ * 评论操作(TComment)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:30:32
+ * @since 2020-10-06 18:38:33
  */
 public interface TCommentServiceI {
 
@@ -20,6 +22,8 @@ public interface TCommentServiceI {
     List<TCommentResp> listByEntity(TCommentReq tCommentReq);
 
     List<TCommentResp> listByIds(List<Integer> ids);
+
+    PageInfo<TCommentResp> listByPage(PageReq<TCommentReq> pageReq);
 
     int insert(TCommentReq tCommentReq);
 

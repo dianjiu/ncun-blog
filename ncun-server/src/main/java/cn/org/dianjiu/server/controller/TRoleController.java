@@ -1,9 +1,13 @@
 package cn.org.dianjiu.server.controller;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TRoleReq;
+import cn.org.dianjiu.common.pojo.resp.PageResp;
 import cn.org.dianjiu.common.pojo.resp.TRoleResp;
 import cn.org.dianjiu.common.pojo.vo.RespVO;
+import cn.org.dianjiu.common.util.ObjectUtils;
 import cn.org.dianjiu.server.service.TRoleServiceI;
+import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +21,7 @@ import java.util.List;
  * 角色操作(TRole)表控制层
  *
  * @author makejava
- * @since 2020-09-08 14:50:06
+ * @since 2020-10-06 18:52:00
  */
 @RestController
 @Api(value = "TRole", tags = {"角色操作"})
@@ -59,7 +63,7 @@ public class TRoleController {
      * @return 实例对象
      */
     @ApiOperation("通过属性查询单个对象")
-    @GetMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TRoleResp> getByEntity(TRoleReq tRoleReq) {
         RespVO<TRoleResp> result = new RespVO<>();
         TRoleResp tRoleResp = tRoleService.getByEntity(tRoleReq);
@@ -81,7 +85,7 @@ public class TRoleController {
      * @return 对象列表
      */
     @ApiOperation("通过属性查询对象列表")
-    @GetMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<List> list(TRoleReq tRoleReq) {
         RespVO<List> result = new RespVO<>();
         List<TRoleResp> tRoleRespList = tRoleService.listByEntity(tRoleReq);
@@ -93,6 +97,34 @@ public class TRoleController {
         result.setCode("200");
         result.setMsg("请求成功！");
         result.setData(tRoleRespList);
+        return result;
+    }
+
+    /**
+     * 通过实体不为空的属性作为筛选条件查询对象列表
+     *
+     * @param pageReq 实例对象
+     * @return 对象列表
+     */
+    @ApiOperation(value = "分页获取对象列表", notes = "当前页和页大小必传")
+    @RequestMapping(value = "/listByPage", method = RequestMethod.POST)
+    public RespVO<PageResp> listByPage(@RequestBody PageReq<TRoleReq> pageReq) {
+        PageResp<List<TRoleResp>> pageVO = new PageResp<>();
+        RespVO<PageResp> result = new RespVO<>();
+        PageInfo<TRoleResp> pages = tRoleService.listByPage(pageReq);
+        if (ObjectUtils.checkObjAllFieldsIsNull(pages)) {
+            result.setCode("400");
+            result.setMsg("没有查到数据！");
+            return result;
+        }
+        pageVO.setTotal(pages.getTotal());
+        pageVO.setPages(pages.getPages());
+        pageVO.setPageNum(pages.getPageNum());
+        pageVO.setPageSize(pages.getPageSize());
+        pageVO.setData(pages.getList());
+        result.setCode("200");
+        result.setMsg("请求成功！");
+        result.setData(pageVO);
         return result;
     }
 
@@ -145,7 +177,7 @@ public class TRoleController {
      * @return 实例对象
      */
     @ApiOperation("更新对象记录")
-    @PutMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TRoleResp> update(@RequestBody @Validated TRoleReq tRoleReq) {
         RespVO<TRoleResp> result = new RespVO<>();
         int update = tRoleService.update(tRoleReq);
@@ -166,7 +198,7 @@ public class TRoleController {
      * @return 实例对象
      */
     @ApiOperation("删除一条对象记录")
-    @DeleteMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TRoleResp> deleteOne(@PathVariable Integer id) {
         RespVO<TRoleResp> result = new RespVO<>();
         int delete = tRoleService.deleteById(id);
@@ -187,7 +219,7 @@ public class TRoleController {
      * @return 实例对象
      */
     @ApiOperation("批量删除对象记录")
-    @DeleteMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
     public RespVO<TRoleResp> deleteBatch(@RequestBody List<Integer> ids) {
         RespVO<TRoleResp> result = new RespVO<>();
         int dels = 0;

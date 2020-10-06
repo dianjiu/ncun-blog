@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TFileReq;
 import cn.org.dianjiu.common.pojo.resp.TFileResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TFile)表服务接口
+ * 文件操作(TFile)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:30:46
+ * @since 2020-10-06 18:38:38
  */
 public interface TFileServiceI {
 
@@ -20,6 +22,8 @@ public interface TFileServiceI {
     List<TFileResp> listByEntity(TFileReq tFileReq);
 
     List<TFileResp> listByIds(List<Integer> ids);
+
+    PageInfo<TFileResp> listByPage(PageReq<TFileReq> pageReq);
 
     int insert(TFileReq tFileReq);
 

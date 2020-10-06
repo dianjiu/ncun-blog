@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TUserRolesReq;
 import cn.org.dianjiu.common.pojo.resp.TUserRolesResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TUserRoles)表服务接口
+ * 用户角色操作(TUserRoles)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:33:30
+ * @since 2020-10-06 18:38:55
  */
 public interface TUserRolesServiceI {
 
@@ -20,6 +22,8 @@ public interface TUserRolesServiceI {
     List<TUserRolesResp> listByEntity(TUserRolesReq tUserRolesReq);
 
     List<TUserRolesResp> listByIds(List<Integer> ids);
+
+    PageInfo<TUserRolesResp> listByPage(PageReq<TUserRolesReq> pageReq);
 
     int insert(TUserRolesReq tUserRolesReq);
 

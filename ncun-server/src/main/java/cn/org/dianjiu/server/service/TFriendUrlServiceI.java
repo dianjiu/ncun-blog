@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TFriendUrlReq;
 import cn.org.dianjiu.common.pojo.resp.TFriendUrlResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TFriendUrl)表服务接口
+ * 友链操作(TFriendUrl)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:30:52
+ * @since 2020-10-06 18:38:40
  */
 public interface TFriendUrlServiceI {
 
@@ -20,6 +22,8 @@ public interface TFriendUrlServiceI {
     List<TFriendUrlResp> listByEntity(TFriendUrlReq tFriendUrlReq);
 
     List<TFriendUrlResp> listByIds(List<Integer> ids);
+
+    PageInfo<TFriendUrlResp> listByPage(PageReq<TFriendUrlReq> pageReq);
 
     int insert(TFriendUrlReq tFriendUrlReq);
 

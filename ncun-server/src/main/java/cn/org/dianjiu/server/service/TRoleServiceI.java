@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TRoleReq;
 import cn.org.dianjiu.common.pojo.resp.TRoleResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TRole)表服务接口
+ * 角色操作(TRole)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:31:05
+ * @since 2020-10-06 18:38:45
  */
 public interface TRoleServiceI {
 
@@ -20,6 +22,8 @@ public interface TRoleServiceI {
     List<TRoleResp> listByEntity(TRoleReq tRoleReq);
 
     List<TRoleResp> listByIds(List<Integer> ids);
+
+    PageInfo<TRoleResp> listByPage(PageReq<TRoleReq> pageReq);
 
     int insert(TRoleReq tRoleReq);
 

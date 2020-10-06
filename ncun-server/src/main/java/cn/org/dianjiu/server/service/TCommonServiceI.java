@@ -1,15 +1,17 @@
 package cn.org.dianjiu.server.service;
 
+import cn.org.dianjiu.common.pojo.req.PageReq;
 import cn.org.dianjiu.common.pojo.req.TCommonReq;
 import cn.org.dianjiu.common.pojo.resp.TCommonResp;
+import com.github.pagehelper.PageInfo;
 
 import java.util.List;
 
 /**
- * (TCommon)表服务接口
+ * 字典操作(TCommon)表服务接口
  *
  * @author makejava
- * @since 2020-09-05 21:30:38
+ * @since 2020-10-06 18:38:35
  */
 public interface TCommonServiceI {
 
@@ -20,6 +22,8 @@ public interface TCommonServiceI {
     List<TCommonResp> listByEntity(TCommonReq tCommonReq);
 
     List<TCommonResp> listByIds(List<Integer> ids);
+
+    PageInfo<TCommonResp> listByPage(PageReq<TCommonReq> pageReq);
 
     int insert(TCommonReq tCommonReq);
 
