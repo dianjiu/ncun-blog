@@ -34,7 +34,7 @@ pagehelper:
 
 # 依梦论坛地址
 emen:
-  user:
+  auth:
     authcookie: ssotest.emen.fun/api/auth/authCookie
     authlogin: ssotest.emen.fun/api/auth/authLogin
     authlogout: ssotest.emen.fun/api/auth/authLogout

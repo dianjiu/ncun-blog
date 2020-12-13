@@ -34,7 +34,7 @@ pagehelper:
 
 # 依梦论坛地址
 emen:
-  user:
+  auth:
     authcookie: 127.0.0.1:7071/auth/authCookie
     authlogin: 127.0.0.1:7071/auth/authLogin
     authlogout: 127.0.0.1:7071/auth/authLogout
