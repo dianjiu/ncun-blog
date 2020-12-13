@@ -31,3 +31,14 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+# 依梦论坛地址
+emen:
+  user:
+    authcookie: 127.0.0.1:7071/auth/authCookie
+    authlogin: 127.0.0.1:7071/auth/authLogin
+    authlogout: 127.0.0.1:7071/auth/authLogout
+
+logback:
+  logDir: ./log/local
+

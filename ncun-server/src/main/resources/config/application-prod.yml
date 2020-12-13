@@ -31,3 +31,14 @@ pagehelper:
   reasonable: true
   supportMethodsArguments: true
   params: count=countSql
+
+# 依梦论坛地址
+emen:
+  user:
+    authcookie: sso.emen.fun/api/auth/authCookie
+    authlogin: sso.emen.fun/api/auth/authLogin
+    authlogout: sso.emen.fun/api/auth/authLogout
+
+#日志路径
+logback:
+  logDir: /app/logs/ncun/prod/
