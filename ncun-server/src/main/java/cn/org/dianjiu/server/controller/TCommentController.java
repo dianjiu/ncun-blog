@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * 评论操作(TComment)表控制层
  *
- * @author makejava
- * @since 2020-10-06 18:51:55
+ * @author dianjiu
+ * @since 2021-05-08 17:51:09
  */
 @RestController
 @Api(value = "TComment", tags = {"评论操作"})

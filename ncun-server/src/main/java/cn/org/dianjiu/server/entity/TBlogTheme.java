@@ -7,13 +7,16 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * (TBlogTheme)实体类
+ * 主题操作(TBlogTheme)实体类
  *
- * @author makejava
- * @since 2020-09-05 21:30:19
+ * @author dianjiu
+ * @since 2021-05-08 17:51:05
  */
 @Data
 public class TBlogTheme {
+    /**
+     * 唯一ID
+     */
     private Integer id;
     /**
      * 主题名(url)
@@ -36,12 +39,20 @@ public class TBlogTheme {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    /**
+     * 创建人
+     */
+    private String createdBy;
     /**
      * 更新时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    /**
+     * 更新人
+     */
+    private String updatedBy;
 
 }

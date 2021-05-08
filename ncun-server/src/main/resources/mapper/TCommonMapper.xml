@@ -20,27 +20,16 @@
         <result property="value5" column="value5" jdbcType="VARCHAR"/>
         <result property="key6" column="key6" jdbcType="VARCHAR"/>
         <result property="value6" column="value6" jdbcType="VARCHAR"/>
-        <result property="key7" column="key7" jdbcType="VARCHAR"/>
-        <result property="value7" column="value7" jdbcType="VARCHAR"/>
-        <result property="key8" column="key8" jdbcType="VARCHAR"/>
-        <result property="value8" column="value8" jdbcType="VARCHAR"/>
-        <result property="key9" column="key9" jdbcType="VARCHAR"/>
-        <result property="value9" column="value9" jdbcType="VARCHAR"/>
-        <result property="key10" column="key10" jdbcType="VARCHAR"/>
-        <result property="value10" column="value10" jdbcType="VARCHAR"/>
-        <result property="key11" column="key11" jdbcType="VARCHAR"/>
-        <result property="value11" column="value11" jdbcType="VARCHAR"/>
-        <result property="key12" column="key12" jdbcType="VARCHAR"/>
-        <result property="value12" column="value12" jdbcType="VARCHAR"/>
-        <result property="key13" column="key13" jdbcType="VARCHAR"/>
-        <result property="value13" column="value13" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="table_field">
-      id, param_name, param_key, param_value, param_desc, key1, value1, key2, value2, key3, value3, key4, value4, key5, value5, key6, value6, key7, value7, key8, value8, key9, value9, key10, value10, key11, value11, key12, value12, key13, value13, status, create_time, update_time      
+        id
+        , param_name, param_key, param_value, param_desc, key1, value1, key2, value2, key3, value3, key4, value4, key5, value5, key6, value6, status, created_time, created_by, updated_time, updated_by
     </sql>
 
     <!--通过Id查询单个对象-->
@@ -109,56 +98,20 @@
             <if test="value6 != null">
                 and value6 = #{value6,jdbcType=VARCHAR}
             </if>
-            <if test="key7 != null">
-                and key7 = #{key7,jdbcType=VARCHAR}
-            </if>
-            <if test="value7 != null">
-                and value7 = #{value7,jdbcType=VARCHAR}
-            </if>
-            <if test="key8 != null">
-                and key8 = #{key8,jdbcType=VARCHAR}
-            </if>
-            <if test="value8 != null">
-                and value8 = #{value8,jdbcType=VARCHAR}
-            </if>
-            <if test="key9 != null">
-                and key9 = #{key9,jdbcType=VARCHAR}
-            </if>
-            <if test="value9 != null">
-                and value9 = #{value9,jdbcType=VARCHAR}
-            </if>
-            <if test="key10 != null">
-                and key10 = #{key10,jdbcType=VARCHAR}
-            </if>
-            <if test="value10 != null">
-                and value10 = #{value10,jdbcType=VARCHAR}
-            </if>
-            <if test="key11 != null">
-                and key11 = #{key11,jdbcType=VARCHAR}
-            </if>
-            <if test="value11 != null">
-                and value11 = #{value11,jdbcType=VARCHAR}
-            </if>
-            <if test="key12 != null">
-                and key12 = #{key12,jdbcType=VARCHAR}
-            </if>
-            <if test="value12 != null">
-                and value12 = #{value12,jdbcType=VARCHAR}
-            </if>
-            <if test="key13 != null">
-                and key13 = #{key13,jdbcType=VARCHAR}
-            </if>
-            <if test="value13 != null">
-                and value13 = #{value13,jdbcType=VARCHAR}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -220,56 +173,20 @@
             <if test="value6 != null">
                 and value6 = #{value6,jdbcType=VARCHAR}
             </if>
-            <if test="key7 != null">
-                and key7 = #{key7,jdbcType=VARCHAR}
-            </if>
-            <if test="value7 != null">
-                and value7 = #{value7,jdbcType=VARCHAR}
-            </if>
-            <if test="key8 != null">
-                and key8 = #{key8,jdbcType=VARCHAR}
-            </if>
-            <if test="value8 != null">
-                and value8 = #{value8,jdbcType=VARCHAR}
-            </if>
-            <if test="key9 != null">
-                and key9 = #{key9,jdbcType=VARCHAR}
-            </if>
-            <if test="value9 != null">
-                and value9 = #{value9,jdbcType=VARCHAR}
-            </if>
-            <if test="key10 != null">
-                and key10 = #{key10,jdbcType=VARCHAR}
-            </if>
-            <if test="value10 != null">
-                and value10 = #{value10,jdbcType=VARCHAR}
-            </if>
-            <if test="key11 != null">
-                and key11 = #{key11,jdbcType=VARCHAR}
-            </if>
-            <if test="value11 != null">
-                and value11 = #{value11,jdbcType=VARCHAR}
-            </if>
-            <if test="key12 != null">
-                and key12 = #{key12,jdbcType=VARCHAR}
-            </if>
-            <if test="value12 != null">
-                and value12 = #{value12,jdbcType=VARCHAR}
-            </if>
-            <if test="key13 != null">
-                and key13 = #{key13,jdbcType=VARCHAR}
-            </if>
-            <if test="value13 != null">
-                and value13 = #{value13,jdbcType=VARCHAR}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -340,56 +257,20 @@
             <if test="value6 != null">
                 value6,
             </if>
-            <if test="key7 != null">
-                key7,
-            </if>
-            <if test="value7 != null">
-                value7,
-            </if>
-            <if test="key8 != null">
-                key8,
-            </if>
-            <if test="value8 != null">
-                value8,
-            </if>
-            <if test="key9 != null">
-                key9,
-            </if>
-            <if test="value9 != null">
-                value9,
-            </if>
-            <if test="key10 != null">
-                key10,
-            </if>
-            <if test="value10 != null">
-                value10,
-            </if>
-            <if test="key11 != null">
-                key11,
-            </if>
-            <if test="value11 != null">
-                value11,
-            </if>
-            <if test="key12 != null">
-                key12,
-            </if>
-            <if test="value12 != null">
-                value12,
-            </if>
-            <if test="key13 != null">
-                key13,
-            </if>
-            <if test="value13 != null">
-                value13,
-            </if>
             <if test="status != null">
                 status,
             </if>
-            <if test="createTime != null">
-                create_time,
+            <if test="createdTime != null">
+                created_time,
             </if>
-            <if test="updateTime != null">
-                update_time,
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -444,56 +325,20 @@
             <if test="value6 != null">
                 #{value6,jdbcType=VARCHAR},
             </if>
-            <if test="key7 != null">
-                #{key7,jdbcType=VARCHAR},
-            </if>
-            <if test="value7 != null">
-                #{value7,jdbcType=VARCHAR},
-            </if>
-            <if test="key8 != null">
-                #{key8,jdbcType=VARCHAR},
-            </if>
-            <if test="value8 != null">
-                #{value8,jdbcType=VARCHAR},
-            </if>
-            <if test="key9 != null">
-                #{key9,jdbcType=VARCHAR},
-            </if>
-            <if test="value9 != null">
-                #{value9,jdbcType=VARCHAR},
-            </if>
-            <if test="key10 != null">
-                #{key10,jdbcType=VARCHAR},
-            </if>
-            <if test="value10 != null">
-                #{value10,jdbcType=VARCHAR},
-            </if>
-            <if test="key11 != null">
-                #{key11,jdbcType=VARCHAR},
-            </if>
-            <if test="value11 != null">
-                #{value11,jdbcType=VARCHAR},
-            </if>
-            <if test="key12 != null">
-                #{key12,jdbcType=VARCHAR},
-            </if>
-            <if test="value12 != null">
-                #{value12,jdbcType=VARCHAR},
-            </if>
-            <if test="key13 != null">
-                #{key13,jdbcType=VARCHAR},
-            </if>
-            <if test="value13 != null">
-                #{value13,jdbcType=VARCHAR},
-            </if>
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -502,8 +347,7 @@
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
         insert into t_common
         (<if test="id != null">id,</if>param_name, param_key, param_value, param_desc, key1, value1, key2, value2, key3,
-        value3, key4, value4, key5, value5, key6, value6, key7, value7, key8, value8, key9, value9, key10, value10,
-        key11, value11, key12, value12, key13, value13, status, create_time, update_time)
+        value3, key4, value4, key5, value5, key6, value6, status)
         values
         <foreach item="item" collection="list" separator="," open="" close="" index="index">
             (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.paramName,jdbcType=VARCHAR},
@@ -512,12 +356,7 @@
             #{item.value2,jdbcType=VARCHAR}, #{item.key3,jdbcType=VARCHAR}, #{item.value3,jdbcType=VARCHAR},
             #{item.key4,jdbcType=VARCHAR}, #{item.value4,jdbcType=VARCHAR}, #{item.key5,jdbcType=VARCHAR},
             #{item.value5,jdbcType=VARCHAR}, #{item.key6,jdbcType=VARCHAR}, #{item.value6,jdbcType=VARCHAR},
-            #{item.key7,jdbcType=VARCHAR}, #{item.value7,jdbcType=VARCHAR}, #{item.key8,jdbcType=VARCHAR},
-            #{item.value8,jdbcType=VARCHAR}, #{item.key9,jdbcType=VARCHAR}, #{item.value9,jdbcType=VARCHAR},
-            #{item.key10,jdbcType=VARCHAR}, #{item.value10,jdbcType=VARCHAR}, #{item.key11,jdbcType=VARCHAR},
-            #{item.value11,jdbcType=VARCHAR}, #{item.key12,jdbcType=VARCHAR}, #{item.value12,jdbcType=VARCHAR},
-            #{item.key13,jdbcType=VARCHAR}, #{item.value13,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR},
-            #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+            #{item.status,jdbcType=VARCHAR})
         </foreach>
     </insert>
 
@@ -573,56 +412,8 @@
             <if test="value6 != null and value6 != ''">
                 value6 = #{value6,jdbcType=VARCHAR},
             </if>
-            <if test="key7 != null and key7 != ''">
-                key7 = #{key7,jdbcType=VARCHAR},
-            </if>
-            <if test="value7 != null and value7 != ''">
-                value7 = #{value7,jdbcType=VARCHAR},
-            </if>
-            <if test="key8 != null and key8 != ''">
-                key8 = #{key8,jdbcType=VARCHAR},
-            </if>
-            <if test="value8 != null and value8 != ''">
-                value8 = #{value8,jdbcType=VARCHAR},
-            </if>
-            <if test="key9 != null and key9 != ''">
-                key9 = #{key9,jdbcType=VARCHAR},
-            </if>
-            <if test="value9 != null and value9 != ''">
-                value9 = #{value9,jdbcType=VARCHAR},
-            </if>
-            <if test="key10 != null and key10 != ''">
-                key10 = #{key10,jdbcType=VARCHAR},
-            </if>
-            <if test="value10 != null and value10 != ''">
-                value10 = #{value10,jdbcType=VARCHAR},
-            </if>
-            <if test="key11 != null and key11 != ''">
-                key11 = #{key11,jdbcType=VARCHAR},
-            </if>
-            <if test="value11 != null and value11 != ''">
-                value11 = #{value11,jdbcType=VARCHAR},
-            </if>
-            <if test="key12 != null and key12 != ''">
-                key12 = #{key12,jdbcType=VARCHAR},
-            </if>
-            <if test="value12 != null and value12 != ''">
-                value12 = #{value12,jdbcType=VARCHAR},
-            </if>
-            <if test="key13 != null and key13 != ''">
-                key13 = #{key13,jdbcType=VARCHAR},
-            </if>
-            <if test="value13 != null and value13 != ''">
-                value13 = #{value13,jdbcType=VARCHAR},
-            </if>
             <if test="status != null and status != ''">
                 status = #{status,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -680,56 +471,8 @@
             <if test="where.value6 == null and set.value6 != null and set.value6 != ''">
                 value6 = #{set.value6,jdbcType=VARCHAR},
             </if>
-            <if test="where.key7 == null and set.key7 != null and set.key7 != ''">
-                key7 = #{set.key7,jdbcType=VARCHAR},
-            </if>
-            <if test="where.value7 == null and set.value7 != null and set.value7 != ''">
-                value7 = #{set.value7,jdbcType=VARCHAR},
-            </if>
-            <if test="where.key8 == null and set.key8 != null and set.key8 != ''">
-                key8 = #{set.key8,jdbcType=VARCHAR},
-            </if>
-            <if test="where.value8 == null and set.value8 != null and set.value8 != ''">
-                value8 = #{set.value8,jdbcType=VARCHAR},
-            </if>
-            <if test="where.key9 == null and set.key9 != null and set.key9 != ''">
-                key9 = #{set.key9,jdbcType=VARCHAR},
-            </if>
-            <if test="where.value9 == null and set.value9 != null and set.value9 != ''">
-                value9 = #{set.value9,jdbcType=VARCHAR},
-            </if>
-            <if test="where.key10 == null and set.key10 != null and set.key10 != ''">
-                key10 = #{set.key10,jdbcType=VARCHAR},
-            </if>
-            <if test="where.value10 == null and set.value10 != null and set.value10 != ''">
-                value10 = #{set.value10,jdbcType=VARCHAR},
-            </if>
-            <if test="where.key11 == null and set.key11 != null and set.key11 != ''">
-                key11 = #{set.key11,jdbcType=VARCHAR},
-            </if>
-            <if test="where.value11 == null and set.value11 != null and set.value11 != ''">
-                value11 = #{set.value11,jdbcType=VARCHAR},
-            </if>
-            <if test="where.key12 == null and set.key12 != null and set.key12 != ''">
-                key12 = #{set.key12,jdbcType=VARCHAR},
-            </if>
-            <if test="where.value12 == null and set.value12 != null and set.value12 != ''">
-                value12 = #{set.value12,jdbcType=VARCHAR},
-            </if>
-            <if test="where.key13 == null and set.key13 != null and set.key13 != ''">
-                key13 = #{set.key13,jdbcType=VARCHAR},
-            </if>
-            <if test="where.value13 == null and set.value13 != null and set.value13 != ''">
-                value13 = #{set.value13,jdbcType=VARCHAR},
-            </if>
             <if test="where.status == null and set.status != null and set.status != ''">
                 status = #{set.status,jdbcType=VARCHAR},
-            </if>
-            <if test="where.createTime == null and set.createTime != null">
-                create_time = #{set.createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="where.updateTime == null and set.updateTime != null">
-                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         <where>
@@ -784,56 +527,20 @@
             <if test="where.value6 != null">
                 and value6 = #{where.value6,jdbcType=VARCHAR}
             </if>
-            <if test="where.key7 != null">
-                and key7 = #{where.key7,jdbcType=VARCHAR}
-            </if>
-            <if test="where.value7 != null">
-                and value7 = #{where.value7,jdbcType=VARCHAR}
-            </if>
-            <if test="where.key8 != null">
-                and key8 = #{where.key8,jdbcType=VARCHAR}
-            </if>
-            <if test="where.value8 != null">
-                and value8 = #{where.value8,jdbcType=VARCHAR}
-            </if>
-            <if test="where.key9 != null">
-                and key9 = #{where.key9,jdbcType=VARCHAR}
-            </if>
-            <if test="where.value9 != null">
-                and value9 = #{where.value9,jdbcType=VARCHAR}
-            </if>
-            <if test="where.key10 != null">
-                and key10 = #{where.key10,jdbcType=VARCHAR}
-            </if>
-            <if test="where.value10 != null">
-                and value10 = #{where.value10,jdbcType=VARCHAR}
-            </if>
-            <if test="where.key11 != null">
-                and key11 = #{where.key11,jdbcType=VARCHAR}
-            </if>
-            <if test="where.value11 != null">
-                and value11 = #{where.value11,jdbcType=VARCHAR}
-            </if>
-            <if test="where.key12 != null">
-                and key12 = #{where.key12,jdbcType=VARCHAR}
-            </if>
-            <if test="where.value12 != null">
-                and value12 = #{where.value12,jdbcType=VARCHAR}
-            </if>
-            <if test="where.key13 != null">
-                and key13 = #{where.key13,jdbcType=VARCHAR}
-            </if>
-            <if test="where.value13 != null">
-                and value13 = #{where.value13,jdbcType=VARCHAR}
-            </if>
             <if test="where.status != null">
                 and status = #{where.status,jdbcType=VARCHAR}
             </if>
-            <if test="where.createTime != null">
-                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            <if test="where.createdTime != null">
+                and created_time = #{where.createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="where.updateTime != null">
-                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            <if test="where.createdBy != null">
+                and created_by = #{where.createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="where.updatedTime != null">
+                and updated_time = #{where.updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updatedBy != null">
+                and updated_by = #{where.updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </update>
@@ -922,89 +629,9 @@
                     when id = #{item.id} then #{item.value6}
                 </foreach>
             </trim>
-            <trim prefix="key7 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.key7}
-                </foreach>
-            </trim>
-            <trim prefix="value7 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.value7}
-                </foreach>
-            </trim>
-            <trim prefix="key8 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.key8}
-                </foreach>
-            </trim>
-            <trim prefix="value8 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.value8}
-                </foreach>
-            </trim>
-            <trim prefix="key9 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.key9}
-                </foreach>
-            </trim>
-            <trim prefix="value9 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.value9}
-                </foreach>
-            </trim>
-            <trim prefix="key10 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.key10}
-                </foreach>
-            </trim>
-            <trim prefix="value10 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.value10}
-                </foreach>
-            </trim>
-            <trim prefix="key11 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.key11}
-                </foreach>
-            </trim>
-            <trim prefix="value11 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.value11}
-                </foreach>
-            </trim>
-            <trim prefix="key12 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.key12}
-                </foreach>
-            </trim>
-            <trim prefix="value12 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.value12}
-                </foreach>
-            </trim>
-            <trim prefix="key13 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.key13}
-                </foreach>
-            </trim>
-            <trim prefix="value13 = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.value13}
-                </foreach>
-            </trim>
             <trim prefix="status = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
                     when id = #{item.id} then #{item.status}
-                </foreach>
-            </trim>
-            <trim prefix="create_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.createTime}
-                </foreach>
-            </trim>
-            <trim prefix="update_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.updateTime}
                 </foreach>
             </trim>
         </trim>
@@ -1016,7 +643,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById" parameterType="java.lang.Integer">
-        delete from t_common where id = #{id,jdbcType=INTEGER}
+        delete
+        from t_common
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <!--通过实体非空属性删除-->
@@ -1071,56 +700,8 @@
             <if test="value6 != null">
                 and value6 = #{value6,jdbcType=VARCHAR}
             </if>
-            <if test="key7 != null">
-                and key7 = #{key7,jdbcType=VARCHAR}
-            </if>
-            <if test="value7 != null">
-                and value7 = #{value7,jdbcType=VARCHAR}
-            </if>
-            <if test="key8 != null">
-                and key8 = #{key8,jdbcType=VARCHAR}
-            </if>
-            <if test="value8 != null">
-                and value8 = #{value8,jdbcType=VARCHAR}
-            </if>
-            <if test="key9 != null">
-                and key9 = #{key9,jdbcType=VARCHAR}
-            </if>
-            <if test="value9 != null">
-                and value9 = #{value9,jdbcType=VARCHAR}
-            </if>
-            <if test="key10 != null">
-                and key10 = #{key10,jdbcType=VARCHAR}
-            </if>
-            <if test="value10 != null">
-                and value10 = #{value10,jdbcType=VARCHAR}
-            </if>
-            <if test="key11 != null">
-                and key11 = #{key11,jdbcType=VARCHAR}
-            </if>
-            <if test="value11 != null">
-                and value11 = #{value11,jdbcType=VARCHAR}
-            </if>
-            <if test="key12 != null">
-                and key12 = #{key12,jdbcType=VARCHAR}
-            </if>
-            <if test="value12 != null">
-                and value12 = #{value12,jdbcType=VARCHAR}
-            </if>
-            <if test="key13 != null">
-                and key13 = #{key13,jdbcType=VARCHAR}
-            </if>
-            <if test="value13 != null">
-                and value13 = #{value13,jdbcType=VARCHAR}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
             </if>
         </where>
     </delete>
@@ -1134,7 +715,8 @@
     </delete>
 
     <select id="countAll" resultType="int">
-        select count(id) from t_common
+        select count(id)
+        from t_common
     </select>
 
     <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TCommon" resultType="int">
@@ -1191,57 +773,22 @@
             <if test="value6 != null">
                 and value6 = #{value6,jdbcType=VARCHAR}
             </if>
-            <if test="key7 != null">
-                and key7 = #{key7,jdbcType=VARCHAR}
-            </if>
-            <if test="value7 != null">
-                and value7 = #{value7,jdbcType=VARCHAR}
-            </if>
-            <if test="key8 != null">
-                and key8 = #{key8,jdbcType=VARCHAR}
-            </if>
-            <if test="value8 != null">
-                and value8 = #{value8,jdbcType=VARCHAR}
-            </if>
-            <if test="key9 != null">
-                and key9 = #{key9,jdbcType=VARCHAR}
-            </if>
-            <if test="value9 != null">
-                and value9 = #{value9,jdbcType=VARCHAR}
-            </if>
-            <if test="key10 != null">
-                and key10 = #{key10,jdbcType=VARCHAR}
-            </if>
-            <if test="value10 != null">
-                and value10 = #{value10,jdbcType=VARCHAR}
-            </if>
-            <if test="key11 != null">
-                and key11 = #{key11,jdbcType=VARCHAR}
-            </if>
-            <if test="value11 != null">
-                and value11 = #{value11,jdbcType=VARCHAR}
-            </if>
-            <if test="key12 != null">
-                and key12 = #{key12,jdbcType=VARCHAR}
-            </if>
-            <if test="value12 != null">
-                and value12 = #{value12,jdbcType=VARCHAR}
-            </if>
-            <if test="key13 != null">
-                and key13 = #{key13,jdbcType=VARCHAR}
-            </if>
-            <if test="value13 != null">
-                and value13 = #{value13,jdbcType=VARCHAR}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
 </mapper>
+

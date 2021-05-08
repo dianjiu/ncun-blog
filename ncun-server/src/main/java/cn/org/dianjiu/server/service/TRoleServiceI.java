@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 角色操作(TRole)表服务接口
  *
- * @author makejava
- * @since 2020-10-06 20:22:32
+ * @author dianjiu
+ * @since 2021-05-08 18:15:09
  */
 public interface TRoleServiceI {
 

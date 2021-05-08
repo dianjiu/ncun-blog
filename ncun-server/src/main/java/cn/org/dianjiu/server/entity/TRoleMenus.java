@@ -1,21 +1,21 @@
 package cn.org.dianjiu.server.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
+import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
- * (TRoleMenus)实体类
+ * 角色菜单操作(TRoleMenus)实体类
  *
- * @author makejava
- * @since 2020-09-05 21:31:10
+ * @author dianjiu
+ * @since 2021-05-08 17:51:20
  */
 @Data
 public class TRoleMenus {
     /**
-     * 主键，自增长
+     * 唯一ID
      */
     private Integer id;
     /**
@@ -27,20 +27,28 @@ public class TRoleMenus {
      */
     private Integer roleId;
     /**
+     * 0  -- 弃用  1 -- 启用
+     */
+    private String status;
+    /**
      * 创建时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    /**
+     * 创建人
+     */
+    private String createdBy;
     /**
      * 更新时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
     /**
-     * 0  -- 未读  1 -- 已用
+     * 更新人
      */
-    private String status;
+    private String updatedBy;
 
 }

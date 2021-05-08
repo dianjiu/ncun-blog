@@ -4,15 +4,14 @@ import cn.org.dianjiu.server.entity.TBlogTheme;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 /**
- * (TBlogTheme)表数据库访问层
+ * 主题操作(TBlogTheme)表数据库访问层
  *
- * @author makejava
- * @since 2020-09-05 21:30:19
+ * @author dianjiu
+ * @since 2021-05-08 17:51:06
  */
 @Mapper
 public interface TBlogThemeDao {

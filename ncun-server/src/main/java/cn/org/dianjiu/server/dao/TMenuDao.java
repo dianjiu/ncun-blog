@@ -4,15 +4,14 @@ import cn.org.dianjiu.server.entity.TMenu;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 /**
- * (TMenu)表数据库访问层
+ * 菜单操作(TMenu)表数据库访问层
  *
- * @author makejava
- * @since 2020-09-05 21:30:58
+ * @author dianjiu
+ * @since 2021-05-08 17:51:17
  */
 @Mapper
 public interface TMenuDao {

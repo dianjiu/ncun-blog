@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 友链操作(TFriendUrl)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:29
+ * @author dianjiu
+ * @since 2021-05-08 18:15:09
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TFriendUrlServiceImpl implements TFriendUrlServiceI {
             for (TFriendUrl tFriendUrl1 : tFriendUrls) {
                 TFriendUrlResp tFriendUrlResp = new TFriendUrlResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tFriendUrl1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tFriendUrl1, tFriendUrlResp);
                 list.add(tFriendUrlResp);
@@ -117,6 +117,7 @@ public class TFriendUrlServiceImpl implements TFriendUrlServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TFriendUrlResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TFriendUrlResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TFriendUrlServiceImpl implements TFriendUrlServiceI {
         }
         ObjectUtils.copyProperties(tFriendUrlReq, tFriendUrl);
         Date date = new Date();
-        tFriendUrl.setCreateTime(date);
-        tFriendUrl.setUpdateTime(date);
+        tFriendUrl.setCreatedTime(date);
+        tFriendUrl.setCreatedBy("admin");
+        tFriendUrl.setUpdatedTime(date);
+        tFriendUrl.setUpdatedBy("admin");
         return tFriendUrlDao.insert(tFriendUrl);
     }
 
@@ -168,7 +171,7 @@ public class TFriendUrlServiceImpl implements TFriendUrlServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tFriendUrlReq, tFriendUrl);
-        tFriendUrl.setUpdateTime(new Date());
+        tFriendUrl.setUpdatedTime(new Date());
         return tFriendUrlDao.update(tFriendUrl);
     }
 

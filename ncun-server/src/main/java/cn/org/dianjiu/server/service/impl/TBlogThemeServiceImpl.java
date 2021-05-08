@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 主题操作(TBlogTheme)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:21
+ * @author dianjiu
+ * @since 2021-05-08 18:15:06
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TBlogThemeServiceImpl implements TBlogThemeServiceI {
             for (TBlogTheme tBlogTheme1 : tBlogThemes) {
                 TBlogThemeResp tBlogThemeResp = new TBlogThemeResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tBlogTheme1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tBlogTheme1, tBlogThemeResp);
                 list.add(tBlogThemeResp);
@@ -117,6 +117,7 @@ public class TBlogThemeServiceImpl implements TBlogThemeServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TBlogThemeResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TBlogThemeResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TBlogThemeServiceImpl implements TBlogThemeServiceI {
         }
         ObjectUtils.copyProperties(tBlogThemeReq, tBlogTheme);
         Date date = new Date();
-        tBlogTheme.setCreateTime(date);
-        tBlogTheme.setUpdateTime(date);
+        tBlogTheme.setCreatedTime(date);
+        tBlogTheme.setCreatedBy("admin");
+        tBlogTheme.setUpdatedTime(date);
+        tBlogTheme.setUpdatedBy("admin");
         return tBlogThemeDao.insert(tBlogTheme);
     }
 
@@ -168,7 +171,7 @@ public class TBlogThemeServiceImpl implements TBlogThemeServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tBlogThemeReq, tBlogTheme);
-        tBlogTheme.setUpdateTime(new Date());
+        tBlogTheme.setUpdatedTime(new Date());
         return tBlogThemeDao.update(tBlogTheme);
     }
 

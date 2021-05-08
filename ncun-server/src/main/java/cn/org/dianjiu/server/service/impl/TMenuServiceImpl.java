@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 菜单操作(TMenu)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:31
+ * @author dianjiu
+ * @since 2021-05-08 18:15:09
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TMenuServiceImpl implements TMenuServiceI {
             for (TMenu tMenu1 : tMenus) {
                 TMenuResp tMenuResp = new TMenuResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tMenu1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tMenu1, tMenuResp);
                 list.add(tMenuResp);
@@ -117,6 +117,7 @@ public class TMenuServiceImpl implements TMenuServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TMenuResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TMenuResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TMenuServiceImpl implements TMenuServiceI {
         }
         ObjectUtils.copyProperties(tMenuReq, tMenu);
         Date date = new Date();
-        tMenu.setCreateTime(date);
-        tMenu.setUpdateTime(date);
+        tMenu.setCreatedTime(date);
+        tMenu.setCreatedBy("admin");
+        tMenu.setUpdatedTime(date);
+        tMenu.setUpdatedBy("admin");
         return tMenuDao.insert(tMenu);
     }
 
@@ -168,7 +171,7 @@ public class TMenuServiceImpl implements TMenuServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tMenuReq, tMenu);
-        tMenu.setUpdateTime(new Date());
+        tMenu.setUpdatedTime(new Date());
         return tMenuDao.update(tMenu);
     }
 

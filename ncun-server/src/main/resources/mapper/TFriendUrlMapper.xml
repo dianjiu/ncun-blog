@@ -9,12 +9,15 @@
         <result property="linkInfo" column="link_info" jdbcType="VARCHAR"/>
         <result property="linkUrl" column="link_url" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="table_field">
-      id, link_name, link_img, link_info, link_url, status, create_time, update_time      
+        id
+        , link_name, link_img, link_info, link_url, status, created_time, created_by, updated_time, updated_by
     </sql>
 
     <!--通过Id查询单个对象-->
@@ -50,11 +53,17 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -83,11 +92,17 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -126,11 +141,17 @@
             <if test="status != null">
                 status,
             </if>
-            <if test="createTime != null">
-                create_time,
+            <if test="createdTime != null">
+                created_time,
             </if>
-            <if test="updateTime != null">
-                update_time,
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -152,11 +173,17 @@
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -164,13 +191,12 @@
     <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
         insert into t_friend_url
-        (<if test="id != null">id,</if>link_name, link_img, link_info, link_url, status, create_time, update_time)
+        (<if test="id != null">id,</if>link_name, link_img, link_info, link_url, status)
         values
         <foreach item="item" collection="list" separator="," open="" close="" index="index">
             (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.linkName,jdbcType=VARCHAR},
             #{item.linkImg,jdbcType=VARCHAR}, #{item.linkInfo,jdbcType=VARCHAR}, #{item.linkUrl,jdbcType=VARCHAR},
-            #{item.status,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP})
+            #{item.status,jdbcType=VARCHAR})
         </foreach>
     </insert>
 
@@ -192,12 +218,6 @@
             </if>
             <if test="status != null and status != ''">
                 status = #{status,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -222,12 +242,6 @@
             <if test="where.status == null and set.status != null and set.status != ''">
                 status = #{set.status,jdbcType=VARCHAR},
             </if>
-            <if test="where.createTime == null and set.createTime != null">
-                create_time = #{set.createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="where.updateTime == null and set.updateTime != null">
-                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
-            </if>
         </set>
         <where>
             <if test="where.id != null">
@@ -248,11 +262,17 @@
             <if test="where.status != null">
                 and status = #{where.status,jdbcType=VARCHAR}
             </if>
-            <if test="where.createTime != null">
-                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            <if test="where.createdTime != null">
+                and created_time = #{where.createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="where.updateTime != null">
-                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            <if test="where.createdBy != null">
+                and created_by = #{where.createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="where.updatedTime != null">
+                and updated_time = #{where.updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updatedBy != null">
+                and updated_by = #{where.updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </update>
@@ -286,16 +306,6 @@
                     when id = #{item.id} then #{item.status}
                 </foreach>
             </trim>
-            <trim prefix="create_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.createTime}
-                </foreach>
-            </trim>
-            <trim prefix="update_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.updateTime}
-                </foreach>
-            </trim>
         </trim>
         where id in
         <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
@@ -305,7 +315,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById" parameterType="java.lang.Integer">
-        delete from t_friend_url where id = #{id,jdbcType=INTEGER}
+        delete
+        from t_friend_url
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <!--通过实体非空属性删除-->
@@ -327,12 +339,6 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
-            </if>
         </where>
     </delete>
 
@@ -345,7 +351,8 @@
     </delete>
 
     <select id="countAll" resultType="int">
-        select count(id) from t_friend_url
+        select count(id)
+        from t_friend_url
     </select>
 
     <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TFriendUrl" resultType="int">
@@ -369,12 +376,19 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
 </mapper>
+

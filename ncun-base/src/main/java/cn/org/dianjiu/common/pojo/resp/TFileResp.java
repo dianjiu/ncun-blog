@@ -9,14 +9,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TFileResp) Resp
+ * 文件操作(TFileResp) Resp
  *
- * @author makejava
- * @since 2020-09-05 21:30:51
+ * @author dianjiu
+ * @since 2021-05-08 17:51:15
  */
 @Data
 public class TFileResp implements Serializable {
     private static final long serialVersionUID = 9155949248117098529L;
+    @ApiModelProperty("唯一ID")
     private Integer id;
     @ApiModelProperty("文件名称")
     private String fileName;
@@ -35,10 +36,14 @@ public class TFileResp implements Serializable {
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

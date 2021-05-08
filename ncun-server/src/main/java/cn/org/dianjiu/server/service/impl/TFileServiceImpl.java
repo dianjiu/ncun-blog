@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 文件操作(TFile)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:28
+ * @author dianjiu
+ * @since 2021-05-08 18:15:08
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TFileServiceImpl implements TFileServiceI {
             for (TFile tFile1 : tFiles) {
                 TFileResp tFileResp = new TFileResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tFile1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tFile1, tFileResp);
                 list.add(tFileResp);
@@ -117,6 +117,7 @@ public class TFileServiceImpl implements TFileServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TFileResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TFileResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TFileServiceImpl implements TFileServiceI {
         }
         ObjectUtils.copyProperties(tFileReq, tFile);
         Date date = new Date();
-        tFile.setCreateTime(date);
-        tFile.setUpdateTime(date);
+        tFile.setCreatedTime(date);
+        tFile.setCreatedBy("admin");
+        tFile.setUpdatedTime(date);
+        tFile.setUpdatedBy("admin");
         return tFileDao.insert(tFile);
     }
 
@@ -168,7 +171,7 @@ public class TFileServiceImpl implements TFileServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tFileReq, tFile);
-        tFile.setUpdateTime(new Date());
+        tFile.setUpdatedTime(new Date());
         return tFileDao.update(tFile);
     }
 

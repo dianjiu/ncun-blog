@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 插件操作(TBlogPlugin)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:20
+ * @author dianjiu
+ * @since 2021-05-08 18:15:05
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TBlogPluginServiceImpl implements TBlogPluginServiceI {
             for (TBlogPlugin tBlogPlugin1 : tBlogPlugins) {
                 TBlogPluginResp tBlogPluginResp = new TBlogPluginResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tBlogPlugin1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tBlogPlugin1, tBlogPluginResp);
                 list.add(tBlogPluginResp);
@@ -117,6 +117,7 @@ public class TBlogPluginServiceImpl implements TBlogPluginServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TBlogPluginResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TBlogPluginResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TBlogPluginServiceImpl implements TBlogPluginServiceI {
         }
         ObjectUtils.copyProperties(tBlogPluginReq, tBlogPlugin);
         Date date = new Date();
-        tBlogPlugin.setCreateTime(date);
-        tBlogPlugin.setUpdateTime(date);
+        tBlogPlugin.setCreatedTime(date);
+        tBlogPlugin.setCreatedBy("admin");
+        tBlogPlugin.setUpdatedTime(date);
+        tBlogPlugin.setUpdatedBy("admin");
         return tBlogPluginDao.insert(tBlogPlugin);
     }
 
@@ -168,7 +171,7 @@ public class TBlogPluginServiceImpl implements TBlogPluginServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tBlogPluginReq, tBlogPlugin);
-        tBlogPlugin.setUpdateTime(new Date());
+        tBlogPlugin.setUpdatedTime(new Date());
         return tBlogPluginDao.update(tBlogPlugin);
     }
 

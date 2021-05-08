@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * 日志操作(TSystemLog)表控制层
  *
- * @author makejava
- * @since 2020-10-06 18:52:02
+ * @author dianjiu
+ * @since 2021-05-08 17:51:22
  */
 @RestController
 @Api(value = "TSystemLog", tags = {"日志操作"})

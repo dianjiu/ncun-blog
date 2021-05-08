@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 评论操作(TComment)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:24
+ * @author dianjiu
+ * @since 2021-05-08 18:15:07
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TCommentServiceImpl implements TCommentServiceI {
             for (TComment tComment1 : tComments) {
                 TCommentResp tCommentResp = new TCommentResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tComment1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tComment1, tCommentResp);
                 list.add(tCommentResp);
@@ -117,6 +117,7 @@ public class TCommentServiceImpl implements TCommentServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TCommentResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TCommentResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TCommentServiceImpl implements TCommentServiceI {
         }
         ObjectUtils.copyProperties(tCommentReq, tComment);
         Date date = new Date();
-        tComment.setCreateTime(date);
-        tComment.setUpdateTime(date);
+        tComment.setCreatedTime(date);
+        tComment.setCreatedBy("admin");
+        tComment.setUpdatedTime(date);
+        tComment.setUpdatedBy("admin");
         return tCommentDao.insert(tComment);
     }
 
@@ -168,7 +171,7 @@ public class TCommentServiceImpl implements TCommentServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tCommentReq, tComment);
-        tComment.setUpdateTime(new Date());
+        tComment.setUpdatedTime(new Date());
         return tCommentDao.update(tComment);
     }
 

@@ -9,10 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TCommonReq) Req
+ * 字典操作(TCommonReq) Req
  *
- * @author makejava
- * @since 2020-09-05 21:30:44
+ * @author dianjiu
+ * @since 2021-05-08 17:51:12
  */
 @Data
 public class TCommonReq implements Serializable {
@@ -51,43 +51,19 @@ public class TCommonReq implements Serializable {
     private String key6;
     @ApiModelProperty("value6")
     private String value6;
-    @ApiModelProperty("key7")
-    private String key7;
-    @ApiModelProperty("value7")
-    private String value7;
-    @ApiModelProperty("key8")
-    private String key8;
-    @ApiModelProperty("value8")
-    private String value8;
-    @ApiModelProperty("key9")
-    private String key9;
-    @ApiModelProperty("value9")
-    private String value9;
-    @ApiModelProperty("key10")
-    private String key10;
-    @ApiModelProperty("value10")
-    private String value10;
-    @ApiModelProperty("key11")
-    private String key11;
-    @ApiModelProperty("value11")
-    private String value11;
-    @ApiModelProperty("key12")
-    private String key12;
-    @ApiModelProperty("value12")
-    private String value12;
-    @ApiModelProperty("key13")
-    private String key13;
-    @ApiModelProperty("value13")
-    private String value13;
     @ApiModelProperty("状态 1 -- 生效  0  -- 弃用")
     private String status;
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 用户角色操作(TUserRoles)表服务接口
  *
- * @author makejava
- * @since 2020-10-06 20:22:39
+ * @author dianjiu
+ * @since 2021-05-08 18:15:12
  */
 public interface TUserRolesServiceI {
 

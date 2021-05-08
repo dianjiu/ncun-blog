@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 用户角色操作(TUserRoles)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:39
+ * @author dianjiu
+ * @since 2021-05-08 18:15:12
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TUserRolesServiceImpl implements TUserRolesServiceI {
             for (TUserRoles tUserRoles1 : tUserRoless) {
                 TUserRolesResp tUserRolesResp = new TUserRolesResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tUserRoles1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tUserRoles1, tUserRolesResp);
                 list.add(tUserRolesResp);
@@ -117,6 +117,7 @@ public class TUserRolesServiceImpl implements TUserRolesServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TUserRolesResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TUserRolesResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TUserRolesServiceImpl implements TUserRolesServiceI {
         }
         ObjectUtils.copyProperties(tUserRolesReq, tUserRoles);
         Date date = new Date();
-        tUserRoles.setCreateTime(date);
-        tUserRoles.setUpdateTime(date);
+        tUserRoles.setCreatedTime(date);
+        tUserRoles.setCreatedBy("admin");
+        tUserRoles.setUpdatedTime(date);
+        tUserRoles.setUpdatedBy("admin");
         return tUserRolesDao.insert(tUserRoles);
     }
 
@@ -168,7 +171,7 @@ public class TUserRolesServiceImpl implements TUserRolesServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tUserRolesReq, tUserRoles);
-        tUserRoles.setUpdateTime(new Date());
+        tUserRoles.setUpdatedTime(new Date());
         return tUserRolesDao.update(tUserRoles);
     }
 

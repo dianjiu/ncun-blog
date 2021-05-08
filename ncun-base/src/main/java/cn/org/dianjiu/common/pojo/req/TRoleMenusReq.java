@@ -9,29 +9,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TRoleMenusReq) Req
+ * 角色菜单操作(TRoleMenusReq) Req
  *
- * @author makejava
- * @since 2020-09-05 21:31:15
+ * @author dianjiu
+ * @since 2021-05-08 17:51:22
  */
 @Data
 public class TRoleMenusReq implements Serializable {
     private static final long serialVersionUID = 9155949248117098529L;
-    @ApiModelProperty("主键，自增长")
+    @ApiModelProperty("唯一ID")
     private Integer id;
     @ApiModelProperty("菜单表id")
     private Integer menuId;
     @ApiModelProperty("角色表id")
     private Integer roleId;
+    @ApiModelProperty("0  -- 弃用  1 -- 启用")
+    private String status;
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
-    @ApiModelProperty("0  -- 未读  1 -- 已用")
-    private String status;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

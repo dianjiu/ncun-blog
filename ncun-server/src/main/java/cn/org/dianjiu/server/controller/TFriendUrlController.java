@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * 友链操作(TFriendUrl)表控制层
  *
- * @author makejava
- * @since 2020-10-06 18:51:58
+ * @author dianjiu
+ * @since 2021-05-08 17:51:15
  */
 @RestController
 @Api(value = "TFriendUrl", tags = {"友链操作"})

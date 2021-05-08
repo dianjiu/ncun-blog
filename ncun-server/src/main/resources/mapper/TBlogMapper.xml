@@ -4,27 +4,30 @@
 
     <resultMap type="cn.org.dianjiu.server.entity.TBlog" id="TBlogResultMap">
         <result property="id" column="id" jdbcType="INTEGER"/>
-        <result property="articleTitle" column="article_title" jdbcType="VARCHAR"/>
-        <result property="articleText" column="article_text" jdbcType="OTHER"/>
-        <result property="articleSummary" column="article_summary" jdbcType="VARCHAR"/>
-        <result property="articleType" column="article_type" jdbcType="VARCHAR"/>
-        <result property="articleCategories" column="article_categories" jdbcType="VARCHAR"/>
-        <result property="articleLabel" column="article_label" jdbcType="VARCHAR"/>
-        <result property="articleSpecial" column="article_special" jdbcType="VARCHAR"/>
-        <result property="articleGrade" column="article_grade" jdbcType="INTEGER"/>
-        <result property="articleAuthor" column="article_author" jdbcType="VARCHAR"/>
-        <result property="articleImgs" column="article_imgs" jdbcType="VARCHAR"/>
-        <result property="articleUrl" column="article_url" jdbcType="VARCHAR"/>
-        <result property="articleLikes" column="article_likes" jdbcType="INTEGER"/>
-        <result property="articleViews" column="article_views" jdbcType="INTEGER"/>
+        <result property="blogTitle" column="blog_title" jdbcType="VARCHAR"/>
+        <result property="blogText" column="blog_text" jdbcType="VARCHAR"/>
+        <result property="blogSummary" column="blog_summary" jdbcType="VARCHAR"/>
+        <result property="blogType" column="blog_type" jdbcType="VARCHAR"/>
+        <result property="blogSort" column="blog_sort" jdbcType="VARCHAR"/>
+        <result property="blogTags" column="blog_tags" jdbcType="VARCHAR"/>
+        <result property="blogTopic" column="blog_topic" jdbcType="VARCHAR"/>
+        <result property="blogGrade" column="blog_grade" jdbcType="INTEGER"/>
+        <result property="blogAuthor" column="blog_author" jdbcType="VARCHAR"/>
+        <result property="blogImgs" column="blog_imgs" jdbcType="VARCHAR"/>
+        <result property="blogUrl" column="blog_url" jdbcType="VARCHAR"/>
+        <result property="blogLikes" column="blog_likes" jdbcType="INTEGER"/>
+        <result property="blogViews" column="blog_views" jdbcType="INTEGER"/>
         <result property="commentStatus" column="comment_status" jdbcType="VARCHAR"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="table_field">
-      id, article_title, article_text, article_summary, article_type, article_categories, article_label, article_special, article_grade, article_author, article_imgs, article_url, article_likes, article_views, comment_status, status, create_time, update_time      
+        id
+        , blog_title, blog_text, blog_summary, blog_type, blog_sort, blog_tags, blog_topic, blog_grade, blog_author, blog_imgs, blog_url, blog_likes, blog_views, comment_status, status, created_time, created_by, updated_time, updated_by
     </sql>
 
     <!--通过Id查询单个对象-->
@@ -45,44 +48,44 @@
             <if test="id != null">
                 and id = #{id,jdbcType=INTEGER}
             </if>
-            <if test="articleTitle != null">
-                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            <if test="blogTitle != null">
+                and blog_title = #{blogTitle,jdbcType=VARCHAR}
             </if>
-            <if test="articleText != null">
-                and article_text = #{articleText,jdbcType=OTHER}
+            <if test="blogText != null">
+                and blog_text = #{blogText,jdbcType=VARCHAR}
             </if>
-            <if test="articleSummary != null">
-                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            <if test="blogSummary != null">
+                and blog_summary = #{blogSummary,jdbcType=VARCHAR}
             </if>
-            <if test="articleType != null">
-                and article_type = #{articleType,jdbcType=VARCHAR}
+            <if test="blogType != null">
+                and blog_type = #{blogType,jdbcType=VARCHAR}
             </if>
-            <if test="articleCategories != null">
-                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            <if test="blogSort != null">
+                and blog_sort = #{blogSort,jdbcType=VARCHAR}
             </if>
-            <if test="articleLabel != null">
-                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            <if test="blogTags != null">
+                and blog_tags = #{blogTags,jdbcType=VARCHAR}
             </if>
-            <if test="articleSpecial != null">
-                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            <if test="blogTopic != null">
+                and blog_topic = #{blogTopic,jdbcType=VARCHAR}
             </if>
-            <if test="articleGrade != null">
-                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            <if test="blogGrade != null">
+                and blog_grade = #{blogGrade,jdbcType=INTEGER}
             </if>
-            <if test="articleAuthor != null">
-                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            <if test="blogAuthor != null">
+                and blog_author = #{blogAuthor,jdbcType=VARCHAR}
             </if>
-            <if test="articleImgs != null">
-                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            <if test="blogImgs != null">
+                and blog_imgs = #{blogImgs,jdbcType=VARCHAR}
             </if>
-            <if test="articleUrl != null">
-                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            <if test="blogUrl != null">
+                and blog_url = #{blogUrl,jdbcType=VARCHAR}
             </if>
-            <if test="articleLikes != null">
-                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            <if test="blogLikes != null">
+                and blog_likes = #{blogLikes,jdbcType=INTEGER}
             </if>
-            <if test="articleViews != null">
-                and article_views = #{articleViews,jdbcType=INTEGER}
+            <if test="blogViews != null">
+                and blog_views = #{blogViews,jdbcType=INTEGER}
             </if>
             <if test="commentStatus != null">
                 and comment_status = #{commentStatus,jdbcType=VARCHAR}
@@ -90,11 +93,17 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -108,44 +117,44 @@
             <if test="id != null">
                 and id = #{id,jdbcType=INTEGER}
             </if>
-            <if test="articleTitle != null">
-                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            <if test="blogTitle != null">
+                and blog_title = #{blogTitle,jdbcType=VARCHAR}
             </if>
-            <if test="articleText != null">
-                and article_text = #{articleText,jdbcType=OTHER}
+            <if test="blogText != null">
+                and blog_text = #{blogText,jdbcType=VARCHAR}
             </if>
-            <if test="articleSummary != null">
-                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            <if test="blogSummary != null">
+                and blog_summary = #{blogSummary,jdbcType=VARCHAR}
             </if>
-            <if test="articleType != null">
-                and article_type = #{articleType,jdbcType=VARCHAR}
+            <if test="blogType != null">
+                and blog_type = #{blogType,jdbcType=VARCHAR}
             </if>
-            <if test="articleCategories != null">
-                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            <if test="blogSort != null">
+                and blog_sort = #{blogSort,jdbcType=VARCHAR}
             </if>
-            <if test="articleLabel != null">
-                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            <if test="blogTags != null">
+                and blog_tags = #{blogTags,jdbcType=VARCHAR}
             </if>
-            <if test="articleSpecial != null">
-                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            <if test="blogTopic != null">
+                and blog_topic = #{blogTopic,jdbcType=VARCHAR}
             </if>
-            <if test="articleGrade != null">
-                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            <if test="blogGrade != null">
+                and blog_grade = #{blogGrade,jdbcType=INTEGER}
             </if>
-            <if test="articleAuthor != null">
-                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            <if test="blogAuthor != null">
+                and blog_author = #{blogAuthor,jdbcType=VARCHAR}
             </if>
-            <if test="articleImgs != null">
-                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            <if test="blogImgs != null">
+                and blog_imgs = #{blogImgs,jdbcType=VARCHAR}
             </if>
-            <if test="articleUrl != null">
-                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            <if test="blogUrl != null">
+                and blog_url = #{blogUrl,jdbcType=VARCHAR}
             </if>
-            <if test="articleLikes != null">
-                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            <if test="blogLikes != null">
+                and blog_likes = #{blogLikes,jdbcType=INTEGER}
             </if>
-            <if test="articleViews != null">
-                and article_views = #{articleViews,jdbcType=INTEGER}
+            <if test="blogViews != null">
+                and blog_views = #{blogViews,jdbcType=INTEGER}
             </if>
             <if test="commentStatus != null">
                 and comment_status = #{commentStatus,jdbcType=VARCHAR}
@@ -153,11 +162,17 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -180,44 +195,44 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="articleTitle != null">
-                article_title,
+            <if test="blogTitle != null">
+                blog_title,
             </if>
-            <if test="articleText != null">
-                article_text,
+            <if test="blogText != null">
+                blog_text,
             </if>
-            <if test="articleSummary != null">
-                article_summary,
+            <if test="blogSummary != null">
+                blog_summary,
             </if>
-            <if test="articleType != null">
-                article_type,
+            <if test="blogType != null">
+                blog_type,
             </if>
-            <if test="articleCategories != null">
-                article_categories,
+            <if test="blogSort != null">
+                blog_sort,
             </if>
-            <if test="articleLabel != null">
-                article_label,
+            <if test="blogTags != null">
+                blog_tags,
             </if>
-            <if test="articleSpecial != null">
-                article_special,
+            <if test="blogTopic != null">
+                blog_topic,
             </if>
-            <if test="articleGrade != null">
-                article_grade,
+            <if test="blogGrade != null">
+                blog_grade,
             </if>
-            <if test="articleAuthor != null">
-                article_author,
+            <if test="blogAuthor != null">
+                blog_author,
             </if>
-            <if test="articleImgs != null">
-                article_imgs,
+            <if test="blogImgs != null">
+                blog_imgs,
             </if>
-            <if test="articleUrl != null">
-                article_url,
+            <if test="blogUrl != null">
+                blog_url,
             </if>
-            <if test="articleLikes != null">
-                article_likes,
+            <if test="blogLikes != null">
+                blog_likes,
             </if>
-            <if test="articleViews != null">
-                article_views,
+            <if test="blogViews != null">
+                blog_views,
             </if>
             <if test="commentStatus != null">
                 comment_status,
@@ -225,55 +240,61 @@
             <if test="status != null">
                 status,
             </if>
-            <if test="createTime != null">
-                create_time,
+            <if test="createdTime != null">
+                created_time,
             </if>
-            <if test="updateTime != null">
-                update_time,
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="articleTitle != null">
-                #{articleTitle,jdbcType=VARCHAR},
+            <if test="blogTitle != null">
+                #{blogTitle,jdbcType=VARCHAR},
             </if>
-            <if test="articleText != null">
-                #{articleText,jdbcType=OTHER},
+            <if test="blogText != null">
+                #{blogText,jdbcType=VARCHAR},
             </if>
-            <if test="articleSummary != null">
-                #{articleSummary,jdbcType=VARCHAR},
+            <if test="blogSummary != null">
+                #{blogSummary,jdbcType=VARCHAR},
             </if>
-            <if test="articleType != null">
-                #{articleType,jdbcType=VARCHAR},
+            <if test="blogType != null">
+                #{blogType,jdbcType=VARCHAR},
             </if>
-            <if test="articleCategories != null">
-                #{articleCategories,jdbcType=VARCHAR},
+            <if test="blogSort != null">
+                #{blogSort,jdbcType=VARCHAR},
             </if>
-            <if test="articleLabel != null">
-                #{articleLabel,jdbcType=VARCHAR},
+            <if test="blogTags != null">
+                #{blogTags,jdbcType=VARCHAR},
             </if>
-            <if test="articleSpecial != null">
-                #{articleSpecial,jdbcType=VARCHAR},
+            <if test="blogTopic != null">
+                #{blogTopic,jdbcType=VARCHAR},
             </if>
-            <if test="articleGrade != null">
-                #{articleGrade,jdbcType=INTEGER},
+            <if test="blogGrade != null">
+                #{blogGrade,jdbcType=INTEGER},
             </if>
-            <if test="articleAuthor != null">
-                #{articleAuthor,jdbcType=VARCHAR},
+            <if test="blogAuthor != null">
+                #{blogAuthor,jdbcType=VARCHAR},
             </if>
-            <if test="articleImgs != null">
-                #{articleImgs,jdbcType=VARCHAR},
+            <if test="blogImgs != null">
+                #{blogImgs,jdbcType=VARCHAR},
             </if>
-            <if test="articleUrl != null">
-                #{articleUrl,jdbcType=VARCHAR},
+            <if test="blogUrl != null">
+                #{blogUrl,jdbcType=VARCHAR},
             </if>
-            <if test="articleLikes != null">
-                #{articleLikes,jdbcType=INTEGER},
+            <if test="blogLikes != null">
+                #{blogLikes,jdbcType=INTEGER},
             </if>
-            <if test="articleViews != null">
-                #{articleViews,jdbcType=INTEGER},
+            <if test="blogViews != null">
+                #{blogViews,jdbcType=INTEGER},
             </if>
             <if test="commentStatus != null">
                 #{commentStatus,jdbcType=VARCHAR},
@@ -281,11 +302,17 @@
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -293,20 +320,19 @@
     <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
         insert into t_blog
-        (<if test="id != null">id,</if>article_title, article_text, article_summary, article_type, article_categories,
-        article_label, article_special, article_grade, article_author, article_imgs, article_url, article_likes,
-        article_views, comment_status, status, create_time, update_time)
+        (<if test="id != null">id,</if>blog_title, blog_text, blog_summary, blog_type, blog_sort, blog_tags, blog_topic,
+        blog_grade, blog_author, blog_imgs, blog_url, blog_likes, blog_views, comment_status, status, created_time,
+        created_by, updated_time, updated_by)
         values
         <foreach item="item" collection="list" separator="," open="" close="" index="index">
-            (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.articleTitle,jdbcType=VARCHAR},
-            #{item.articleText,jdbcType=OTHER}, #{item.articleSummary,jdbcType=VARCHAR},
-            #{item.articleType,jdbcType=VARCHAR}, #{item.articleCategories,jdbcType=VARCHAR},
-            #{item.articleLabel,jdbcType=VARCHAR}, #{item.articleSpecial,jdbcType=VARCHAR},
-            #{item.articleGrade,jdbcType=INTEGER}, #{item.articleAuthor,jdbcType=VARCHAR},
-            #{item.articleImgs,jdbcType=VARCHAR}, #{item.articleUrl,jdbcType=VARCHAR},
-            #{item.articleLikes,jdbcType=INTEGER}, #{item.articleViews,jdbcType=INTEGER},
+            (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.blogTitle,jdbcType=VARCHAR},
+            #{item.blogText,jdbcType=VARCHAR}, #{item.blogSummary,jdbcType=VARCHAR}, #{item.blogType,jdbcType=VARCHAR},
+            #{item.blogSort,jdbcType=VARCHAR}, #{item.blogTags,jdbcType=VARCHAR}, #{item.blogTopic,jdbcType=VARCHAR},
+            #{item.blogGrade,jdbcType=INTEGER}, #{item.blogAuthor,jdbcType=VARCHAR}, #{item.blogImgs,jdbcType=VARCHAR},
+            #{item.blogUrl,jdbcType=VARCHAR}, #{item.blogLikes,jdbcType=INTEGER}, #{item.blogViews,jdbcType=INTEGER},
             #{item.commentStatus,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR},
-            #{item.createTime,jdbcType=TIMESTAMP}, #{item.updateTime,jdbcType=TIMESTAMP})
+            #{item.createdTime,jdbcType=TIMESTAMP}, #{item.createdBy,jdbcType=VARCHAR},
+            #{item.updatedTime,jdbcType=TIMESTAMP}, #{item.updatedBy,jdbcType=VARCHAR})
         </foreach>
     </insert>
 
@@ -314,44 +340,44 @@
     <update id="update" parameterType="cn.org.dianjiu.server.entity.TBlog">
         update t_blog
         <set>
-            <if test="articleTitle != null and articleTitle != ''">
-                article_title = #{articleTitle,jdbcType=VARCHAR},
+            <if test="blogTitle != null and blogTitle != ''">
+                blog_title = #{blogTitle,jdbcType=VARCHAR},
             </if>
-            <if test="articleText != null">
-                article_text = #{articleText,jdbcType=OTHER},
+            <if test="blogText != null">
+                blog_text = #{blogText,jdbcType=VARCHAR},
             </if>
-            <if test="articleSummary != null and articleSummary != ''">
-                article_summary = #{articleSummary,jdbcType=VARCHAR},
+            <if test="blogSummary != null and blogSummary != ''">
+                blog_summary = #{blogSummary,jdbcType=VARCHAR},
             </if>
-            <if test="articleType != null and articleType != ''">
-                article_type = #{articleType,jdbcType=VARCHAR},
+            <if test="blogType != null and blogType != ''">
+                blog_type = #{blogType,jdbcType=VARCHAR},
             </if>
-            <if test="articleCategories != null and articleCategories != ''">
-                article_categories = #{articleCategories,jdbcType=VARCHAR},
+            <if test="blogSort != null and blogSort != ''">
+                blog_sort = #{blogSort,jdbcType=VARCHAR},
             </if>
-            <if test="articleLabel != null and articleLabel != ''">
-                article_label = #{articleLabel,jdbcType=VARCHAR},
+            <if test="blogTags != null and blogTags != ''">
+                blog_tags = #{blogTags,jdbcType=VARCHAR},
             </if>
-            <if test="articleSpecial != null and articleSpecial != ''">
-                article_special = #{articleSpecial,jdbcType=VARCHAR},
+            <if test="blogTopic != null and blogTopic != ''">
+                blog_topic = #{blogTopic,jdbcType=VARCHAR},
             </if>
-            <if test="articleGrade != null">
-                article_grade = #{articleGrade,jdbcType=INTEGER},
+            <if test="blogGrade != null">
+                blog_grade = #{blogGrade,jdbcType=INTEGER},
             </if>
-            <if test="articleAuthor != null and articleAuthor != ''">
-                article_author = #{articleAuthor,jdbcType=VARCHAR},
+            <if test="blogAuthor != null and blogAuthor != ''">
+                blog_author = #{blogAuthor,jdbcType=VARCHAR},
             </if>
-            <if test="articleImgs != null and articleImgs != ''">
-                article_imgs = #{articleImgs,jdbcType=VARCHAR},
+            <if test="blogImgs != null and blogImgs != ''">
+                blog_imgs = #{blogImgs,jdbcType=VARCHAR},
             </if>
-            <if test="articleUrl != null and articleUrl != ''">
-                article_url = #{articleUrl,jdbcType=VARCHAR},
+            <if test="blogUrl != null and blogUrl != ''">
+                blog_url = #{blogUrl,jdbcType=VARCHAR},
             </if>
-            <if test="articleLikes != null">
-                article_likes = #{articleLikes,jdbcType=INTEGER},
+            <if test="blogLikes != null">
+                blog_likes = #{blogLikes,jdbcType=INTEGER},
             </if>
-            <if test="articleViews != null">
-                article_views = #{articleViews,jdbcType=INTEGER},
+            <if test="blogViews != null">
+                blog_views = #{blogViews,jdbcType=INTEGER},
             </if>
             <if test="commentStatus != null and commentStatus != ''">
                 comment_status = #{commentStatus,jdbcType=VARCHAR},
@@ -359,11 +385,17 @@
             <if test="status != null and status != ''">
                 status = #{status,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -373,44 +405,44 @@
     <update id="updateByField">
         update t_blog
         <set>
-            <if test="where.articleTitle == null and set.articleTitle != null and set.articleTitle != ''">
-                article_title = #{set.articleTitle,jdbcType=VARCHAR},
+            <if test="where.blogTitle == null and set.blogTitle != null and set.blogTitle != ''">
+                blog_title = #{set.blogTitle,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleText == null and set.articleText != null">
-                article_text = #{set.articleText,jdbcType=OTHER},
+            <if test="where.blogText == null and set.blogText != null">
+                blog_text = #{set.blogText,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleSummary == null and set.articleSummary != null and set.articleSummary != ''">
-                article_summary = #{set.articleSummary,jdbcType=VARCHAR},
+            <if test="where.blogSummary == null and set.blogSummary != null and set.blogSummary != ''">
+                blog_summary = #{set.blogSummary,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleType == null and set.articleType != null and set.articleType != ''">
-                article_type = #{set.articleType,jdbcType=VARCHAR},
+            <if test="where.blogType == null and set.blogType != null and set.blogType != ''">
+                blog_type = #{set.blogType,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleCategories == null and set.articleCategories != null and set.articleCategories != ''">
-                article_categories = #{set.articleCategories,jdbcType=VARCHAR},
+            <if test="where.blogSort == null and set.blogSort != null and set.blogSort != ''">
+                blog_sort = #{set.blogSort,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleLabel == null and set.articleLabel != null and set.articleLabel != ''">
-                article_label = #{set.articleLabel,jdbcType=VARCHAR},
+            <if test="where.blogTags == null and set.blogTags != null and set.blogTags != ''">
+                blog_tags = #{set.blogTags,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleSpecial == null and set.articleSpecial != null and set.articleSpecial != ''">
-                article_special = #{set.articleSpecial,jdbcType=VARCHAR},
+            <if test="where.blogTopic == null and set.blogTopic != null and set.blogTopic != ''">
+                blog_topic = #{set.blogTopic,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleGrade == null and set.articleGrade != null">
-                article_grade = #{set.articleGrade,jdbcType=INTEGER},
+            <if test="where.blogGrade == null and set.blogGrade != null">
+                blog_grade = #{set.blogGrade,jdbcType=INTEGER},
             </if>
-            <if test="where.articleAuthor == null and set.articleAuthor != null and set.articleAuthor != ''">
-                article_author = #{set.articleAuthor,jdbcType=VARCHAR},
+            <if test="where.blogAuthor == null and set.blogAuthor != null and set.blogAuthor != ''">
+                blog_author = #{set.blogAuthor,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleImgs == null and set.articleImgs != null and set.articleImgs != ''">
-                article_imgs = #{set.articleImgs,jdbcType=VARCHAR},
+            <if test="where.blogImgs == null and set.blogImgs != null and set.blogImgs != ''">
+                blog_imgs = #{set.blogImgs,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleUrl == null and set.articleUrl != null and set.articleUrl != ''">
-                article_url = #{set.articleUrl,jdbcType=VARCHAR},
+            <if test="where.blogUrl == null and set.blogUrl != null and set.blogUrl != ''">
+                blog_url = #{set.blogUrl,jdbcType=VARCHAR},
             </if>
-            <if test="where.articleLikes == null and set.articleLikes != null">
-                article_likes = #{set.articleLikes,jdbcType=INTEGER},
+            <if test="where.blogLikes == null and set.blogLikes != null">
+                blog_likes = #{set.blogLikes,jdbcType=INTEGER},
             </if>
-            <if test="where.articleViews == null and set.articleViews != null">
-                article_views = #{set.articleViews,jdbcType=INTEGER},
+            <if test="where.blogViews == null and set.blogViews != null">
+                blog_views = #{set.blogViews,jdbcType=INTEGER},
             </if>
             <if test="where.commentStatus == null and set.commentStatus != null and set.commentStatus != ''">
                 comment_status = #{set.commentStatus,jdbcType=VARCHAR},
@@ -418,55 +450,61 @@
             <if test="where.status == null and set.status != null and set.status != ''">
                 status = #{set.status,jdbcType=VARCHAR},
             </if>
-            <if test="where.createTime == null and set.createTime != null">
-                create_time = #{set.createTime,jdbcType=TIMESTAMP},
+            <if test="where.createdTime == null and set.createdTime != null">
+                created_time = #{set.createdTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="where.updateTime == null and set.updateTime != null">
-                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
+            <if test="where.createdBy == null and set.createdBy != null and set.createdBy != ''">
+                created_by = #{set.createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="where.updatedTime == null and set.updatedTime != null">
+                updated_time = #{set.updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updatedBy == null and set.updatedBy != null and set.updatedBy != ''">
+                updated_by = #{set.updatedBy,jdbcType=VARCHAR},
             </if>
         </set>
         <where>
             <if test="where.id != null">
                 and id = #{where.id,jdbcType=INTEGER}
             </if>
-            <if test="where.articleTitle != null">
-                and article_title = #{where.articleTitle,jdbcType=VARCHAR}
+            <if test="where.blogTitle != null">
+                and blog_title = #{where.blogTitle,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleText != null">
-                and article_text = #{where.articleText,jdbcType=OTHER}
+            <if test="where.blogText != null">
+                and blog_text = #{where.blogText,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleSummary != null">
-                and article_summary = #{where.articleSummary,jdbcType=VARCHAR}
+            <if test="where.blogSummary != null">
+                and blog_summary = #{where.blogSummary,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleType != null">
-                and article_type = #{where.articleType,jdbcType=VARCHAR}
+            <if test="where.blogType != null">
+                and blog_type = #{where.blogType,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleCategories != null">
-                and article_categories = #{where.articleCategories,jdbcType=VARCHAR}
+            <if test="where.blogSort != null">
+                and blog_sort = #{where.blogSort,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleLabel != null">
-                and article_label = #{where.articleLabel,jdbcType=VARCHAR}
+            <if test="where.blogTags != null">
+                and blog_tags = #{where.blogTags,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleSpecial != null">
-                and article_special = #{where.articleSpecial,jdbcType=VARCHAR}
+            <if test="where.blogTopic != null">
+                and blog_topic = #{where.blogTopic,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleGrade != null">
-                and article_grade = #{where.articleGrade,jdbcType=INTEGER}
+            <if test="where.blogGrade != null">
+                and blog_grade = #{where.blogGrade,jdbcType=INTEGER}
             </if>
-            <if test="where.articleAuthor != null">
-                and article_author = #{where.articleAuthor,jdbcType=VARCHAR}
+            <if test="where.blogAuthor != null">
+                and blog_author = #{where.blogAuthor,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleImgs != null">
-                and article_imgs = #{where.articleImgs,jdbcType=VARCHAR}
+            <if test="where.blogImgs != null">
+                and blog_imgs = #{where.blogImgs,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleUrl != null">
-                and article_url = #{where.articleUrl,jdbcType=VARCHAR}
+            <if test="where.blogUrl != null">
+                and blog_url = #{where.blogUrl,jdbcType=VARCHAR}
             </if>
-            <if test="where.articleLikes != null">
-                and article_likes = #{where.articleLikes,jdbcType=INTEGER}
+            <if test="where.blogLikes != null">
+                and blog_likes = #{where.blogLikes,jdbcType=INTEGER}
             </if>
-            <if test="where.articleViews != null">
-                and article_views = #{where.articleViews,jdbcType=INTEGER}
+            <if test="where.blogViews != null">
+                and blog_views = #{where.blogViews,jdbcType=INTEGER}
             </if>
             <if test="where.commentStatus != null">
                 and comment_status = #{where.commentStatus,jdbcType=VARCHAR}
@@ -474,11 +512,17 @@
             <if test="where.status != null">
                 and status = #{where.status,jdbcType=VARCHAR}
             </if>
-            <if test="where.createTime != null">
-                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            <if test="where.createdTime != null">
+                and created_time = #{where.createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="where.updateTime != null">
-                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            <if test="where.createdBy != null">
+                and created_by = #{where.createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="where.updatedTime != null">
+                and updated_time = #{where.updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updatedBy != null">
+                and updated_by = #{where.updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </update>
@@ -487,69 +531,69 @@
     <update id="updateBatch" parameterType="list">
         update t_blog
         <trim prefix="set" suffixOverrides=",">
-            <trim prefix="article_title = case" suffix="end,">
+            <trim prefix="blog_title = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleTitle}
+                    when id = #{item.id} then #{item.blogTitle}
                 </foreach>
             </trim>
-            <trim prefix="article_text = case" suffix="end,">
+            <trim prefix="blog_text = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleText}
+                    when id = #{item.id} then #{item.blogText}
                 </foreach>
             </trim>
-            <trim prefix="article_summary = case" suffix="end,">
+            <trim prefix="blog_summary = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleSummary}
+                    when id = #{item.id} then #{item.blogSummary}
                 </foreach>
             </trim>
-            <trim prefix="article_type = case" suffix="end,">
+            <trim prefix="blog_type = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleType}
+                    when id = #{item.id} then #{item.blogType}
                 </foreach>
             </trim>
-            <trim prefix="article_categories = case" suffix="end,">
+            <trim prefix="blog_sort = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleCategories}
+                    when id = #{item.id} then #{item.blogSort}
                 </foreach>
             </trim>
-            <trim prefix="article_label = case" suffix="end,">
+            <trim prefix="blog_tags = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleLabel}
+                    when id = #{item.id} then #{item.blogTags}
                 </foreach>
             </trim>
-            <trim prefix="article_special = case" suffix="end,">
+            <trim prefix="blog_topic = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleSpecial}
+                    when id = #{item.id} then #{item.blogTopic}
                 </foreach>
             </trim>
-            <trim prefix="article_grade = case" suffix="end,">
+            <trim prefix="blog_grade = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleGrade}
+                    when id = #{item.id} then #{item.blogGrade}
                 </foreach>
             </trim>
-            <trim prefix="article_author = case" suffix="end,">
+            <trim prefix="blog_author = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleAuthor}
+                    when id = #{item.id} then #{item.blogAuthor}
                 </foreach>
             </trim>
-            <trim prefix="article_imgs = case" suffix="end,">
+            <trim prefix="blog_imgs = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleImgs}
+                    when id = #{item.id} then #{item.blogImgs}
                 </foreach>
             </trim>
-            <trim prefix="article_url = case" suffix="end,">
+            <trim prefix="blog_url = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleUrl}
+                    when id = #{item.id} then #{item.blogUrl}
                 </foreach>
             </trim>
-            <trim prefix="article_likes = case" suffix="end,">
+            <trim prefix="blog_likes = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleLikes}
+                    when id = #{item.id} then #{item.blogLikes}
                 </foreach>
             </trim>
-            <trim prefix="article_views = case" suffix="end,">
+            <trim prefix="blog_views = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.articleViews}
+                    when id = #{item.id} then #{item.blogViews}
                 </foreach>
             </trim>
             <trim prefix="comment_status = case" suffix="end,">
@@ -562,14 +606,24 @@
                     when id = #{item.id} then #{item.status}
                 </foreach>
             </trim>
-            <trim prefix="create_time = case" suffix="end,">
+            <trim prefix="created_time = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.createTime}
+                    when id = #{item.id} then #{item.createdTime}
                 </foreach>
             </trim>
-            <trim prefix="update_time = case" suffix="end,">
+            <trim prefix="created_by = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.updateTime}
+                    when id = #{item.id} then #{item.createdBy}
+                </foreach>
+            </trim>
+            <trim prefix="updated_time = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.updatedTime}
+                </foreach>
+            </trim>
+            <trim prefix="updated_by = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.updatedBy}
                 </foreach>
             </trim>
         </trim>
@@ -581,51 +635,53 @@
 
     <!--通过主键删除-->
     <delete id="deleteById" parameterType="java.lang.Integer">
-        delete from t_blog where id = #{id,jdbcType=INTEGER}
+        delete
+        from t_blog
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <!--通过实体非空属性删除-->
     <delete id="deleteByEntity" parameterType="cn.org.dianjiu.server.entity.TBlog">
         delete from t_blog
         <where>
-            <if test="articleTitle != null">
-                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            <if test="blogTitle != null">
+                and blog_title = #{blogTitle,jdbcType=VARCHAR}
             </if>
-            <if test="articleText != null">
-                and article_text = #{articleText,jdbcType=OTHER}
+            <if test="blogText != null">
+                and blog_text = #{blogText,jdbcType=VARCHAR}
             </if>
-            <if test="articleSummary != null">
-                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            <if test="blogSummary != null">
+                and blog_summary = #{blogSummary,jdbcType=VARCHAR}
             </if>
-            <if test="articleType != null">
-                and article_type = #{articleType,jdbcType=VARCHAR}
+            <if test="blogType != null">
+                and blog_type = #{blogType,jdbcType=VARCHAR}
             </if>
-            <if test="articleCategories != null">
-                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            <if test="blogSort != null">
+                and blog_sort = #{blogSort,jdbcType=VARCHAR}
             </if>
-            <if test="articleLabel != null">
-                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            <if test="blogTags != null">
+                and blog_tags = #{blogTags,jdbcType=VARCHAR}
             </if>
-            <if test="articleSpecial != null">
-                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            <if test="blogTopic != null">
+                and blog_topic = #{blogTopic,jdbcType=VARCHAR}
             </if>
-            <if test="articleGrade != null">
-                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            <if test="blogGrade != null">
+                and blog_grade = #{blogGrade,jdbcType=INTEGER}
             </if>
-            <if test="articleAuthor != null">
-                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            <if test="blogAuthor != null">
+                and blog_author = #{blogAuthor,jdbcType=VARCHAR}
             </if>
-            <if test="articleImgs != null">
-                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            <if test="blogImgs != null">
+                and blog_imgs = #{blogImgs,jdbcType=VARCHAR}
             </if>
-            <if test="articleUrl != null">
-                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            <if test="blogUrl != null">
+                and blog_url = #{blogUrl,jdbcType=VARCHAR}
             </if>
-            <if test="articleLikes != null">
-                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            <if test="blogLikes != null">
+                and blog_likes = #{blogLikes,jdbcType=INTEGER}
             </if>
-            <if test="articleViews != null">
-                and article_views = #{articleViews,jdbcType=INTEGER}
+            <if test="blogViews != null">
+                and blog_views = #{blogViews,jdbcType=INTEGER}
             </if>
             <if test="commentStatus != null">
                 and comment_status = #{commentStatus,jdbcType=VARCHAR}
@@ -633,11 +689,17 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </delete>
@@ -651,7 +713,8 @@
     </delete>
 
     <select id="countAll" resultType="int">
-        select count(id) from t_blog
+        select count(id)
+        from t_blog
     </select>
 
     <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TBlog" resultType="int">
@@ -660,44 +723,44 @@
             <if test="id != null">
                 and id = #{id,jdbcType=INTEGER}
             </if>
-            <if test="articleTitle != null">
-                and article_title = #{articleTitle,jdbcType=VARCHAR}
+            <if test="blogTitle != null">
+                and blog_title = #{blogTitle,jdbcType=VARCHAR}
             </if>
-            <if test="articleText != null">
-                and article_text = #{articleText,jdbcType=OTHER}
+            <if test="blogText != null">
+                and blog_text = #{blogText,jdbcType=VARCHAR}
             </if>
-            <if test="articleSummary != null">
-                and article_summary = #{articleSummary,jdbcType=VARCHAR}
+            <if test="blogSummary != null">
+                and blog_summary = #{blogSummary,jdbcType=VARCHAR}
             </if>
-            <if test="articleType != null">
-                and article_type = #{articleType,jdbcType=VARCHAR}
+            <if test="blogType != null">
+                and blog_type = #{blogType,jdbcType=VARCHAR}
             </if>
-            <if test="articleCategories != null">
-                and article_categories = #{articleCategories,jdbcType=VARCHAR}
+            <if test="blogSort != null">
+                and blog_sort = #{blogSort,jdbcType=VARCHAR}
             </if>
-            <if test="articleLabel != null">
-                and article_label = #{articleLabel,jdbcType=VARCHAR}
+            <if test="blogTags != null">
+                and blog_tags = #{blogTags,jdbcType=VARCHAR}
             </if>
-            <if test="articleSpecial != null">
-                and article_special = #{articleSpecial,jdbcType=VARCHAR}
+            <if test="blogTopic != null">
+                and blog_topic = #{blogTopic,jdbcType=VARCHAR}
             </if>
-            <if test="articleGrade != null">
-                and article_grade = #{articleGrade,jdbcType=INTEGER}
+            <if test="blogGrade != null">
+                and blog_grade = #{blogGrade,jdbcType=INTEGER}
             </if>
-            <if test="articleAuthor != null">
-                and article_author = #{articleAuthor,jdbcType=VARCHAR}
+            <if test="blogAuthor != null">
+                and blog_author = #{blogAuthor,jdbcType=VARCHAR}
             </if>
-            <if test="articleImgs != null">
-                and article_imgs = #{articleImgs,jdbcType=VARCHAR}
+            <if test="blogImgs != null">
+                and blog_imgs = #{blogImgs,jdbcType=VARCHAR}
             </if>
-            <if test="articleUrl != null">
-                and article_url = #{articleUrl,jdbcType=VARCHAR}
+            <if test="blogUrl != null">
+                and blog_url = #{blogUrl,jdbcType=VARCHAR}
             </if>
-            <if test="articleLikes != null">
-                and article_likes = #{articleLikes,jdbcType=INTEGER}
+            <if test="blogLikes != null">
+                and blog_likes = #{blogLikes,jdbcType=INTEGER}
             </if>
-            <if test="articleViews != null">
-                and article_views = #{articleViews,jdbcType=INTEGER}
+            <if test="blogViews != null">
+                and blog_views = #{blogViews,jdbcType=INTEGER}
             </if>
             <if test="commentStatus != null">
                 and comment_status = #{commentStatus,jdbcType=VARCHAR}
@@ -705,12 +768,19 @@
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
 </mapper>
+

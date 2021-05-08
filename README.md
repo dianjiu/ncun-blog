@@ -20,7 +20,7 @@ https://github.com/dianjiu/ncun-index-vue
 
 https://gitee.io/dianjiu/ncun-index-vue
 ## 项目功能
-1. 初始化客户端
+1. 初始化客户端，实现基础表的增删改查
 2. 登录注册、退出登录
 3. 创建分类、标签、专栏
 4. 发布博客文章
@@ -30,7 +30,7 @@ https://gitee.io/dianjiu/ncun-index-vue
 8. 系统设置 
 
 ## 开发进度
-- [ ] 初始化客户端
+- [x] 初始化客户端，实现基础表的增删改查
 - [ ] 登录注册、退出登录
 - [ ] 创建分类、标签、专栏
 - [ ] 发布博客文章

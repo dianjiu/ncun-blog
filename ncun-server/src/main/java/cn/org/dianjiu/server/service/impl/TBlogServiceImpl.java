@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 博客操作(TBlog)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:18
+ * @author dianjiu
+ * @since 2021-05-08 18:15:04
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TBlogServiceImpl implements TBlogServiceI {
             for (TBlog tBlog1 : tBlogs) {
                 TBlogResp tBlogResp = new TBlogResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tBlog1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tBlog1, tBlogResp);
                 list.add(tBlogResp);
@@ -117,6 +117,7 @@ public class TBlogServiceImpl implements TBlogServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TBlogResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TBlogResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TBlogServiceImpl implements TBlogServiceI {
         }
         ObjectUtils.copyProperties(tBlogReq, tBlog);
         Date date = new Date();
-        tBlog.setCreateTime(date);
-        tBlog.setUpdateTime(date);
+        tBlog.setCreatedTime(date);
+        tBlog.setCreatedBy("admin");
+        tBlog.setUpdatedTime(date);
+        tBlog.setUpdatedBy("admin");
         return tBlogDao.insert(tBlog);
     }
 
@@ -168,7 +171,7 @@ public class TBlogServiceImpl implements TBlogServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tBlogReq, tBlog);
-        tBlog.setUpdateTime(new Date());
+        tBlog.setUpdatedTime(new Date());
         return tBlogDao.update(tBlog);
     }
 

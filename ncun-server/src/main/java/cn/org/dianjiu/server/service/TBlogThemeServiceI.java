@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 主题操作(TBlogTheme)表服务接口
  *
- * @author makejava
- * @since 2020-10-06 20:22:21
+ * @author dianjiu
+ * @since 2021-05-08 18:15:06
  */
 public interface TBlogThemeServiceI {
 

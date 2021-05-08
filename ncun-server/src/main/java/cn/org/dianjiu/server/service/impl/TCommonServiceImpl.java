@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 字典操作(TCommon)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:26
+ * @author dianjiu
+ * @since 2021-05-08 18:15:07
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TCommonServiceImpl implements TCommonServiceI {
             for (TCommon tCommon1 : tCommons) {
                 TCommonResp tCommonResp = new TCommonResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tCommon1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tCommon1, tCommonResp);
                 list.add(tCommonResp);
@@ -117,6 +117,7 @@ public class TCommonServiceImpl implements TCommonServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TCommonResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TCommonResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TCommonServiceImpl implements TCommonServiceI {
         }
         ObjectUtils.copyProperties(tCommonReq, tCommon);
         Date date = new Date();
-        tCommon.setCreateTime(date);
-        tCommon.setUpdateTime(date);
+        tCommon.setCreatedTime(date);
+        tCommon.setCreatedBy("admin");
+        tCommon.setUpdatedTime(date);
+        tCommon.setUpdatedBy("admin");
         return tCommonDao.insert(tCommon);
     }
 
@@ -168,7 +171,7 @@ public class TCommonServiceImpl implements TCommonServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tCommonReq, tCommon);
-        tCommon.setUpdateTime(new Date());
+        tCommon.setUpdatedTime(new Date());
         return tCommonDao.update(tCommon);
     }
 

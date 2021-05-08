@@ -1,18 +1,19 @@
 package cn.org.dianjiu.common.pojo.resp;
 
+import java.util.Date;
+
+import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
- * (TUserResp) Resp
+ * 用户操作(TUserResp) Resp
  *
- * @author makejava
- * @since 2020-09-05 21:33:29
+ * @author dianjiu
+ * @since 2021-05-08 17:51:27
  */
 @Data
 public class TUserResp implements Serializable {
@@ -48,10 +49,14 @@ public class TUserResp implements Serializable {
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

@@ -7,17 +7,20 @@
         <result property="businessNo" column="business_no" jdbcType="VARCHAR"/>
         <result property="reqUrl" column="req_url" jdbcType="VARCHAR"/>
         <result property="reqDesc" column="req_desc" jdbcType="VARCHAR"/>
-        <result property="reqBody" column="req_body" jdbcType="OTHER"/>
-        <result property="respBody" column="resp_body" jdbcType="OTHER"/>
+        <result property="reqBody" column="req_body" jdbcType="VARCHAR"/>
+        <result property="respBody" column="resp_body" jdbcType="VARCHAR"/>
         <result property="timeCost" column="time_cost" jdbcType="VARCHAR"/>
         <result property="reqIp" column="req_ip" jdbcType="VARCHAR"/>
         <result property="ipAddr" column="ip_addr" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="table_field">
-      id, business_no, req_url, req_desc, req_body, resp_body, time_cost, req_ip, ip_addr, create_time, update_time      
+        id
+        , business_no, req_url, req_desc, req_body, resp_body, time_cost, req_ip, ip_addr, created_time, created_by, updated_time, updated_by
     </sql>
 
     <!--通过Id查询单个对象-->
@@ -48,10 +51,10 @@
                 and req_desc = #{reqDesc,jdbcType=VARCHAR}
             </if>
             <if test="reqBody != null">
-                and req_body = #{reqBody,jdbcType=OTHER}
+                and req_body = #{reqBody,jdbcType=VARCHAR}
             </if>
             <if test="respBody != null">
-                and resp_body = #{respBody,jdbcType=OTHER}
+                and resp_body = #{respBody,jdbcType=VARCHAR}
             </if>
             <if test="timeCost != null">
                 and time_cost = #{timeCost,jdbcType=VARCHAR}
@@ -62,11 +65,17 @@
             <if test="ipAddr != null">
                 and ip_addr = #{ipAddr,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -90,10 +99,10 @@
                 and req_desc = #{reqDesc,jdbcType=VARCHAR}
             </if>
             <if test="reqBody != null">
-                and req_body = #{reqBody,jdbcType=OTHER}
+                and req_body = #{reqBody,jdbcType=VARCHAR}
             </if>
             <if test="respBody != null">
-                and resp_body = #{respBody,jdbcType=OTHER}
+                and resp_body = #{respBody,jdbcType=VARCHAR}
             </if>
             <if test="timeCost != null">
                 and time_cost = #{timeCost,jdbcType=VARCHAR}
@@ -104,11 +113,17 @@
             <if test="ipAddr != null">
                 and ip_addr = #{ipAddr,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -156,11 +171,17 @@
             <if test="ipAddr != null">
                 ip_addr,
             </if>
-            <if test="createTime != null">
-                create_time,
+            <if test="createdTime != null">
+                created_time,
             </if>
-            <if test="updateTime != null">
-                update_time,
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -177,10 +198,10 @@
                 #{reqDesc,jdbcType=VARCHAR},
             </if>
             <if test="reqBody != null">
-                #{reqBody,jdbcType=OTHER},
+                #{reqBody,jdbcType=VARCHAR},
             </if>
             <if test="respBody != null">
-                #{respBody,jdbcType=OTHER},
+                #{respBody,jdbcType=VARCHAR},
             </if>
             <if test="timeCost != null">
                 #{timeCost,jdbcType=VARCHAR},
@@ -191,11 +212,17 @@
             <if test="ipAddr != null">
                 #{ipAddr,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
             </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -203,15 +230,13 @@
     <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
         insert into t_system_log
-        (<if test="id != null">id,</if>business_no, req_url, req_desc, req_body, resp_body, time_cost, req_ip, ip_addr,
-        create_time, update_time)
+        (<if test="id != null">id,</if>business_no, req_url, req_desc, req_body, resp_body, time_cost, req_ip, ip_addr)
         values
         <foreach item="item" collection="list" separator="," open="" close="" index="index">
             (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.businessNo,jdbcType=VARCHAR},
-            #{item.reqUrl,jdbcType=VARCHAR}, #{item.reqDesc,jdbcType=VARCHAR}, #{item.reqBody,jdbcType=OTHER},
-            #{item.respBody,jdbcType=OTHER}, #{item.timeCost,jdbcType=VARCHAR}, #{item.reqIp,jdbcType=VARCHAR},
-            #{item.ipAddr,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP})
+            #{item.reqUrl,jdbcType=VARCHAR}, #{item.reqDesc,jdbcType=VARCHAR}, #{item.reqBody,jdbcType=VARCHAR},
+            #{item.respBody,jdbcType=VARCHAR}, #{item.timeCost,jdbcType=VARCHAR}, #{item.reqIp,jdbcType=VARCHAR},
+            #{item.ipAddr,jdbcType=VARCHAR})
         </foreach>
     </insert>
 
@@ -229,10 +254,10 @@
                 req_desc = #{reqDesc,jdbcType=VARCHAR},
             </if>
             <if test="reqBody != null">
-                req_body = #{reqBody,jdbcType=OTHER},
+                req_body = #{reqBody,jdbcType=VARCHAR},
             </if>
             <if test="respBody != null">
-                resp_body = #{respBody,jdbcType=OTHER},
+                resp_body = #{respBody,jdbcType=VARCHAR},
             </if>
             <if test="timeCost != null and timeCost != ''">
                 time_cost = #{timeCost,jdbcType=VARCHAR},
@@ -242,12 +267,6 @@
             </if>
             <if test="ipAddr != null and ipAddr != ''">
                 ip_addr = #{ipAddr,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -267,10 +286,10 @@
                 req_desc = #{set.reqDesc,jdbcType=VARCHAR},
             </if>
             <if test="where.reqBody == null and set.reqBody != null">
-                req_body = #{set.reqBody,jdbcType=OTHER},
+                req_body = #{set.reqBody,jdbcType=VARCHAR},
             </if>
             <if test="where.respBody == null and set.respBody != null">
-                resp_body = #{set.respBody,jdbcType=OTHER},
+                resp_body = #{set.respBody,jdbcType=VARCHAR},
             </if>
             <if test="where.timeCost == null and set.timeCost != null and set.timeCost != ''">
                 time_cost = #{set.timeCost,jdbcType=VARCHAR},
@@ -280,12 +299,6 @@
             </if>
             <if test="where.ipAddr == null and set.ipAddr != null and set.ipAddr != ''">
                 ip_addr = #{set.ipAddr,jdbcType=VARCHAR},
-            </if>
-            <if test="where.createTime == null and set.createTime != null">
-                create_time = #{set.createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="where.updateTime == null and set.updateTime != null">
-                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
             </if>
         </set>
         <where>
@@ -302,10 +315,10 @@
                 and req_desc = #{where.reqDesc,jdbcType=VARCHAR}
             </if>
             <if test="where.reqBody != null">
-                and req_body = #{where.reqBody,jdbcType=OTHER}
+                and req_body = #{where.reqBody,jdbcType=VARCHAR}
             </if>
             <if test="where.respBody != null">
-                and resp_body = #{where.respBody,jdbcType=OTHER}
+                and resp_body = #{where.respBody,jdbcType=VARCHAR}
             </if>
             <if test="where.timeCost != null">
                 and time_cost = #{where.timeCost,jdbcType=VARCHAR}
@@ -316,11 +329,17 @@
             <if test="where.ipAddr != null">
                 and ip_addr = #{where.ipAddr,jdbcType=VARCHAR}
             </if>
-            <if test="where.createTime != null">
-                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
+            <if test="where.createdTime != null">
+                and created_time = #{where.createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="where.updateTime != null">
-                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
+            <if test="where.createdBy != null">
+                and created_by = #{where.createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="where.updatedTime != null">
+                and updated_time = #{where.updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updatedBy != null">
+                and updated_by = #{where.updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </update>
@@ -369,16 +388,6 @@
                     when id = #{item.id} then #{item.ipAddr}
                 </foreach>
             </trim>
-            <trim prefix="create_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.createTime}
-                </foreach>
-            </trim>
-            <trim prefix="update_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.updateTime}
-                </foreach>
-            </trim>
         </trim>
         where id in
         <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
@@ -388,7 +397,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById" parameterType="java.lang.Integer">
-        delete from t_system_log where id = #{id,jdbcType=INTEGER}
+        delete
+        from t_system_log
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <!--通过实体非空属性删除-->
@@ -405,10 +416,10 @@
                 and req_desc = #{reqDesc,jdbcType=VARCHAR}
             </if>
             <if test="reqBody != null">
-                and req_body = #{reqBody,jdbcType=OTHER}
+                and req_body = #{reqBody,jdbcType=VARCHAR}
             </if>
             <if test="respBody != null">
-                and resp_body = #{respBody,jdbcType=OTHER}
+                and resp_body = #{respBody,jdbcType=VARCHAR}
             </if>
             <if test="timeCost != null">
                 and time_cost = #{timeCost,jdbcType=VARCHAR}
@@ -418,12 +429,6 @@
             </if>
             <if test="ipAddr != null">
                 and ip_addr = #{ipAddr,jdbcType=VARCHAR}
-            </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
             </if>
         </where>
     </delete>
@@ -437,7 +442,8 @@
     </delete>
 
     <select id="countAll" resultType="int">
-        select count(id) from t_system_log
+        select count(id)
+        from t_system_log
     </select>
 
     <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TSystemLog" resultType="int">
@@ -456,10 +462,10 @@
                 and req_desc = #{reqDesc,jdbcType=VARCHAR}
             </if>
             <if test="reqBody != null">
-                and req_body = #{reqBody,jdbcType=OTHER}
+                and req_body = #{reqBody,jdbcType=VARCHAR}
             </if>
             <if test="respBody != null">
-                and resp_body = #{respBody,jdbcType=OTHER}
+                and resp_body = #{respBody,jdbcType=VARCHAR}
             </if>
             <if test="timeCost != null">
                 and time_cost = #{timeCost,jdbcType=VARCHAR}
@@ -470,12 +476,19 @@
             <if test="ipAddr != null">
                 and ip_addr = #{ipAddr,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
             </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
 </mapper>
+

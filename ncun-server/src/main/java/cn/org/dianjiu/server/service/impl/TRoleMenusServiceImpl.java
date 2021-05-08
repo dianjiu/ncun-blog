@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 角色菜单操作(TRoleMenus)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:34
+ * @author dianjiu
+ * @since 2021-05-08 18:15:10
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TRoleMenusServiceImpl implements TRoleMenusServiceI {
             for (TRoleMenus tRoleMenus1 : tRoleMenuss) {
                 TRoleMenusResp tRoleMenusResp = new TRoleMenusResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tRoleMenus1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tRoleMenus1, tRoleMenusResp);
                 list.add(tRoleMenusResp);
@@ -117,6 +117,7 @@ public class TRoleMenusServiceImpl implements TRoleMenusServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TRoleMenusResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TRoleMenusResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TRoleMenusServiceImpl implements TRoleMenusServiceI {
         }
         ObjectUtils.copyProperties(tRoleMenusReq, tRoleMenus);
         Date date = new Date();
-        tRoleMenus.setCreateTime(date);
-        tRoleMenus.setUpdateTime(date);
+        tRoleMenus.setCreatedTime(date);
+        tRoleMenus.setCreatedBy("admin");
+        tRoleMenus.setUpdatedTime(date);
+        tRoleMenus.setUpdatedBy("admin");
         return tRoleMenusDao.insert(tRoleMenus);
     }
 
@@ -168,7 +171,7 @@ public class TRoleMenusServiceImpl implements TRoleMenusServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tRoleMenusReq, tRoleMenus);
-        tRoleMenus.setUpdateTime(new Date());
+        tRoleMenus.setUpdatedTime(new Date());
         return tRoleMenusDao.update(tRoleMenus);
     }
 

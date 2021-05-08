@@ -9,15 +9,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TFriendUrlResp) Resp
+ * 友链操作(TFriendUrlResp) Resp
  *
- * @author makejava
- * @since 2020-09-05 21:30:57
+ * @author dianjiu
+ * @since 2021-05-08 17:51:16
  */
 @Data
 public class TFriendUrlResp implements Serializable {
     private static final long serialVersionUID = 9155949248117098529L;
-    @ApiModelProperty("主键")
+    @ApiModelProperty("唯一ID")
     private Integer id;
     @ApiModelProperty("友链名")
     private String linkName;
@@ -32,10 +32,14 @@ public class TFriendUrlResp implements Serializable {
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
-    @ApiModelProperty("创建时间")
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
+    @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }
