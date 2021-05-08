@@ -27,7 +27,7 @@ https://gitee.io/dianjiu/ncun-index-vue
 5. 添加友情链接
 6. 添加主题
 7. 添加插件
-8. 系统设置
+8. 系统设置 
 
 ## 开发进度
 - [ ] 初始化客户端
