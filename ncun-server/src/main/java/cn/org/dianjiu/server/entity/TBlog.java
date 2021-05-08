@@ -7,10 +7,10 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * (TBlog)实体类
+ * 博客操作(TBlog)实体类
  *
- * @author makejava
- * @since 2020-09-05 21:29:51
+ * @author dianjiu
+ * @since 2021-05-08 17:50:46
  */
 @Data
 public class TBlog {
@@ -21,55 +21,55 @@ public class TBlog {
     /**
      * 标题
      */
-    private String articleTitle;
+    private String blogTitle;
     /**
      * 文章正文
      */
-    private Object articleText;
+    private Object blogText;
     /**
      * 文章摘要
      */
-    private String articleSummary;
+    private String blogSummary;
     /**
      * 文章类型(原创，转载)
      */
-    private String articleType;
+    private String blogType;
     /**
      * 博客分类
      */
-    private String articleCategories;
+    private String blogSort;
     /**
      * 文章标签
      */
-    private String articleLabel;
+    private String blogTags;
     /**
      * 文章专题
      */
-    private String articleSpecial;
+    private String blogTopic;
     /**
      * 文章热度（10表示置顶）
      */
-    private Integer articleGrade;
+    private Integer blogGrade;
     /**
      * 文章作者
      */
-    private String articleAuthor;
+    private String blogAuthor;
     /**
      * 缩略图像
      */
-    private String articleImgs;
+    private String blogImgs;
     /**
      * 文章路径
      */
-    private String articleUrl;
+    private String blogUrl;
     /**
      * 文章点赞数
      */
-    private Long articleLikes;
+    private Long blogLikes;
     /**
      * 文章查看数
      */
-    private Long articleViews;
+    private Long blogViews;
     /**
      * 是否允许评论（0-不开启 1-开启）
      */
@@ -83,12 +83,20 @@ public class TBlog {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    /**
+     * 创建人
+     */
+    private String createdBy;
     /**
      * 更新时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    /**
+     * 更新人
+     */
+    private String updatedBy;
 
 }

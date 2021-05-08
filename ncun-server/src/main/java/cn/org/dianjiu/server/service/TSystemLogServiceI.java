@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 日志操作(TSystemLog)表服务接口
  *
- * @author makejava
- * @since 2020-10-06 20:22:35
+ * @author dianjiu
+ * @since 2021-05-08 18:15:11
  */
 public interface TSystemLogServiceI {
 

@@ -9,10 +9,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TBlogTypeReq) Req
+ * 分类操作(TBlogTypeReq) Req
  *
- * @author makejava
- * @since 2020-09-05 21:30:30
+ * @author dianjiu
+ * @since 2021-05-08 17:51:09
  */
 @Data
 public class TBlogTypeReq implements Serializable {
@@ -32,10 +32,14 @@ public class TBlogTypeReq implements Serializable {
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

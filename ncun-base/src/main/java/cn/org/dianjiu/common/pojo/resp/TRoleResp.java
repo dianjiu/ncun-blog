@@ -9,29 +9,33 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TRoleResp) Resp
+ * 角色操作(TRoleResp) Resp
  *
- * @author makejava
- * @since 2020-09-05 21:31:10
+ * @author dianjiu
+ * @since 2021-05-08 17:51:20
  */
 @Data
 public class TRoleResp implements Serializable {
     private static final long serialVersionUID = 9155949248117098529L;
-    @ApiModelProperty("主键，自增长")
+    @ApiModelProperty("唯一ID")
     private Integer id;
     @ApiModelProperty("角色代码")
     private String roleCode;
     @ApiModelProperty("角色名称")
     private String roleName;
+    @ApiModelProperty("0  -- 弃用  1 -- 启用")
+    private String status;
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
-    @ApiModelProperty("0  -- 未读  1 -- 已用")
-    private String status;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

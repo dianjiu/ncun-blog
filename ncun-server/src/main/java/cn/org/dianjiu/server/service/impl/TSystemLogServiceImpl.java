@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 日志操作(TSystemLog)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:36
+ * @author dianjiu
+ * @since 2021-05-08 18:15:11
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TSystemLogServiceImpl implements TSystemLogServiceI {
             for (TSystemLog tSystemLog1 : tSystemLogs) {
                 TSystemLogResp tSystemLogResp = new TSystemLogResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tSystemLog1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tSystemLog1, tSystemLogResp);
                 list.add(tSystemLogResp);
@@ -117,6 +117,7 @@ public class TSystemLogServiceImpl implements TSystemLogServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TSystemLogResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TSystemLogResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TSystemLogServiceImpl implements TSystemLogServiceI {
         }
         ObjectUtils.copyProperties(tSystemLogReq, tSystemLog);
         Date date = new Date();
-        tSystemLog.setCreateTime(date);
-        tSystemLog.setUpdateTime(date);
+        tSystemLog.setCreatedTime(date);
+        tSystemLog.setCreatedBy("admin");
+        tSystemLog.setUpdatedTime(date);
+        tSystemLog.setUpdatedBy("admin");
         return tSystemLogDao.insert(tSystemLog);
     }
 
@@ -168,7 +171,7 @@ public class TSystemLogServiceImpl implements TSystemLogServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tSystemLogReq, tSystemLog);
-        tSystemLog.setUpdateTime(new Date());
+        tSystemLog.setUpdatedTime(new Date());
         return tSystemLogDao.update(tSystemLog);
     }
 

@@ -9,14 +9,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TBlogThemeResp) Resp
+ * 主题操作(TBlogThemeResp) Resp
  *
- * @author makejava
- * @since 2020-09-05 21:30:25
+ * @author dianjiu
+ * @since 2021-05-08 17:51:07
  */
 @Data
 public class TBlogThemeResp implements Serializable {
     private static final long serialVersionUID = 9155949248117098529L;
+    @ApiModelProperty("唯一ID")
     private Integer id;
     @ApiModelProperty("主题名(url)")
     private String themeName;
@@ -29,10 +30,14 @@ public class TBlogThemeResp implements Serializable {
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

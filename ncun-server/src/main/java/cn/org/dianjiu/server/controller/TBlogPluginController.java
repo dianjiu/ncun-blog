@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * 插件操作(TBlogPlugin)表控制层
  *
- * @author makejava
- * @since 2020-10-06 18:51:52
+ * @author dianjiu
+ * @since 2021-05-08 17:51:03
  */
 @RestController
 @Api(value = "TBlogPlugin", tags = {"插件操作"})

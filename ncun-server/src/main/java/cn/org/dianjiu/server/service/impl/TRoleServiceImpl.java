@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 角色操作(TRole)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:32
+ * @author dianjiu
+ * @since 2021-05-08 18:15:10
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TRoleServiceImpl implements TRoleServiceI {
             for (TRole tRole1 : tRoles) {
                 TRoleResp tRoleResp = new TRoleResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tRole1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tRole1, tRoleResp);
                 list.add(tRoleResp);
@@ -117,6 +117,7 @@ public class TRoleServiceImpl implements TRoleServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TRoleResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TRoleResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TRoleServiceImpl implements TRoleServiceI {
         }
         ObjectUtils.copyProperties(tRoleReq, tRole);
         Date date = new Date();
-        tRole.setCreateTime(date);
-        tRole.setUpdateTime(date);
+        tRole.setCreatedTime(date);
+        tRole.setCreatedBy("admin");
+        tRole.setUpdatedTime(date);
+        tRole.setUpdatedBy("admin");
         return tRoleDao.insert(tRole);
     }
 
@@ -168,7 +171,7 @@ public class TRoleServiceImpl implements TRoleServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tRoleReq, tRole);
-        tRole.setUpdateTime(new Date());
+        tRole.setUpdatedTime(new Date());
         return tRoleDao.update(tRole);
     }
 

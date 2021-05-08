@@ -4,15 +4,14 @@ import cn.org.dianjiu.server.entity.TCommon;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 /**
- * (TCommon)表数据库访问层
+ * 字典操作(TCommon)表数据库访问层
  *
- * @author makejava
- * @since 2020-09-05 21:30:38
+ * @author dianjiu
+ * @since 2021-05-08 17:51:12
  */
 @Mapper
 public interface TCommonDao {

@@ -9,15 +9,15 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * (TCommentReq) Req
+ * 评论操作(TCommentReq) Req
  *
- * @author makejava
- * @since 2020-09-05 21:30:37
+ * @author dianjiu
+ * @since 2021-05-08 17:51:11
  */
 @Data
 public class TCommentReq implements Serializable {
     private static final long serialVersionUID = 9155949248117098529L;
-    @ApiModelProperty("评论id")
+    @ApiModelProperty("唯一ID")
     private Integer id;
     @ApiModelProperty("博客id")
     private Integer blogId;
@@ -31,15 +31,19 @@ public class TCommentReq implements Serializable {
     private String content;
     @ApiModelProperty("父ID")
     private Integer parentId;
+    @ApiModelProperty("状态（0-待审核  1-已审核）")
+    private String status;
     @ApiModelProperty("创建时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    @ApiModelProperty("创建人")
+    private String createdBy;
     @ApiModelProperty("更新时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
-    @ApiModelProperty("状态（0-待审核  1-已审核）")
-    private String status;
+    private Date updatedTime;
+    @ApiModelProperty("更新人")
+    private String updatedBy;
 
 }

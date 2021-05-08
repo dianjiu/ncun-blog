@@ -9,13 +9,16 @@
         <result property="menuIcon" column="menu_icon" jdbcType="VARCHAR"/>
         <result property="menuSort" column="menu_sort" jdbcType="INTEGER"/>
         <result property="menuTarget" column="menu_target" jdbcType="VARCHAR"/>
-        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
-        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
         <result property="status" column="status" jdbcType="VARCHAR"/>
+        <result property="createdTime" column="created_time" jdbcType="TIMESTAMP"/>
+        <result property="createdBy" column="created_by" jdbcType="VARCHAR"/>
+        <result property="updatedTime" column="updated_time" jdbcType="TIMESTAMP"/>
+        <result property="updatedBy" column="updated_by" jdbcType="VARCHAR"/>
     </resultMap>
 
     <sql id="table_field">
-      id, menu_url, menu_name, menu_icon, menu_sort, menu_target, create_time, update_time, status      
+        id
+        , menu_url, menu_name, menu_icon, menu_sort, menu_target, status, created_time, created_by, updated_time, updated_by
     </sql>
 
     <!--通过Id查询单个对象-->
@@ -51,14 +54,20 @@
             <if test="menuTarget != null">
                 and menu_target = #{menuTarget,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -87,14 +96,20 @@
             <if test="menuTarget != null">
                 and menu_target = #{menuTarget,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
@@ -132,14 +147,20 @@
             <if test="menuTarget != null">
                 menu_target,
             </if>
-            <if test="createTime != null">
-                create_time,
-            </if>
-            <if test="updateTime != null">
-                update_time,
-            </if>
             <if test="status != null">
                 status,
+            </if>
+            <if test="createdTime != null">
+                created_time,
+            </if>
+            <if test="createdBy != null">
+                created_by,
+            </if>
+            <if test="updatedTime != null">
+                updated_time,
+            </if>
+            <if test="updatedBy != null">
+                updated_by,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -161,14 +182,20 @@
             <if test="menuTarget != null">
                 #{menuTarget,jdbcType=VARCHAR},
             </if>
-            <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                #{updateTime,jdbcType=TIMESTAMP},
-            </if>
             <if test="status != null">
                 #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null">
+                #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null">
+                #{updatedBy,jdbcType=VARCHAR},
             </if>
         </trim>
     </insert>
@@ -176,14 +203,12 @@
     <!--批量新增所有列，列表长度不能为0，且列表id统一为null或者统一不为null-->
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
         insert into t_menu
-        (<if test="id != null">id,</if>menu_url, menu_name, menu_icon, menu_sort, menu_target, create_time, update_time,
-        status)
+        (<if test="id != null">id,</if>menu_url, menu_name, menu_icon, menu_sort, menu_target, status)
         values
         <foreach item="item" collection="list" separator="," open="" close="" index="index">
             (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.menuUrl,jdbcType=VARCHAR},
             #{item.menuName,jdbcType=VARCHAR}, #{item.menuIcon,jdbcType=VARCHAR}, #{item.menuSort,jdbcType=INTEGER},
-            #{item.menuTarget,jdbcType=VARCHAR}, #{item.createTime,jdbcType=TIMESTAMP},
-            #{item.updateTime,jdbcType=TIMESTAMP}, #{item.status,jdbcType=VARCHAR})
+            #{item.menuTarget,jdbcType=VARCHAR}, #{item.status,jdbcType=VARCHAR})
         </foreach>
     </insert>
 
@@ -205,12 +230,6 @@
             </if>
             <if test="menuTarget != null and menuTarget != ''">
                 menu_target = #{menuTarget,jdbcType=VARCHAR},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="updateTime != null">
-                update_time = #{updateTime,jdbcType=TIMESTAMP},
             </if>
             <if test="status != null and status != ''">
                 status = #{status,jdbcType=VARCHAR},
@@ -238,12 +257,6 @@
             <if test="where.menuTarget == null and set.menuTarget != null and set.menuTarget != ''">
                 menu_target = #{set.menuTarget,jdbcType=VARCHAR},
             </if>
-            <if test="where.createTime == null and set.createTime != null">
-                create_time = #{set.createTime,jdbcType=TIMESTAMP},
-            </if>
-            <if test="where.updateTime == null and set.updateTime != null">
-                update_time = #{set.updateTime,jdbcType=TIMESTAMP},
-            </if>
             <if test="where.status == null and set.status != null and set.status != ''">
                 status = #{set.status,jdbcType=VARCHAR},
             </if>
@@ -267,14 +280,20 @@
             <if test="where.menuTarget != null">
                 and menu_target = #{where.menuTarget,jdbcType=VARCHAR}
             </if>
-            <if test="where.createTime != null">
-                and create_time = #{where.createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="where.updateTime != null">
-                and update_time = #{where.updateTime,jdbcType=TIMESTAMP}
-            </if>
             <if test="where.status != null">
                 and status = #{where.status,jdbcType=VARCHAR}
+            </if>
+            <if test="where.createdTime != null">
+                and created_time = #{where.createdTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.createdBy != null">
+                and created_by = #{where.createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="where.updatedTime != null">
+                and updated_time = #{where.updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="where.updatedBy != null">
+                and updated_by = #{where.updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </update>
@@ -308,16 +327,6 @@
                     when id = #{item.id} then #{item.menuTarget}
                 </foreach>
             </trim>
-            <trim prefix="create_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.createTime}
-                </foreach>
-            </trim>
-            <trim prefix="update_time = case" suffix="end,">
-                <foreach collection="list" item="item" index="index">
-                    when id = #{item.id} then #{item.updateTime}
-                </foreach>
-            </trim>
             <trim prefix="status = case" suffix="end,">
                 <foreach collection="list" item="item" index="index">
                     when id = #{item.id} then #{item.status}
@@ -332,7 +341,9 @@
 
     <!--通过主键删除-->
     <delete id="deleteById" parameterType="java.lang.Integer">
-        delete from t_menu where id = #{id,jdbcType=INTEGER}
+        delete
+        from t_menu
+        where id = #{id,jdbcType=INTEGER}
     </delete>
 
     <!--通过实体非空属性删除-->
@@ -354,12 +365,6 @@
             <if test="menuTarget != null">
                 and menu_target = #{menuTarget,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
             </if>
@@ -375,7 +380,8 @@
     </delete>
 
     <select id="countAll" resultType="int">
-        select count(id) from t_menu
+        select count(id)
+        from t_menu
     </select>
 
     <select id="countByEntity" parameterType="cn.org.dianjiu.server.entity.TMenu" resultType="int">
@@ -399,15 +405,22 @@
             <if test="menuTarget != null">
                 and menu_target = #{menuTarget,jdbcType=VARCHAR}
             </if>
-            <if test="createTime != null">
-                and create_time = #{createTime,jdbcType=TIMESTAMP}
-            </if>
-            <if test="updateTime != null">
-                and update_time = #{updateTime,jdbcType=TIMESTAMP}
-            </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </select>
 </mapper>
+

@@ -4,15 +4,14 @@ import cn.org.dianjiu.server.entity.TBlog;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 /**
- * (TBlog)表数据库访问层
+ * 博客操作(TBlog)表数据库访问层
  *
- * @author makejava
- * @since 2020-09-05 21:29:54
+ * @author dianjiu
+ * @since 2021-05-08 17:50:54
  */
 @Mapper
 public interface TBlogDao {

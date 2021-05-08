@@ -10,8 +10,8 @@ import java.util.List;
 /**
  * 文件操作(TFile)表服务接口
  *
- * @author makejava
- * @since 2020-10-06 20:22:27
+ * @author dianjiu
+ * @since 2021-05-08 18:15:08
  */
 public interface TFileServiceI {
 

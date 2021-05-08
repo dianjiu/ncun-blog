@@ -4,15 +4,14 @@ import cn.org.dianjiu.server.entity.TRole;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 /**
- * (TRole)表数据库访问层
+ * 角色操作(TRole)表数据库访问层
  *
- * @author makejava
- * @since 2020-09-05 21:31:05
+ * @author dianjiu
+ * @since 2021-05-08 17:51:19
  */
 @Mapper
 public interface TRoleDao {

@@ -38,8 +38,10 @@ CREATE TABLE `t_blog` (
                           `blog_views` bigint(20) DEFAULT NULL COMMENT '文章查看数',
                           `comment_status` varchar(2) NOT NULL COMMENT '是否允许评论（0-不开启 1-开启）',
                           `status` varchar(2) NOT NULL COMMENT '状态（0-草稿  1-发布）',
-                          `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                          `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                          `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                          `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='博客操作';
 
@@ -55,8 +57,10 @@ CREATE TABLE `t_blog_plugin` (
                                  `plugin_describe` varchar(255) DEFAULT NULL COMMENT '插件描述',
                                  `plugin_img` varchar(255) DEFAULT NULL COMMENT '插件预览图',
                                  `status` varchar(2) CHARACTER SET utf8mb4 NOT NULL DEFAULT '1' COMMENT '状态 1 -- 生效  0  -- 弃用',
-                                 `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                                 `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                 `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                 `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                                 `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                 `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                  PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='插件操作';
 
@@ -72,8 +76,10 @@ CREATE TABLE `t_blog_theme` (
                                 `theme_describe` varchar(255) DEFAULT NULL COMMENT '主题描述',
                                 `theme_img` varchar(255) DEFAULT NULL COMMENT '主题预览图',
                                 `status` varchar(2) CHARACTER SET utf8mb4 NOT NULL DEFAULT '1' COMMENT '状态 1 -- 生效  0  -- 弃用',
-                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                                `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                                `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='主题操作';
 
@@ -90,8 +96,10 @@ CREATE TABLE `t_blog_type` (
                                `type_describe` varchar(255) DEFAULT NULL COMMENT '描述',
                                `type` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 类型  1 -- 分类   2 -- 标签   3 -- 专题',
                                `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 未读  1 -- 已用',
-                               `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                               `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                               `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                               `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                               `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                               `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='分类操作';
 
@@ -109,9 +117,11 @@ CREATE TABLE `t_comment` (
                              `site` varchar(255) NOT NULL COMMENT '站点',
                              `content` varchar(255) NOT NULL COMMENT '内容',
                              `parent_id` int(11) NOT NULL COMMENT '父ID',
-                             `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                             `update_time` datetime DEFAULT NULL COMMENT '更新时间',
                              `status` varchar(2) NOT NULL DEFAULT '0' COMMENT '状态（0-待审核  1-已审核）',
+                             `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                             `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                             `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                             `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                              PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='评论操作';
 
@@ -140,8 +150,10 @@ CREATE TABLE `t_common` (
                             `key6` varchar(255) CHARACTER SET utf8mb4 NOT NULL COMMENT 'key6',
                             `value6` varchar(255) CHARACTER SET utf8mb4 NOT NULL COMMENT 'value6',
                             `status` varchar(2) CHARACTER SET utf8mb4 NOT NULL DEFAULT '1' COMMENT '状态 1 -- 生效  0  -- 弃用',
-                            `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                            `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                            `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                            `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                            `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                            `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                             PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='字典操作';
 
@@ -160,8 +172,10 @@ CREATE TABLE `t_file` (
                           `file_size` varchar(255) DEFAULT NULL COMMENT '文件大小',
                           `file_suffix` varchar(255) DEFAULT NULL COMMENT '后缀',
                           `status` varchar(2) CHARACTER SET utf8mb4 NOT NULL DEFAULT '1' COMMENT '状态 1 -- 生效  0  -- 弃用',
-                          `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                          `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                          `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                          `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=245 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='文件操作';
 
@@ -178,8 +192,10 @@ CREATE TABLE `t_friend_url` (
                                 `link_info` varchar(255) NOT NULL COMMENT '友链介绍',
                                 `link_url` varchar(255) NOT NULL COMMENT '友链地址',
                                 `status` varchar(2) CHARACTER SET utf8mb4 NOT NULL DEFAULT '1' COMMENT '状态 1 -- 生效  0  -- 弃用',
-                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                                `update_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                                `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='友链操作';
 
@@ -196,9 +212,11 @@ CREATE TABLE `t_menu` (
                           `menu_icon` varchar(255) DEFAULT NULL COMMENT '菜单图标',
                           `menu_sort` int(11) DEFAULT NULL COMMENT '排序',
                           `menu_target` varchar(255) DEFAULT NULL COMMENT '打开方式',
-                          `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                          `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-                          `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 未读  1 -- 已用',
+                          `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 弃用  1 -- 启用',
+                          `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                          `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                          `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='菜单操作';
 
@@ -212,9 +230,11 @@ CREATE TABLE `t_role` (
                           `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一ID',
                           `role_code` varchar(255) NOT NULL COMMENT '角色代码',
                           `role_name` varchar(255) NOT NULL COMMENT '角色名称',
-                          `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                          `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-                          `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 未读  1 -- 已用',
+                          `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 弃用  1 -- 启用',
+                          `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                          `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                          `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色操作';
 
@@ -228,9 +248,11 @@ CREATE TABLE `t_role_menus` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一ID',
                                 `menu_id` int(11) NOT NULL COMMENT '菜单表id',
                                 `role_id` int(11) NOT NULL COMMENT '角色表id',
-                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                                `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-                                `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 未读  1 -- 已用',
+                                `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 弃用  1 -- 启用',
+                                `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                                `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='角色菜单操作';
 
@@ -250,8 +272,10 @@ CREATE TABLE `t_system_log` (
                                 `time_cost` varchar(255) NOT NULL COMMENT '请求耗时',
                                 `req_ip` varchar(255) NOT NULL COMMENT '请求IP',
                                 `ip_addr` varchar(255) NOT NULL COMMENT 'IP归属',
-                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                                `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                                `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 ROW_FORMAT=DYNAMIC COMMENT='日志操作';
 
@@ -275,8 +299,10 @@ CREATE TABLE `t_user` (
                           `phone` varchar(18) DEFAULT NULL COMMENT '手机号',
                           `email` varchar(68) DEFAULT NULL COMMENT '邮箱',
                           `qq` varchar(11) DEFAULT NULL COMMENT 'qq',
-                          `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                          `update_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                          `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                          `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                          `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                           PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户操作';
 
@@ -290,9 +316,11 @@ CREATE TABLE `t_user_roles` (
                                 `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一ID',
                                 `user_id` int(11) NOT NULL COMMENT '用户表id',
                                 `role_id` int(11) NOT NULL COMMENT '角色表id',
-                                `create_time` datetime DEFAULT NULL COMMENT '创建时间',
-                                `update_time` datetime DEFAULT NULL COMMENT '更新时间',
-                                `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 未读  1 -- 已用',
+                                `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 弃用  1 -- 启用',
+                                `created_time` datetime DEFAULT NULL COMMENT '创建时间',
+                                `created_by` varchar(100) NOT NULL COMMENT '创建人',
+                                `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
+                                `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                 PRIMARY KEY (`id`) USING BTREE
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='用户角色操作';
 

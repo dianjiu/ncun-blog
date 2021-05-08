@@ -7,15 +7,15 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * (TComment)实体类
+ * 评论操作(TComment)实体类
  *
- * @author makejava
- * @since 2020-09-05 21:30:32
+ * @author dianjiu
+ * @since 2021-05-08 17:51:09
  */
 @Data
 public class TComment {
     /**
-     * 评论id
+     * 唯一ID
      */
     private Integer id;
     /**
@@ -43,20 +43,28 @@ public class TComment {
      */
     private Integer parentId;
     /**
+     * 状态（0-待审核  1-已审核）
+     */
+    private String status;
+    /**
      * 创建时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
+    /**
+     * 创建人
+     */
+    private String createdBy;
     /**
      * 更新时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
     /**
-     * 状态（0-待审核  1-已审核）
+     * 更新人
      */
-    private String status;
+    private String updatedBy;
 
 }

@@ -4,15 +4,14 @@ import cn.org.dianjiu.server.entity.TRoleMenus;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
-import javax.validation.constraints.NotEmpty;
-import javax.validation.constraints.NotNull;
+import javax.validation.constraints.*;
 import java.util.List;
 
 /**
- * (TRoleMenus)表数据库访问层
+ * 角色菜单操作(TRoleMenus)表数据库访问层
  *
- * @author makejava
- * @since 2020-09-05 21:31:11
+ * @author dianjiu
+ * @since 2021-05-08 17:51:21
  */
 @Mapper
 public interface TRoleMenusDao {

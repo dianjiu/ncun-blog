@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 用户操作(TUser)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:37
+ * @author dianjiu
+ * @since 2021-05-08 18:15:11
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TUserServiceImpl implements TUserServiceI {
             for (TUser tUser1 : tUsers) {
                 TUserResp tUserResp = new TUserResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tUser1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tUser1, tUserResp);
                 list.add(tUserResp);
@@ -117,6 +117,7 @@ public class TUserServiceImpl implements TUserServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TUserResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TUserResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TUserServiceImpl implements TUserServiceI {
         }
         ObjectUtils.copyProperties(tUserReq, tUser);
         Date date = new Date();
-        tUser.setCreateTime(date);
-        tUser.setUpdateTime(date);
+        tUser.setCreatedTime(date);
+        tUser.setCreatedBy("admin");
+        tUser.setUpdatedTime(date);
+        tUser.setUpdatedBy("admin");
         return tUserDao.insert(tUser);
     }
 
@@ -168,7 +171,7 @@ public class TUserServiceImpl implements TUserServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tUserReq, tUser);
-        tUser.setUpdateTime(new Date());
+        tUser.setUpdatedTime(new Date());
         return tUserDao.update(tUser);
     }
 

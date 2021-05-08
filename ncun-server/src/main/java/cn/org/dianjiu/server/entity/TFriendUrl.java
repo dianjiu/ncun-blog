@@ -1,21 +1,21 @@
 package cn.org.dianjiu.server.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import lombok.Data;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import java.util.Date;
 
+import lombok.Data;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
 /**
- * (TFriendUrl)实体类
+ * 友链操作(TFriendUrl)实体类
  *
- * @author makejava
- * @since 2020-09-05 21:30:52
+ * @author dianjiu
+ * @since 2021-05-08 17:51:15
  */
 @Data
 public class TFriendUrl {
     /**
-     * 主键
+     * 唯一ID
      */
     private Integer id;
     /**
@@ -43,12 +43,20 @@ public class TFriendUrl {
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date createTime;
+    private Date createdTime;
     /**
-     * 创建时间
+     * 创建人
+     */
+    private String createdBy;
+    /**
+     * 更新时间
      */
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    private Date updateTime;
+    private Date updatedTime;
+    /**
+     * 更新人
+     */
+    private String updatedBy;
 
 }

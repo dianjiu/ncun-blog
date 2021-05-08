@@ -20,8 +20,8 @@ import java.util.List;
 /**
  * 用户操作(TUser)表控制层
  *
- * @author makejava
- * @since 2020-10-06 18:52:03
+ * @author dianjiu
+ * @since 2021-05-08 17:51:24
  */
 @RestController
 @Api(value = "TUser", tags = {"用户操作"})

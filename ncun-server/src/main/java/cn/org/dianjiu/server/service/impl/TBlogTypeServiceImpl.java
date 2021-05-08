@@ -21,8 +21,8 @@ import java.util.List;
 /**
  * 分类操作(TBlogType)表服务实现类
  *
- * @author makejava
- * @since 2020-10-06 20:22:23
+ * @author dianjiu
+ * @since 2021-05-08 18:15:06
  */
 @Slf4j
 @Service
@@ -99,8 +99,8 @@ public class TBlogTypeServiceImpl implements TBlogTypeServiceI {
             for (TBlogType tBlogType1 : tBlogTypes) {
                 TBlogTypeResp tBlogTypeResp = new TBlogTypeResp();
                 if (ObjectUtils.checkObjAllFieldsIsNull(tBlogType1)) {
-                    log.error("根据ids【" + ids.toString() + "】没有查到相关记录！");
-                    throw new BusinessException("400", "根据ids【" + ids.toString() + "】没有查到相关记录！");
+                    log.error("根据ids【" + ids + "】没有查到相关记录！");
+                    throw new BusinessException("400", "根据ids【" + ids + "】没有查到相关记录！");
                 }
                 ObjectUtils.copyProperties(tBlogType1, tBlogTypeResp);
                 list.add(tBlogTypeResp);
@@ -117,6 +117,7 @@ public class TBlogTypeServiceImpl implements TBlogTypeServiceI {
         //将参数传给这个方法就可以实现物理分页了，非常简单。
         PageHelper.startPage(pageReq.getPageNum(), pageReq.getPageSize());
         List<TBlogTypeResp> list = listByEntity(pageReq.getData());
+        //PageInfo<Object> objectPageInfo = new PageInfo<>();
         PageInfo<TBlogTypeResp> pages = new PageInfo<>(list);
         int count = countByEntity(pageReq.getData());
         int num = count % pageReq.getPageSize() == 0 ? count / pageReq.getPageSize() : count / pageReq.getPageSize() + 1;
@@ -136,8 +137,10 @@ public class TBlogTypeServiceImpl implements TBlogTypeServiceI {
         }
         ObjectUtils.copyProperties(tBlogTypeReq, tBlogType);
         Date date = new Date();
-        tBlogType.setCreateTime(date);
-        tBlogType.setUpdateTime(date);
+        tBlogType.setCreatedTime(date);
+        tBlogType.setCreatedBy("admin");
+        tBlogType.setUpdatedTime(date);
+        tBlogType.setUpdatedBy("admin");
         return tBlogTypeDao.insert(tBlogType);
     }
 
@@ -168,7 +171,7 @@ public class TBlogTypeServiceImpl implements TBlogTypeServiceI {
             throw new BusinessException("400", "入参对象不能为空！");
         }
         ObjectUtils.copyProperties(tBlogTypeReq, tBlogType);
-        tBlogType.setUpdateTime(new Date());
+        tBlogType.setUpdatedTime(new Date());
         return tBlogTypeDao.update(tBlogType);
     }
 
