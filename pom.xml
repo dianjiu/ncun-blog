@@ -27,7 +27,7 @@
 		<java.version>11</java.version>
 		<base.version>1.0-SNAPSHOT</base.version>
 		<java-validation.version>2.0.1.Final</java-validation.version>
-		<httpclient.version>4.5.11</httpclient.version>
+		<httpclient.version>4.5.13</httpclient.version>
 		<commons-lang3.version>3.9</commons-lang3.version>
 		<commons-io.version>2.8.0</commons-io.version>
 		<commons-net.version>3.6</commons-net.version>
