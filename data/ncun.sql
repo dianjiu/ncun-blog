@@ -26,7 +26,7 @@ CREATE TABLE `t_blog` (
                           `blog_title` varchar(100) NOT NULL COMMENT '标题',
                           `blog_text` longtext NOT NULL COMMENT '文章正文',
                           `blog_summary` varchar(255) NOT NULL COMMENT '文章摘要',
-                          `blog_type` varchar(255) NOT NULL COMMENT '文章类型(原创，转载)',
+                          `blog_type` varchar(2) NOT NULL COMMENT '文章类型(0-原创，1-转载)',
                           `blog_sort` varchar(255) NOT NULL COMMENT '博客分类',
                           `blog_tags` varchar(255) DEFAULT NULL COMMENT '文章标签',
                           `blog_topic` varchar(255) DEFAULT NULL COMMENT '文章专题',
@@ -87,21 +87,21 @@ CREATE TABLE `t_blog_theme` (
 
 /*Table structure for table `t_blog_type` */
 
-DROP TABLE IF EXISTS `t_blog_type`;
+DROP TABLE IF EXISTS `t_blog_label`;
 
-CREATE TABLE `t_blog_type` (
+CREATE TABLE `t_blog_label` (
                                `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '唯一ID',
                                `label_name` varchar(255) NOT NULL COMMENT '标签名称',
-                               `type_url` varchar(255) DEFAULT NULL COMMENT '分类路径',
-                               `type_describe` varchar(255) DEFAULT NULL COMMENT '描述',
-                               `type` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 类型  1 -- 分类   2 -- 标签   3 -- 专题',
+                               `label_url` varchar(255) DEFAULT NULL COMMENT '分类路径',
+                               `label_describe` varchar(255) DEFAULT NULL COMMENT '描述',
+                               `label_type` varchar(2) NOT NULL DEFAULT '2' COMMENT '0  -- 类型  1 -- 分类   2 -- 标签   3 -- 专题',
                                `status` varchar(2) NOT NULL DEFAULT '1' COMMENT '0  -- 未读  1 -- 已用',
                                `created_time` datetime DEFAULT NULL COMMENT '创建时间',
                                `created_by` varchar(100) NOT NULL COMMENT '创建人',
                                `updated_time` datetime DEFAULT NULL COMMENT '更新时间',
                                `updated_by` varchar(100) NOT NULL COMMENT '更新人',
                                PRIMARY KEY (`id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='分类操作';
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 ROW_FORMAT=DYNAMIC COMMENT='文章标签';
 
 /*Data for the table `t_blog_type` */
 
