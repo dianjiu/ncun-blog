@@ -1,12 +1,12 @@
 package cn.org.dianjiu.server.controller;
 
 import cn.org.dianjiu.common.pojo.req.PageReq;
-import cn.org.dianjiu.common.pojo.req.TBlogTypeReq;
+import cn.org.dianjiu.common.pojo.req.TBlogLabelReq;
 import cn.org.dianjiu.common.pojo.resp.PageResp;
-import cn.org.dianjiu.common.pojo.resp.TBlogTypeResp;
+import cn.org.dianjiu.common.pojo.resp.TBlogLabelResp;
 import cn.org.dianjiu.common.pojo.vo.RespVO;
 import cn.org.dianjiu.common.util.ObjectUtils;
-import cn.org.dianjiu.server.service.TBlogTypeServiceI;
+import cn.org.dianjiu.server.service.TBlogLabelServiceI;
 import com.github.pagehelper.PageInfo;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -18,21 +18,21 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 /**
- * 分类操作(TBlogType)表控制层
+ * 文章标签(TBlogLabel)表控制层
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:08
+ * @since 2021-06-11 11:39:25
  */
 @RestController
-@Api(value = "TBlogType", tags = {"分类操作"})
-@RequestMapping("/tBlogType")
-public class TBlogTypeController {
+@Api(value = "TBlogLabel", tags = {"文章标签"})
+@RequestMapping("/tBlogLabel")
+public class TBlogLabelController {
 
     /**
      * 服务对象
      */
     @Autowired
-    private TBlogTypeServiceI tBlogTypeService;
+    private TBlogLabelServiceI tBlogLabelService;
 
     /**
      * 通过Id查询单个对象
@@ -42,61 +42,61 @@ public class TBlogTypeController {
      */
     @ApiOperation("通过Id查询单个对象")
     @GetMapping(value = "/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<TBlogTypeResp> getById(@PathVariable Integer id) {
-        RespVO<TBlogTypeResp> result = new RespVO<>();
-        TBlogTypeResp tBlogTypeResp = tBlogTypeService.getById(id);
-        if (null == tBlogTypeResp) {
+    public RespVO<TBlogLabelResp> getById(@PathVariable Integer id) {
+        RespVO<TBlogLabelResp> result = new RespVO<>();
+        TBlogLabelResp tBlogLabelResp = tBlogLabelService.getById(id);
+        if (null == tBlogLabelResp) {
             result.setCode("400");
             result.setMsg("没有查到数据！");
             return result;
         }
         result.setCode("200");
         result.setMsg("查询成功！");
-        result.setData(tBlogTypeResp);
+        result.setData(tBlogLabelResp);
         return result;
     }
 
     /**
      * 通过实体不为空的属性作为筛选条件查询单个对象
      *
-     * @param tBlogTypeReq
+     * @param tBlogLabelReq
      * @return 实例对象
      */
     @ApiOperation("通过属性查询单个对象")
     @PostMapping(value = "/get", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<TBlogTypeResp> getByEntity(TBlogTypeReq tBlogTypeReq) {
-        RespVO<TBlogTypeResp> result = new RespVO<>();
-        TBlogTypeResp tBlogTypeResp = tBlogTypeService.getByEntity(tBlogTypeReq);
-        if (null == tBlogTypeResp) {
+    public RespVO<TBlogLabelResp> getByEntity(TBlogLabelReq tBlogLabelReq) {
+        RespVO<TBlogLabelResp> result = new RespVO<>();
+        TBlogLabelResp tBlogLabelResp = tBlogLabelService.getByEntity(tBlogLabelReq);
+        if (null == tBlogLabelResp) {
             result.setCode("400");
             result.setMsg("没有查到数据！");
             return result;
         }
         result.setCode("200");
         result.setMsg("查询成功！");
-        result.setData(tBlogTypeResp);
+        result.setData(tBlogLabelResp);
         return result;
     }
 
     /**
      * 通过实体不为空的属性作为筛选条件查询对象列表
      *
-     * @param tBlogTypeReq 实例对象
+     * @param tBlogLabelReq 实例对象
      * @return 对象列表
      */
     @ApiOperation("通过属性查询对象列表")
     @PostMapping(value = "/list", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<List> list(TBlogTypeReq tBlogTypeReq) {
+    public RespVO<List> list(TBlogLabelReq tBlogLabelReq) {
         RespVO<List> result = new RespVO<>();
-        List<TBlogTypeResp> tBlogTypeRespList = tBlogTypeService.listByEntity(tBlogTypeReq);
-        if (null == tBlogTypeRespList || tBlogTypeRespList.isEmpty()) {
+        List<TBlogLabelResp> tBlogLabelRespList = tBlogLabelService.listByEntity(tBlogLabelReq);
+        if (null == tBlogLabelRespList || tBlogLabelRespList.isEmpty()) {
             result.setCode("400");
             result.setMsg("没有查到数据！");
             return result;
         }
         result.setCode("200");
         result.setMsg("请求成功！");
-        result.setData(tBlogTypeRespList);
+        result.setData(tBlogLabelRespList);
         return result;
     }
 
@@ -108,10 +108,10 @@ public class TBlogTypeController {
      */
     @ApiOperation(value = "分页获取对象列表", notes = "当前页和页大小必传")
     @RequestMapping(value = "/listByPage", method = RequestMethod.POST)
-    public RespVO<PageResp> listByPage(@RequestBody PageReq<TBlogTypeReq> pageReq) {
-        PageResp<List<TBlogTypeResp>> pageVO = new PageResp<>();
+    public RespVO<PageResp> listByPage(@RequestBody PageReq<TBlogLabelReq> pageReq) {
+        PageResp<List<TBlogLabelResp>> pageVO = new PageResp<>();
         RespVO<PageResp> result = new RespVO<>();
-        PageInfo<TBlogTypeResp> pages = tBlogTypeService.listByPage(pageReq);
+        PageInfo<TBlogLabelResp> pages = tBlogLabelService.listByPage(pageReq);
         if (ObjectUtils.checkObjAllFieldsIsNull(pages)) {
             result.setCode("400");
             result.setMsg("没有查到数据！");
@@ -131,14 +131,14 @@ public class TBlogTypeController {
     /**
      * 新增实体属性不为null的记录
      *
-     * @param tBlogTypeReq 实例对象
+     * @param tBlogLabelReq 实例对象
      * @return 实例对象
      */
     @ApiOperation("新增对象记录")
     @PostMapping(value = "/insert", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<TBlogTypeResp> insert(@RequestBody @Validated TBlogTypeReq tBlogTypeReq) {
-        RespVO<TBlogTypeResp> result = new RespVO<>();
-        int insert = tBlogTypeService.insert(tBlogTypeReq);
+    public RespVO<TBlogLabelResp> insert(@RequestBody @Validated TBlogLabelReq tBlogLabelReq) {
+        RespVO<TBlogLabelResp> result = new RespVO<>();
+        int insert = tBlogLabelService.insert(tBlogLabelReq);
         if (insert != 1) {
             result.setCode("400");
             result.setMsg("新增数据失败！");
@@ -157,9 +157,9 @@ public class TBlogTypeController {
      */
     @ApiOperation("批量新增对象记录")
     @PostMapping(value = "/insertBatch", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<TBlogTypeResp> insertBatch(@RequestBody List<TBlogTypeReq> list) {
-        RespVO<TBlogTypeResp> result = new RespVO<>();
-        int insert = tBlogTypeService.insertBatch(list);
+    public RespVO<TBlogLabelResp> insertBatch(@RequestBody List<TBlogLabelReq> list) {
+        RespVO<TBlogLabelResp> result = new RespVO<>();
+        int insert = tBlogLabelService.insertBatch(list);
         if (insert < 1) {
             result.setCode("400");
             result.setMsg("新增数据失败！");
@@ -173,14 +173,14 @@ public class TBlogTypeController {
     /**
      * 通过表字段修改实体属性不为null的列
      *
-     * @param tBlogTypeReq 实例对象
+     * @param tBlogLabelReq 实例对象
      * @return 实例对象
      */
     @ApiOperation("更新对象记录")
     @PostMapping(value = "/update", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<TBlogTypeResp> update(@RequestBody @Validated TBlogTypeReq tBlogTypeReq) {
-        RespVO<TBlogTypeResp> result = new RespVO<>();
-        int update = tBlogTypeService.update(tBlogTypeReq);
+    public RespVO<TBlogLabelResp> update(@RequestBody @Validated TBlogLabelReq tBlogLabelReq) {
+        RespVO<TBlogLabelResp> result = new RespVO<>();
+        int update = tBlogLabelService.update(tBlogLabelReq);
         if (update != 1) {
             result.setCode("400");
             result.setMsg("更新数据失败！");
@@ -199,9 +199,9 @@ public class TBlogTypeController {
      */
     @ApiOperation("删除一条对象记录")
     @GetMapping(value = "/delete/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<TBlogTypeResp> deleteOne(@PathVariable Integer id) {
-        RespVO<TBlogTypeResp> result = new RespVO<>();
-        int delete = tBlogTypeService.deleteById(id);
+    public RespVO<TBlogLabelResp> deleteOne(@PathVariable Integer id) {
+        RespVO<TBlogLabelResp> result = new RespVO<>();
+        int delete = tBlogLabelService.deleteById(id);
         if (delete != 1) {
             result.setCode("400");
             result.setMsg("删除数据失败！");
@@ -220,11 +220,11 @@ public class TBlogTypeController {
      */
     @ApiOperation("批量删除对象记录")
     @PostMapping(value = "/delete", produces = MediaType.APPLICATION_JSON_VALUE)
-    public RespVO<TBlogTypeResp> deleteBatch(@RequestBody List<Integer> ids) {
-        RespVO<TBlogTypeResp> result = new RespVO<>();
+    public RespVO<TBlogLabelResp> deleteBatch(@RequestBody List<Integer> ids) {
+        RespVO<TBlogLabelResp> result = new RespVO<>();
         int dels = 0;
         if (ids != null && ids.size() > 0) {
-            dels = tBlogTypeService.deleteByIds(ids);
+            dels = tBlogLabelService.deleteByIds(ids);
         }
         if (dels <= 0) {
             result.setCode("400");

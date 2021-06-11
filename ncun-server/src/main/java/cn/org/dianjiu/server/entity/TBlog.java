@@ -10,7 +10,7 @@ import java.util.Date;
  * 博客操作(TBlog)实体类
  *
  * @author dianjiu
- * @since 2021-05-08 17:50:46
+ * @since 2021-06-11 11:39:23
  */
 @Data
 public class TBlog {
@@ -31,7 +31,7 @@ public class TBlog {
      */
     private String blogSummary;
     /**
-     * 文章类型(原创，转载)
+     * 文章类型(0-原创，1-转载)
      */
     private String blogType;
     /**

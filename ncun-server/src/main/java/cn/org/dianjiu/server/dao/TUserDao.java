@@ -11,7 +11,7 @@ import java.util.List;
  * 用户操作(TUser)表数据库访问层
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:26
+ * @since 2021-06-11 11:38:04
  */
 @Mapper
 public interface TUserDao {

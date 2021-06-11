@@ -7,13 +7,13 @@ import org.springframework.format.annotation.DateTimeFormat;
 import java.util.Date;
 
 /**
- * 分类操作(TBlogType)实体类
+ * 文章标签(TBlogLabel)实体类
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:07
+ * @since 2021-06-11 11:39:25
  */
 @Data
-public class TBlogType {
+public class TBlogLabel {
     /**
      * 唯一ID
      */
@@ -25,15 +25,15 @@ public class TBlogType {
     /**
      * 分类路径
      */
-    private String typeUrl;
+    private String labelUrl;
     /**
      * 描述
      */
-    private String typeDescribe;
+    private String labelDescribe;
     /**
      * 0  -- 类型  1 -- 分类   2 -- 标签   3 -- 专题
      */
-    private String type;
+    private String labelType;
     /**
      * 0  -- 未读  1 -- 已用
      */

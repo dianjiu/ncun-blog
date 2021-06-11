@@ -11,7 +11,7 @@ import java.util.List;
  * 文件操作(TFile)表服务接口
  *
  * @author dianjiu
- * @since 2021-05-08 18:15:08
+ * @since 2021-06-11 11:39:06
  */
 public interface TFileServiceI {
 

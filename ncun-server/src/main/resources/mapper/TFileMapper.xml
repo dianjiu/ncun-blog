@@ -217,13 +217,14 @@
     <insert id="insertBatch" keyProperty="id" useGeneratedKeys="true" parameterType="list">
         insert into t_file
         (<if test="id != null">id,</if>file_name, file_path, file_preview_path, file_type, file_size, file_suffix,
-        status)
+        status, created_time, created_by, updated_time, updated_by)
         values
         <foreach item="item" collection="list" separator="," open="" close="" index="index">
             (<if test="item.id != null">#{item.id,jdbcType=INTEGER},</if>#{item.fileName,jdbcType=VARCHAR},
             #{item.filePath,jdbcType=VARCHAR}, #{item.filePreviewPath,jdbcType=VARCHAR},
             #{item.fileType,jdbcType=VARCHAR}, #{item.fileSize,jdbcType=VARCHAR}, #{item.fileSuffix,jdbcType=VARCHAR},
-            #{item.status,jdbcType=VARCHAR})
+            #{item.status,jdbcType=VARCHAR}, #{item.createdTime,jdbcType=TIMESTAMP}, #{item.createdBy,jdbcType=VARCHAR},
+            #{item.updatedTime,jdbcType=TIMESTAMP}, #{item.updatedBy,jdbcType=VARCHAR})
         </foreach>
     </insert>
 
@@ -251,6 +252,18 @@
             </if>
             <if test="status != null and status != ''">
                 status = #{status,jdbcType=VARCHAR},
+            </if>
+            <if test="createdTime != null">
+                created_time = #{createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="createdBy != null and createdBy != ''">
+                created_by = #{createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="updatedTime != null">
+                updated_time = #{updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedBy != null and updatedBy != ''">
+                updated_by = #{updatedBy,jdbcType=VARCHAR},
             </if>
         </set>
         where id = #{id,jdbcType=INTEGER}
@@ -280,6 +293,18 @@
             </if>
             <if test="where.status == null and set.status != null and set.status != ''">
                 status = #{set.status,jdbcType=VARCHAR},
+            </if>
+            <if test="where.createdTime == null and set.createdTime != null">
+                created_time = #{set.createdTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.createdBy == null and set.createdBy != null and set.createdBy != ''">
+                created_by = #{set.createdBy,jdbcType=VARCHAR},
+            </if>
+            <if test="where.updatedTime == null and set.updatedTime != null">
+                updated_time = #{set.updatedTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="where.updatedBy == null and set.updatedBy != null and set.updatedBy != ''">
+                updated_by = #{set.updatedBy,jdbcType=VARCHAR},
             </if>
         </set>
         <where>
@@ -361,6 +386,26 @@
                     when id = #{item.id} then #{item.status}
                 </foreach>
             </trim>
+            <trim prefix="created_time = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.createdTime}
+                </foreach>
+            </trim>
+            <trim prefix="created_by = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.createdBy}
+                </foreach>
+            </trim>
+            <trim prefix="updated_time = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.updatedTime}
+                </foreach>
+            </trim>
+            <trim prefix="updated_by = case" suffix="end,">
+                <foreach collection="list" item="item" index="index">
+                    when id = #{item.id} then #{item.updatedBy}
+                </foreach>
+            </trim>
         </trim>
         where id in
         <foreach collection="list" index="index" item="item" separator="," open="(" close=")">
@@ -399,6 +444,18 @@
             </if>
             <if test="status != null">
                 and status = #{status,jdbcType=VARCHAR}
+            </if>
+            <if test="createdTime != null">
+                and created_time = #{createdTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="createdBy != null">
+                and created_by = #{createdBy,jdbcType=VARCHAR}
+            </if>
+            <if test="updatedTime != null">
+                and updated_time = #{updatedTime,jdbcType=TIMESTAMP}
+            </if>
+            <if test="updatedBy != null">
+                and updated_by = #{updatedBy,jdbcType=VARCHAR}
             </if>
         </where>
     </delete>

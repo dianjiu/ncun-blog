@@ -12,7 +12,7 @@ import java.util.Date;
  * 文件操作(TFileReq) Req
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:14
+ * @since 2021-06-11 11:39:08
  */
 @Data
 public class TFileReq implements Serializable {

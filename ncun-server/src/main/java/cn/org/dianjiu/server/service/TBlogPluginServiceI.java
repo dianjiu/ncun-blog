@@ -11,7 +11,7 @@ import java.util.List;
  * 插件操作(TBlogPlugin)表服务接口
  *
  * @author dianjiu
- * @since 2021-05-08 18:15:05
+ * @since 2021-06-11 11:39:29
  */
 public interface TBlogPluginServiceI {
 

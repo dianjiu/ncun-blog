@@ -1,19 +1,18 @@
 package cn.org.dianjiu.common.pojo.resp;
 
-import java.util.Date;
-
-import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
+import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
+import java.util.Date;
 
 /**
  * 菜单操作(TMenuResp) Resp
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:18
+ * @since 2021-06-11 11:38:39
  */
 @Data
 public class TMenuResp implements Serializable {

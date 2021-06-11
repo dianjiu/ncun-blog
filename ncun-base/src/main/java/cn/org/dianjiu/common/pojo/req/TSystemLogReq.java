@@ -12,7 +12,7 @@ import java.util.Date;
  * 日志操作(TSystemLogReq) Req
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:23
+ * @since 2021-06-11 11:38:45
  */
 @Data
 public class TSystemLogReq implements Serializable {

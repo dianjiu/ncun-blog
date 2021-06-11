@@ -12,7 +12,7 @@ import java.util.Date;
  * 字典操作(TCommonReq) Req
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:12
+ * @since 2021-06-11 11:39:05
  */
 @Data
 public class TCommonReq implements Serializable {

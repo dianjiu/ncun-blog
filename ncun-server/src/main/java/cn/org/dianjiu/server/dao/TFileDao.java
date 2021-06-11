@@ -11,7 +11,7 @@ import java.util.List;
  * 文件操作(TFile)表数据库访问层
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:14
+ * @since 2021-06-11 11:39:07
  */
 @Mapper
 public interface TFileDao {

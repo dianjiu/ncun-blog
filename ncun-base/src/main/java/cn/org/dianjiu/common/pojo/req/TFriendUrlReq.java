@@ -12,7 +12,7 @@ import java.util.Date;
  * 友链操作(TFriendUrlReq) Req
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:16
+ * @since 2021-06-11 11:39:10
  */
 @Data
 public class TFriendUrlReq implements Serializable {

@@ -11,7 +11,7 @@ import java.util.List;
  * 友链操作(TFriendUrl)表数据库访问层
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:16
+ * @since 2021-06-11 11:39:09
  */
 @Mapper
 public interface TFriendUrlDao {

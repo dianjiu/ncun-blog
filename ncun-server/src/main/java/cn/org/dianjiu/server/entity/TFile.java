@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 文件操作(TFile)实体类
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:13
+ * @since 2021-06-11 11:39:06
  */
 @Data
 public class TFile {

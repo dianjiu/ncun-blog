@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 友链操作(TFriendUrl)实体类
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:15
+ * @since 2021-06-11 11:39:08
  */
 @Data
 public class TFriendUrl {

@@ -21,7 +21,7 @@ import java.util.List;
  * 友链操作(TFriendUrl)表控制层
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:15
+ * @since 2021-06-11 11:39:08
  */
 @RestController
 @Api(value = "TFriendUrl", tags = {"友链操作"})

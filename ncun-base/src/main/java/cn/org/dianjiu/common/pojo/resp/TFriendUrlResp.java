@@ -1,18 +1,19 @@
 package cn.org.dianjiu.common.pojo.resp;
 
+import java.util.Date;
+
+import lombok.Data;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * 友链操作(TFriendUrlResp) Resp
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:16
+ * @since 2021-06-11 11:39:10
  */
 @Data
 public class TFriendUrlResp implements Serializable {

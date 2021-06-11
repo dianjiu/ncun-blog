@@ -11,7 +11,7 @@ import java.util.List;
  * 用户角色操作(TUserRoles)表数据库访问层
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:28
+ * @since 2021-06-11 11:38:14
  */
 @Mapper
 public interface TUserRolesDao {

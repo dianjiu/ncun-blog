@@ -11,7 +11,7 @@ import java.util.List;
  * 角色操作(TRole)表服务接口
  *
  * @author dianjiu
- * @since 2021-05-08 18:15:09
+ * @since 2021-06-11 11:38:39
  */
 public interface TRoleServiceI {
 

@@ -10,7 +10,7 @@ import org.springframework.format.annotation.DateTimeFormat;
  * 日志操作(TSystemLog)实体类
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:22
+ * @since 2021-06-11 11:38:43
  */
 @Data
 public class TSystemLog {

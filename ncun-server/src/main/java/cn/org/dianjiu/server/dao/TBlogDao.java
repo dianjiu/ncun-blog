@@ -11,7 +11,7 @@ import java.util.List;
  * 博客操作(TBlog)表数据库访问层
  *
  * @author dianjiu
- * @since 2021-05-08 17:50:54
+ * @since 2021-06-11 11:39:24
  */
 @Mapper
 public interface TBlogDao {

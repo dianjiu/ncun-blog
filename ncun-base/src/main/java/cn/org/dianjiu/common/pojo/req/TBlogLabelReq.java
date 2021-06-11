@@ -1,4 +1,4 @@
-package cn.org.dianjiu.common.pojo.resp;
+package cn.org.dianjiu.common.pojo.req;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
@@ -9,24 +9,24 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * 分类操作(TBlogTypeResp) Resp
+ * 文章标签(TBlogLabelReq) Req
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:09
+ * @since 2021-06-11 11:39:26
  */
 @Data
-public class TBlogTypeResp implements Serializable {
+public class TBlogLabelReq implements Serializable {
     private static final long serialVersionUID = 9155949248117098529L;
     @ApiModelProperty("唯一ID")
     private Integer id;
     @ApiModelProperty("标签名称")
     private String labelName;
     @ApiModelProperty("分类路径")
-    private String typeUrl;
+    private String labelUrl;
     @ApiModelProperty("描述")
-    private String typeDescribe;
+    private String labelDescribe;
     @ApiModelProperty("0  -- 类型  1 -- 分类   2 -- 标签   3 -- 专题")
-    private String type;
+    private String labelType;
     @ApiModelProperty("0  -- 未读  1 -- 已用")
     private String status;
     @ApiModelProperty("创建时间")

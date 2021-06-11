@@ -12,7 +12,7 @@ import java.util.Date;
  * 博客操作(TBlogReq) Req
  *
  * @author dianjiu
- * @since 2021-05-08 17:50:59
+ * @since 2021-06-11 11:39:25
  */
 @Data
 public class TBlogReq implements Serializable {
@@ -25,7 +25,7 @@ public class TBlogReq implements Serializable {
     private Object blogText;
     @ApiModelProperty("文章摘要")
     private String blogSummary;
-    @ApiModelProperty("文章类型(原创，转载)")
+    @ApiModelProperty("文章类型(0-原创，1-转载)")
     private String blogType;
     @ApiModelProperty("博客分类")
     private String blogSort;

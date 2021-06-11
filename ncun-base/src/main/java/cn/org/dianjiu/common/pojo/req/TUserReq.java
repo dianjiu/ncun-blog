@@ -12,7 +12,7 @@ import java.util.Date;
  * 用户操作(TUserReq) Req
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:27
+ * @since 2021-06-11 11:38:10
  */
 @Data
 public class TUserReq implements Serializable {

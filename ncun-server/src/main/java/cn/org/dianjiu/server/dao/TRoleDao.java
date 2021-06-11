@@ -11,7 +11,7 @@ import java.util.List;
  * 角色操作(TRole)表数据库访问层
  *
  * @author dianjiu
- * @since 2021-05-08 17:51:19
+ * @since 2021-06-11 11:38:40
  */
 @Mapper
 public interface TRoleDao {
